@@ -1,6 +1,4 @@
-'''Usage: 
-    pyres
-    pyres [options] <command> [<args>]...
+'''Usage: pyres [options] <command> [<args>]...
 
 Options:
     -h --help   Show this screen.
@@ -9,25 +7,27 @@ Options:
 Commands:
     help        Display documentation for a command
     init        Create a new pyres project
-    build       Build a document from a pyres project'''
+    build       Build a document from a pyres project
+    '''
 
 import sys
-import inspect
 
 from docopt import docopt
 
-def pyres():
+def pyres(args=sys.argv[1:], out=sys.stdout):
     '''Main entry point into pyres'''
     try:
-        arguments = docopt(__doc__, options_first=True)
+        arguments = docopt(__doc__, argv=args, options_first=True)
     except SystemExit:
-        print(__doc__)
+        out.write(__doc__)
         exit(1)
     command = arguments['<command>']
     if command in COMMANDS:
+        print COMMANDS[command]
         COMMANDS[command](arguments['<args>'])
     else:
-        print __doc__
+        out.write(__doc__)
+        exit(1)
 
 def display_help(*args, **kwargs):
     '''Display documentation for a command'''
@@ -46,4 +46,3 @@ COMMANDS = {
         'init': init,
         'build': build
         }
-
