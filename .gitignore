@@ -1,0 +1,16 @@
+*.pyc
+
+# virtualenv
+bin
+include
+lib
+lib64
+
+# setuptools
+*.egg-info
+
+# tox
+*.tox
+
+# vim
+*.swp
