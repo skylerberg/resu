@@ -11,7 +11,7 @@ class test_pyres(unittest.TestCase):
         with self.assertRaises(SystemExit):
             cli.pyres(args=[], out=out)
         output = out.getvalue()
-        self.assertEquals(output, cli.__doc__)
+        self.assertEquals(output, cli.PYRES_DOC)
 
     def test_valid_command(self):
         cli.pyres(args=['init'])
@@ -21,7 +21,7 @@ class test_pyres(unittest.TestCase):
         with self.assertRaises(SystemExit):
             cli.pyres(args=['invalid'], out=out)
         output = out.getvalue()
-        self.assertEquals(output, cli.__doc__)
+        self.assertEquals(output, cli.PYRES_DOC)
 
 if __name__ == "__main__":
     unittest.main()
