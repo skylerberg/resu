@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/skylerberg/PyRes.png)](https://travis-ci.org/skylerberg/PyRes)
+[![Coverage Status](https://img.shields.io/coveralls/skylerberg/PyRes.svg)](https://coveralls.io/r/skylerberg/PyRes?branch=master)
 
 PyRes
 =====
