@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/skylerberg/PyRes.png)](https://travis-ci.org/skylerberg/PyRes)
+
 PyRes
 =====
 
