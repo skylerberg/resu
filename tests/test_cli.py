@@ -22,6 +22,3 @@ class test_pyres(unittest.TestCase):
             cli.pyres(args=['invalid'], out=out)
         output = out.getvalue()
         self.assertEquals(output, cli.PYRES_DOC)
-
-if __name__ == "__main__":
-    unittest.main()
