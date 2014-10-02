@@ -1,5 +1,7 @@
 *.pyc
 
+/build
+
 # virtualenv
 bin
 include
@@ -14,3 +16,6 @@ lib64
 
 # vim
 *.swp
+
+# coverage
+.coverage
