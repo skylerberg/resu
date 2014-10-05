@@ -65,7 +65,6 @@ def pyres(args=sys.argv[1:], out=sys.stdout):
         exit(1)
     command = arguments['<command>']
     if command in COMMANDS:
-        print COMMANDS[command]
         COMMANDS[command](arguments['<args>'])
     else:
         out.write(PYRES_DOC)
