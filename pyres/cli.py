@@ -14,13 +14,13 @@ PYRES_DOC = \
 '''Usage: pyres [options] <command> [<args>]...
 
 Options:
-    -h --help   Show this message.
-    -l --list   Show a list of available commands.
+    -h --help       Show this message.
+    -v --version    Show PyRes version number.
 
 Commands:
-    help        Display documentation for a command.
-    init        Create a new pyres project.
-    build       Build a document from a pyres project.
+    help            Display documentation for a command.
+    init            Create a new pyres project.
+    build           Build a document from a pyres project.
 '''
 
 HELP_DOC = \
@@ -31,27 +31,32 @@ INIT_DOC = \
 '''Usage: pyres init [options]
 
 Options:
-    -h --help   Show this message.
+    -h --help       Show this message.
     -d <path> --directory <path>
-                Directory to create new project in.
-                [default: .]
+                    Directory to create new project in.
+                    [default: .]
 '''
 
 BUILD_DOC = \
 '''Usage: pyres build [options]
 
 Options:
-    -h --help           Show this message.
-    -i --input-file     Path to input file.
-                        Defaults to resume.yml.
-    -o --output-file    Path to output file.
-                        Defaults to resume.pdf.
-    -c --config-file    Path to configuration file.
-                        Defaults to config.yml.
-    -t --transforms-dir Directory containing transforms.
-                        Defaults to transforms.
-    -s --sections-dir   Directory containing sections.
-                        Defaults to sections.
+    -h --help       Show this message.
+    -i <file> --input-file <file>
+                    Path to input file.
+                    [default: resume.yml]
+    -o <file> --output-file <file>
+                    Path to output file.
+                    [default: resume.pdf]
+    -c <file> --config-file <file>
+                    Path to configuration file.
+                    [default: config.yml]
+    -s <path> --sections-dir <path>
+                    Directory containing sections.
+                    [default: section]
+    -t <path> --transforms-dir <path>
+                    Directory containing transforms.
+                    [default: transforms]
 '''
 
 def pyres_command(args=sys.argv[1:], out=sys.stdout):
