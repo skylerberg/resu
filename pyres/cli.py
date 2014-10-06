@@ -1,9 +1,14 @@
 '''
 Entry point into pyres and subcommands.
+
+pyres.cli is responsible for providing the entry point for executables as well
+as
 '''
 import sys
 
 from docopt import docopt
+
+from pyres import init
 
 PYRES_DOC = \
 '''Usage: pyres [options] <command> [<args>]...
@@ -26,9 +31,10 @@ INIT_DOC = \
 '''Usage: pyres init [options]
 
 Options:
-    -h --help       Show this message.
-    -d --directory  Directory to create new project in.
-                    Default is the current directory.
+    -h --help   Show this message.
+    -d <path> --directory <path>
+                Directory to create new project in.
+                [default: .]
 '''
 
 BUILD_DOC = \
@@ -48,7 +54,7 @@ Options:
                         Defaults to sections.
 '''
 
-def pyres(args=sys.argv[1:], out=sys.stdout):
+def pyres_command(args=sys.argv[1:], out=sys.stdout):
     '''
     Dispatch control to a longer.
 
@@ -70,22 +76,31 @@ def pyres(args=sys.argv[1:], out=sys.stdout):
         out.write(PYRES_DOC)
         exit(1)
 
-def display_help(*args, **kwargs):
+def help_command(*args, **kwargs):
     '''Display documentation for a command'''
     pass
 
-def init(*args, **kwargs):
+def init_command(args=[], out=sys.stdout):
     '''
     Create a new pyres project
     '''
-    pass
+    try:
+        arguments = docopt(INIT_DOC, argv= ['init'] + args, help=False)
+    except SystemExit:
+        out.write(INIT_DOC)
+        exit(1)
+    if arguments['--help']:
+        out.write(INIT_DOC)
+        exit(0)
+    init(directory=arguments['--directory'])
 
-def build(*args, **kwargs):
+
+def build_command(*args, **kwargs):
     '''Build a document from a pyres project'''
     pass
 
 COMMANDS = {
-        'help': display_help,
-        'init': init,
-        'build': build
+        'help': help_command,
+        'init': init_command,
+        'build': build_command
         }
