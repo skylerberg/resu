@@ -80,7 +80,7 @@ def pyres_command(args=sys.argv[1:], out=sys.stdout):
         out.write(PYRES_DOC)
         exit(0)
     if arguments['--version']:
-        out.write(__version__)
+        out.write(__version__ + '\n')
         exit(0)
     command = arguments['<command>']
     if command in COMMANDS:

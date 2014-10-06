@@ -31,7 +31,7 @@ class test_pyres_command(unittest.TestCase):
         with self.assertRaises(SystemExit) as cm:
             cli.pyres_command(['-v'], out=out)
         output = out.getvalue()
-        self.assertEquals(output, cli.__version__)
+        self.assertEquals(output, cli.__version__ + '\n')
         self.assertEquals(cm.exception.code, 0)
 
     def test_invalid_args(self):
