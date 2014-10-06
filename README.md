@@ -11,5 +11,5 @@ enough for other uses.
 Changes
 =======
 
-Since I hosting this on GitHub from the start, there will be a lot of commits
+Since I am hosting this on GitHub from the start, there will be a lot of commits
 before release 0.0.0. After the first release I will use semantic versioning.
