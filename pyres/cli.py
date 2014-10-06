@@ -89,16 +89,18 @@ def pyres_command(args=sys.argv[1:], out=sys.stdout):
         out.write(PYRES_DOC)
         exit(1)
 
-def help_command(*args, **kwargs):
+def help_command():
     '''Display documentation for a command'''
     pass
 
-def init_command(args=[], out=sys.stdout):
+def init_command(args=None, out=sys.stdout):
     '''
     Create a new pyres project
     '''
+    if not args:
+        args = []
     try:
-        arguments = docopt(INIT_DOC, argv= ['init'] + args, help=False)
+        arguments = docopt(INIT_DOC, argv=['init'] + args, help=False)
     except SystemExit:
         out.write(INIT_DOC)
         exit(1)
@@ -108,12 +110,12 @@ def init_command(args=[], out=sys.stdout):
     init(directory=arguments['--directory'])
 
 
-def build_command(*args, **kwargs):
+def build_command():
     '''Build a document from a pyres project'''
     pass
 
 COMMANDS = {
-        'help': help_command,
-        'init': init_command,
-        'build': build_command
-        }
+    'help': help_command,
+    'init': init_command,
+    'build': build_command
+}
