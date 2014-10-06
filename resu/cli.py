@@ -1,36 +1,36 @@
 '''
-Entry point into pyres and subcommands.
+Entry point into resu and subcommands.
 
-pyres.cli is responsible for providing the entry point for executables as well
+resu.cli is responsible for providing the entry point for executables as well
 as
 '''
 import sys
 
 from docopt import docopt
 
-from pyres import init, __version__
+from resu import init, __version__
 
-PYRES_DOC = \
+RESU_DOC = \
 '''Usage:
-    pyres [options]
-    pyres [options] <command> [<args>]...
+    resu [options]
+    resu [options] <command> [<args>]...
 
 Options:
     -h --help       Show this message.
-    -v --version    Show PyRes version number and exit.
+    -v --version    Show resu version number and exit.
 
 Commands:
     help            Display documentation for a command.
-    init            Create a new pyres project.
-    build           Build a document from a pyres project.
+    init            Create a new resu project.
+    build           Build a document from a resu project.
 '''
 
 HELP_DOC = \
-''' Usage: pyres help [<command>]
+''' Usage: resu help [<command>]
 '''
 
 INIT_DOC = \
-'''Usage: pyres init [options]
+'''Usage: resu init [options]
 
 Options:
     -h --help       Show this message.
@@ -40,7 +40,7 @@ Options:
 '''
 
 BUILD_DOC = \
-'''Usage: pyres build [options]
+'''Usage: resu build [options]
 
 Options:
     -h --help       Show this message.
@@ -61,23 +61,23 @@ Options:
                     [default: transforms]
 '''
 
-def pyres_command(args=sys.argv[1:], out=sys.stdout):
+def resu_command(args=sys.argv[1:], out=sys.stdout):
     '''
     Dispatch control to a longer.
 
     args
-        Pyres arguments. Defaults to system arguments.
+        Resu arguments. Defaults to system arguments.
 
     out
         Output file, or StringIO. Defaults to standard out.
     '''
     try:
-        arguments = docopt(PYRES_DOC, argv=args, options_first=True, help=False)
+        arguments = docopt(RESU_DOC, argv=args, options_first=True, help=False)
     except SystemExit:
-        out.write(PYRES_DOC)
+        out.write(RESU_DOC)
         exit(1)
     if arguments['--help']:
-        out.write(PYRES_DOC)
+        out.write(RESU_DOC)
         exit(0)
     if arguments['--version']:
         out.write(__version__ + '\n')
@@ -86,7 +86,7 @@ def pyres_command(args=sys.argv[1:], out=sys.stdout):
     if command in COMMANDS:
         COMMANDS[command](arguments['<args>'])
     else:
-        out.write(PYRES_DOC)
+        out.write(RESU_DOC)
         exit(1)
 
 def help_command():
@@ -95,7 +95,7 @@ def help_command():
 
 def init_command(args=None, out=sys.stdout):
     '''
-    Create a new pyres project
+    Create a new resu project
     '''
     if not args:
         args = []
@@ -111,7 +111,7 @@ def init_command(args=None, out=sys.stdout):
 
 
 def build_command():
-    '''Build a document from a pyres project'''
+    '''Build a document from a resu project'''
     pass
 
 COMMANDS = {
