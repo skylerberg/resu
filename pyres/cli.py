@@ -8,14 +8,16 @@ import sys
 
 from docopt import docopt
 
-from pyres import init
+from pyres import init, __version__
 
 PYRES_DOC = \
-'''Usage: pyres [options] <command> [<args>]...
+'''Usage:
+    pyres [options]
+    pyres [options] <command> [<args>]...
 
 Options:
     -h --help       Show this message.
-    -v --version    Show PyRes version number.
+    -v --version    Show PyRes version number and exit.
 
 Commands:
     help            Display documentation for a command.
@@ -70,10 +72,16 @@ def pyres_command(args=sys.argv[1:], out=sys.stdout):
         Output file, or StringIO. Defaults to standard out.
     '''
     try:
-        arguments = docopt(PYRES_DOC, argv=args, options_first=True)
+        arguments = docopt(PYRES_DOC, argv=args, options_first=True, help=False)
     except SystemExit:
         out.write(PYRES_DOC)
         exit(1)
+    if arguments['--help']:
+        out.write(PYRES_DOC)
+        exit(0)
+    if arguments['--version']:
+        out.write(__version__)
+        exit(0)
     command = arguments['<command>']
     if command in COMMANDS:
         COMMANDS[command](arguments['<args>'])

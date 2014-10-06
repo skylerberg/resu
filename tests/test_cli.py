@@ -18,6 +18,22 @@ class test_pyres_command(unittest.TestCase):
     def test_valid_args(self):
         cli.pyres_command(args=['help'])
 
+    def test_help_option(self):
+        out = StringIO()
+        with self.assertRaises(SystemExit) as cm:
+            cli.pyres_command(['-h'], out=out)
+        output = out.getvalue()
+        self.assertEquals(output, cli.PYRES_DOC)
+        self.assertEquals(cm.exception.code, 0)
+
+    def test_version_option(self):
+        out = StringIO()
+        with self.assertRaises(SystemExit) as cm:
+            cli.pyres_command(['-v'], out=out)
+        output = out.getvalue()
+        self.assertEquals(output, cli.__version__)
+        self.assertEquals(cm.exception.code, 0)
+
     def test_invalid_args(self):
         out = StringIO()
         with self.assertRaises(SystemExit):
