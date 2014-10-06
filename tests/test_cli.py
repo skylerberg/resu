@@ -34,10 +34,17 @@ class test_pyres_command(unittest.TestCase):
         self.assertEquals(output, cli.__version__ + '\n')
         self.assertEquals(cm.exception.code, 0)
 
-    def test_invalid_args(self):
+    def test_non_existant_command(self):
         out = StringIO()
         with self.assertRaises(SystemExit):
             cli.pyres_command(args=['invalid'], out=out)
+        output = out.getvalue()
+        self.assertEquals(output, cli.PYRES_DOC)
+
+    def test_invalid_args(self):
+        out = StringIO()
+        with self.assertRaises(SystemExit):
+            cli.pyres_command(args=['-z'], out=out)
         output = out.getvalue()
         self.assertEquals(output, cli.PYRES_DOC)
 
