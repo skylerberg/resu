@@ -2,7 +2,7 @@
 import unittest
 from StringIO import StringIO
 
-from mock import patch
+from mock import patch, MagicMock
 
 from pyres import cli
 
@@ -15,8 +15,10 @@ class test_pyres_command(unittest.TestCase):
         output = out.getvalue()
         self.assertEquals(output, cli.PYRES_DOC)
 
+    @patch.dict(cli.COMMANDS, {'help': MagicMock()})
     def test_valid_args(self):
         cli.pyres_command(args=['help'])
+        cli.COMMANDS['help'].assert_called_once_with([])
 
     def test_help_option(self):
         out = StringIO()
