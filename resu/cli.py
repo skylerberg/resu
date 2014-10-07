@@ -56,9 +56,6 @@ Options:
     -s <path> --sections-dir <path>
                     Directory containing sections.
                     [default: section]
-    -t <path> --transforms-dir <path>
-                    Directory containing transforms.
-                    [default: transforms]
 '''
 
 def resu_command(args=sys.argv[1:], out=sys.stdout):
