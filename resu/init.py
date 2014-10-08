@@ -1,2 +1,0 @@
-def init(**kwargs):
-    pass
