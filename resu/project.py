@@ -72,3 +72,7 @@ def init(directory):
     directory: Directory to copy the default project into.
     '''
     _copy_data_dir(directory, DATA_DIR)
+
+def build(output_file, sections_dir, files):
+    '''Create a new resume from an existing project.'''
+    pass

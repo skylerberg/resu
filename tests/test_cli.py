@@ -77,3 +77,45 @@ class test_init(unittest.TestCase):
         output = out.getvalue()
         self.assertEquals(output, cli.INIT_DOC)
         self.assertNotEquals(cm.exception.code, 0)
+
+class test_build(unittest.TestCase):
+
+    @patch('resu.cli.build')
+    def test_no_args(self, mock_build):
+        cli.build_command()
+        mock_build.assert_called_once_with(
+            output_file='resume.pdf',
+            sections_dir='sections',
+            files=['config.yml', 'resume.yml'])
+
+    @patch('resu.cli.build')
+    def test_sections_dir_option(self, mock_build):
+        cli.build_command(['-s', 'other'])
+        mock_build.assert_called_once_with(
+            output_file='resume.pdf',
+            sections_dir='other',
+            files=['config.yml', 'resume.yml'])
+
+    @patch('resu.cli.build')
+    def test_sections_dir_option(self, mock_build):
+        cli.build_command(['-o', 'resume.html'])
+        mock_build.assert_called_once_with(
+            output_file='resume.html',
+            sections_dir='sections',
+            files=['config.yml', 'resume.yml'])
+
+    def test_help_option(self):
+        out = StringIO()
+        with self.assertRaises(SystemExit) as cm:
+            cli.build_command(['-h'], out=out)
+        output = out.getvalue()
+        self.assertEquals(output, cli.BUILD_DOC)
+        self.assertEquals(cm.exception.code, 0)
+
+    def test_invalid_args(self):
+        out = StringIO()
+        with self.assertRaises(SystemExit) as cm:
+            cli.build_command(args=['-z'], out=out)
+        output = out.getvalue()
+        self.assertEquals(output, cli.BUILD_DOC)
+        self.assertNotEquals(cm.exception.code, 0)

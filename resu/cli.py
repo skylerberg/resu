@@ -2,13 +2,13 @@
 Entry point into resu and subcommands.
 
 resu.cli is responsible for providing the entry point for executables as well
-as
+as handling parsing arguments and providing defaults.
 '''
 import sys
 
 from docopt import docopt
 
-from resu import init, __version__
+from resu import init, build, __version__
 
 RESU_DOC = \
 '''Usage:
@@ -40,22 +40,16 @@ Options:
 '''
 
 BUILD_DOC = \
-'''Usage: resu build [options]
+'''Usage: resu build [options] [<files>]...
 
 Options:
     -h --help       Show this message.
-    -i <file> --input-file <file>
-                    Path to input file.
-                    [default: resume.yml]
     -o <file> --output-file <file>
                     Path to output file.
                     [default: resume.pdf]
-    -c <file> --config-file <file>
-                    Path to configuration file.
-                    [default: config.yml]
     -s <path> --sections-dir <path>
                     Directory containing sections.
-                    [default: section]
+                    [default: sections]
 '''
 
 def resu_command(args=sys.argv[1:], out=sys.stdout):
@@ -107,9 +101,25 @@ def init_command(args=None, out=sys.stdout):
     init(directory=arguments['--directory'])
 
 
-def build_command():
+def build_command(args=None, out=sys.stdout):
     '''Build a document from a resu project'''
-    pass
+    if not args:
+        args = []
+    try:
+        arguments = docopt(BUILD_DOC, argv=['build'] + args, help=False)
+    except SystemExit:
+        out.write(BUILD_DOC)
+        exit(1)
+    if arguments['--help']:
+        out.write(BUILD_DOC)
+        exit(0)
+    if not arguments['<files>']:
+        arguments['<files>'] = ['config.yml', 'resume.yml']
+    build(
+        output_file=arguments['--output-file'],
+        sections_dir=arguments['--sections-dir'],
+        files=arguments['<files>'])
+
 
 COMMANDS = {
     'help': help_command,
