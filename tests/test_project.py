@@ -7,7 +7,7 @@ from mock import patch, call
 import resu.project
 import resu.exceptions
 
-class test__copy_data_file(unittest.TestCase):
+class test_copy_data_file(unittest.TestCase):
 
     def setUp(self):
         self.mock_open = patch('__builtin__.open').start()
