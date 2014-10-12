@@ -74,15 +74,11 @@ def resu_command(args=sys.argv[1:], out=sys.stdout):
         out.write(__version__ + '\n')
         exit(0)
     command = arguments['<command>']
-    if command in COMMANDS:
-        COMMANDS[command](arguments['<args>'])
+    if command in COMMAND_FUNCTIONS:
+        COMMAND_FUNCTIONS[command](arguments['<args>'])
     else:
         out.write(RESU_DOC)
         exit(1)
-
-def help_command():
-    '''Display documentation for a command'''
-    pass
 
 def init_command(args=None, out=sys.stdout):
     '''
@@ -120,9 +116,33 @@ def build_command(args=None, out=sys.stdout):
         sections_dir=arguments['--sections-dir'],
         files=arguments['<files>'])
 
+def help_command(args=None, out=sys.stdout):
+    '''Display documentation for a command'''
+    if not args:
+        args = []
+    try:
+        arguments = docopt(HELP_DOC, argv=['help'] + args)
+    except SystemExit:
+        out.write(HELP_DOC)
+        exit(1)
+    command = arguments.get('<command>', None)
+    if not command:
+        out.write(RESU_DOC)
+    else:
+        try:
+            out.write(COMMAND_DOCS[command])
+        except KeyError as exc:
+            out.write("Invalid command: {command}".format(command=exc))
+    exit(0)
 
-COMMANDS = {
+COMMAND_FUNCTIONS = {
     'help': help_command,
     'init': init_command,
     'build': build_command
+}
+
+COMMAND_DOCS = {
+    'help': HELP_DOC,
+    'init': INIT_DOC,
+    'build': BUILD_DOC
 }

@@ -15,10 +15,10 @@ class test_resu_command(unittest.TestCase):
         output = out.getvalue()
         self.assertEquals(output, cli.RESU_DOC)
 
-    @patch.dict(cli.COMMANDS, {'help': MagicMock()})
+    @patch.dict(cli.COMMAND_FUNCTIONS, {'help': MagicMock()})
     def test_valid_args(self):
         cli.resu_command(args=['help'])
-        cli.COMMANDS['help'].assert_called_once_with([])
+        cli.COMMAND_FUNCTIONS['help'].assert_called_once_with([])
 
     def test_help_option(self):
         out = StringIO()
@@ -118,4 +118,38 @@ class test_build(unittest.TestCase):
             cli.build_command(args=['-z'], out=out)
         output = out.getvalue()
         self.assertEquals(output, cli.BUILD_DOC)
+        self.assertNotEquals(cm.exception.code, 0)
+
+class test_help(unittest.TestCase):
+
+    def test_no_args(self):
+        out = StringIO()
+        with self.assertRaises(SystemExit) as cm:
+            cli.help_command(out=out)
+        output = out.getvalue()
+        self.assertEquals(output, cli.RESU_DOC)
+        self.assertEquals(cm.exception.code, 0)
+
+    def test_command_arg(self):
+        out = StringIO()
+        with self.assertRaises(SystemExit) as cm:
+            cli.help_command(args=['init'], out=out)
+        output = out.getvalue()
+        self.assertEquals(output, cli.INIT_DOC)
+        self.assertEquals(cm.exception.code, 0)
+
+    def test_non_existant_command(self):
+        out = StringIO()
+        with self.assertRaises(SystemExit) as cm:
+            cli.help_command(args=['xorp'], out=out)
+        output = out.getvalue()
+        self.assertEquals(output, "Invalid command: 'xorp'")
+        self.assertEquals(cm.exception.code, 0)
+
+    def test_invalid_args(self):
+        out = StringIO()
+        with self.assertRaises(SystemExit) as cm:
+            cli.help_command(args=['-z'], out=out)
+        output = out.getvalue()
+        self.assertEquals(output, cli.HELP_DOC)
         self.assertNotEquals(cm.exception.code, 0)
