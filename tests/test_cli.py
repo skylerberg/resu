@@ -85,23 +85,13 @@ class test_build(unittest.TestCase):
         cli.build_command()
         mock_build.assert_called_once_with(
             output_file='resume.pdf',
-            sections_dir='sections',
             files=['config.yml', 'resume.yml'])
 
     @patch('resu.cli.build')
-    def test_sections_dir_option(self, mock_build):
-        cli.build_command(['-s', 'other'])
-        mock_build.assert_called_once_with(
-            output_file='resume.pdf',
-            sections_dir='other',
-            files=['config.yml', 'resume.yml'])
-
-    @patch('resu.cli.build')
-    def test_sections_dir_option(self, mock_build):
+    def test_output_file_option(self, mock_build):
         cli.build_command(['-o', 'resume.html'])
         mock_build.assert_called_once_with(
             output_file='resume.html',
-            sections_dir='sections',
             files=['config.yml', 'resume.yml'])
 
     def test_help_option(self):

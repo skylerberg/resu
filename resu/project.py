@@ -73,6 +73,6 @@ def init(directory):
     '''
     _copy_data_dir(directory, DATA_DIR)
 
-def build(output_file, sections_dir, files):
+def build(output_file, files):
     '''Create a new resume from an existing project.'''
     pass

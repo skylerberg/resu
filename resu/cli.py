@@ -47,9 +47,6 @@ Options:
     -o <file> --output-file <file>
                     Path to output file.
                     [default: resume.pdf]
-    -s <path> --sections-dir <path>
-                    Directory containing sections.
-                    [default: sections]
 '''
 
 def resu_command(args=sys.argv[1:], out=sys.stdout):
@@ -113,7 +110,6 @@ def build_command(args=None, out=sys.stdout):
         arguments['<files>'] = ['config.yml', 'resume.yml']
     build(
         output_file=arguments['--output-file'],
-        sections_dir=arguments['--sections-dir'],
         files=arguments['<files>'])
 
 def help_command(args=None, out=sys.stdout):
