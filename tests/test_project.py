@@ -52,7 +52,7 @@ class test_copy_data_dir(unittest.TestCase):
         self.mock_copy_data_file = patch('resu.project._copy_data_file').start()
         self.mock_mkdir = patch('resu.project.os.mkdir').start()
 
-    def test_non_existant_data_dir(self):
+    def test_non_existent_data_dir(self):
         self.mock_resource_exists.return_value = False
         with self.assertRaises(resu.project.MissingPackageDataError):
             resu.project._copy_data_dir('.','dir')
