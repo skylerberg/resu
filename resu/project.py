@@ -76,7 +76,6 @@ def init(directory):
 
 def _combine_yaml_files(files):
     '''Read a list of YAML files and combine their content.'''
-    # Combine files
     files_content = []
     for yaml_file_path in files:
         with open(yaml_file_path) as yaml_file:
