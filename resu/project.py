@@ -6,6 +6,7 @@ This module stores the main commands for working with projects.
 import os
 
 import pkg_resources
+import yaml
 
 from resu.exceptions import FileExistsError, MissingPackageDataError
 
@@ -72,6 +73,16 @@ def init(directory):
     directory: Directory to copy the default project into.
     '''
     _copy_data_dir(directory, DATA_DIR)
+
+def _combine_yaml_files(files):
+    '''Read a list of YAML files and combine their content.'''
+    # Combine files
+    files_content = []
+    for yaml_file_path in files:
+        with open(yaml_file_path) as yaml_file:
+            files_content.append(yaml_file.read())
+    config = "\n".join(files_content)
+    return yaml.load(config)
 
 def build(output_file, files):
     '''Create a new resume from an existing project.'''
