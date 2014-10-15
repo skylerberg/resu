@@ -2,7 +2,7 @@
 import unittest
 import os
 
-from mock import patch, call, MagicMock, Mock
+import mock
 import yaml
 
 import resu.project
@@ -11,10 +11,10 @@ import resu.exceptions
 class test_copy_data_file(unittest.TestCase):
 
     def setUp(self):
-        self.mock_open = patch('__builtin__.open').start()
-        self.mock_path_exists = patch('resu.project.os.path.exists').start()
-        self.mock_resource_exists = patch('resu.project.pkg_resources.resource_exists').start()
-        self.mock_resource_string = patch('resu.project.pkg_resources.resource_string').start()
+        self.mock_open = mock.patch('__builtin__.open').start()
+        self.mock_path_exists = mock.patch('resu.project.os.path.exists').start()
+        self.mock_resource_exists = mock.patch('resu.project.pkg_resources.resource_exists').start()
+        self.mock_resource_string = mock.patch('resu.project.pkg_resources.resource_string').start()
 
     def test_bad_file(self):
         self.mock_resource_exists.return_value = False
@@ -38,20 +38,20 @@ class test_copy_data_file(unittest.TestCase):
         self.mock_open.called_once_with(os.path.join(directory, file_name), 'w')
 
     def tearDown(self):
-        patch.stopall()
+        mock.patch.stopall()
 
 class test_copy_data_dir(unittest.TestCase):
 
     def setUp(self):
-        self.mock_resource_exists = patch('resu.project.pkg_resources.resource_exists').start()
-        self.mock_resource_listdir = patch('resu.project.pkg_resources.resource_listdir').start()
+        self.mock_resource_exists = mock.patch('resu.project.pkg_resources.resource_exists').start()
+        self.mock_resource_listdir = mock.patch('resu.project.pkg_resources.resource_listdir').start()
         self.mock_resource_listdir.side_effect = lambda a, b: ['foo','bar','baz']
-        self.mock_resource_isdir = patch('resu.project.pkg_resources.resource_isdir').start()
+        self.mock_resource_isdir = mock.patch('resu.project.pkg_resources.resource_isdir').start()
         self.mock_resource_isdir.side_effect = lambda *_: False
 
-        self.mock_path_exists = patch('resu.project.os.path.exists').start()
-        self.mock_copy_data_file = patch('resu.project._copy_data_file').start()
-        self.mock_mkdir = patch('resu.project.os.mkdir').start()
+        self.mock_path_exists = mock.patch('resu.project.os.path.exists').start()
+        self.mock_copy_data_file = mock.patch('resu.project._copy_data_file').start()
+        self.mock_mkdir = mock.patch('resu.project.os.mkdir').start()
 
     def test_non_existent_data_dir(self):
         self.mock_resource_exists.return_value = False
@@ -86,17 +86,17 @@ class test_copy_data_dir(unittest.TestCase):
         self.mock_resource_isdir.side_effect = resource_isdir_side_effect
         self.mock_resource_listdir.side_effect = resource_listdir_side_effect
         resu.project._copy_data_dir('.','dir')
-        assert call('resu', 'dir/foo/spam') in self.mock_resource_isdir.call_args_list
+        assert mock.call('resu', 'dir/foo/spam') in self.mock_resource_isdir.call_args_list
 
     def test_valid_input(self):
         resu.project._copy_data_dir('.','dir')
 
     def tearDown(self):
-        patch.stopall()
+        mock.patch.stopall()
 
 class test_init(unittest.TestCase):
 
-    @patch('resu.project._copy_data_dir')
+    @mock.patch('resu.project._copy_data_dir')
     def test_valid_input(self, mock_copy_data_dir):
         resu.project.init('.')
         mock_copy_data_dir.assert_called_once_with('.', resu.project.DATA_DIR)
@@ -104,20 +104,20 @@ class test_init(unittest.TestCase):
 class test_combine_yaml_files(unittest.TestCase):
 
     def setUp(self):
-        self.mock_open = patch('resu.project.open', create=True).start()
-        self.mock_open = patch('resu.project.open', create=True).start()
+        self.mock_open = mock.patch('resu.project.open', create=True).start()
+        self.mock_open = mock.patch('resu.project.open', create=True).start()
         def open_side_effect(file_name, *flags):
-            open_file = MagicMock()
+            open_file = mock.MagicMock()
             if file_name == 'invalid.yml':
-                enter_mock = Mock()
+                enter_mock = mock.Mock()
                 enter_mock.read.return_value = ": :"
                 open_file.__enter__.return_value = enter_mock
             elif file_name == 'a.yml':
-                enter_mock = Mock()
+                enter_mock = mock.Mock()
                 enter_mock.read.return_value = "key: value"
                 open_file.__enter__.return_value = enter_mock
             elif file_name == 'b.yml':
-                enter_mock = Mock()
+                enter_mock = mock.Mock()
                 enter_mock.read.return_value = "other: value"
                 open_file.__enter__.return_value = enter_mock
             else:
@@ -145,4 +145,4 @@ class test_combine_yaml_files(unittest.TestCase):
         self.assertEquals(yaml, {'key': 'value', 'other': 'value'})
 
     def tearDown(self):
-        patch.stopall()
+        mock.patch.stopall()

@@ -6,9 +6,9 @@ as handling parsing arguments and providing defaults.
 '''
 import sys
 
-from docopt import docopt
+import docopt
 
-from resu import init, build, __version__
+import resu
 
 RESU_DOC = \
 '''Usage:
@@ -60,7 +60,7 @@ def resu_command(args=sys.argv[1:], out=sys.stdout):
         Output file, or StringIO. Defaults to standard out.
     '''
     try:
-        arguments = docopt(RESU_DOC, argv=args, options_first=True, help=False)
+        arguments = docopt.docopt(RESU_DOC, argv=args, options_first=True, help=False)
     except SystemExit:
         out.write(RESU_DOC)
         exit(1)
@@ -68,7 +68,7 @@ def resu_command(args=sys.argv[1:], out=sys.stdout):
         out.write(RESU_DOC)
         exit(0)
     if arguments['--version']:
-        out.write(__version__ + '\n')
+        out.write(resu.__version__ + '\n')
         exit(0)
     command = arguments['<command>']
     if command in COMMAND_FUNCTIONS:
@@ -84,14 +84,14 @@ def init_command(args=None, out=sys.stdout):
     if not args:
         args = []
     try:
-        arguments = docopt(INIT_DOC, argv=['init'] + args, help=False)
+        arguments = docopt.docopt(INIT_DOC, argv=['init'] + args, help=False)
     except SystemExit:
         out.write(INIT_DOC)
         exit(1)
     if arguments['--help']:
         out.write(INIT_DOC)
         exit(0)
-    init(directory=arguments['--directory'])
+    resu.init(directory=arguments['--directory'])
 
 
 def build_command(args=None, out=sys.stdout):
@@ -99,7 +99,7 @@ def build_command(args=None, out=sys.stdout):
     if not args:
         args = []
     try:
-        arguments = docopt(BUILD_DOC, argv=['build'] + args, help=False)
+        arguments = docopt.docopt(BUILD_DOC, argv=['build'] + args, help=False)
     except SystemExit:
         out.write(BUILD_DOC)
         exit(1)
@@ -108,7 +108,7 @@ def build_command(args=None, out=sys.stdout):
         exit(0)
     if not arguments['<files>']:
         arguments['<files>'] = ['config.yml', 'resume.yml']
-    build(
+    resu.build(
         output_file=arguments['--output-file'],
         files=arguments['<files>'])
 
@@ -117,7 +117,7 @@ def help_command(args=None, out=sys.stdout):
     if not args:
         args = []
     try:
-        arguments = docopt(HELP_DOC, argv=['help'] + args)
+        arguments = docopt.docopt(HELP_DOC, argv=['help'] + args)
     except SystemExit:
         out.write(HELP_DOC)
         exit(1)
