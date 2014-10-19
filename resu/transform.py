@@ -36,7 +36,7 @@ class Transform(object):
     @abc.abstractmethod
     def apply(self, data):
         '''Transform a dictionary of data into a new dictionary.'''
-        return
+        raise NotImplementedError
 
 def _identity(data):
     '''The single argument identity function.'''
