@@ -84,7 +84,7 @@ def _get_template(template='default.html'):
     template_location = TEMPLATES_DIR + '/' + template
     if not pkg_resources.resource_exists('resu', template_location):
         raise MissingPackageDataError(
-            '{template} does not exist.'.format(data_file=template_location))
+            '{template} does not exist.'.format(template=template_location))
     return pkg_resources.resource_string('resu', template_location)
 
 def _apply_transforms(data):

@@ -142,10 +142,35 @@ class test_combine_yaml_files(unittest.TestCase):
 
 class test_get_template(unittest.TestCase):
     #TODO(skyler) add tests for _get_template
-    pass
+
+    def setUp(self):
+        self.mock_resource_exists = mock.patch('resu.project.pkg_resources.resource_exists').start()
+        def resource_exists_side_effect(package, resource):
+            if resource == resu.project.TEMPLATES_DIR + "/default.html":
+                return True
+            return False
+        self.mock_resource_exists.side_effect = resource_exists_side_effect
+        self.mock_resource_string = mock.patch('resu.project.pkg_resources.resource_string').start()
+
+    def test_existant_resource(self):
+        resu.project._get_template()
+        resource = resu.project.TEMPLATES_DIR + "/default.html"
+        self.mock_resource_string.called_once_with('resu', resource)
+
+    def test_non_existant_resource(self):
+        with self.assertRaises(resu.project.MissingPackageDataError):
+            resu.project._get_template('xyz.html')
+        assert not self.mock_resource_string.called
+
+    def tearDown(self):
+        mock.patch.stopall()
 
 class test_build(unittest.TestCase):
     #TODO(skyler) add tests for build
+    pass
+
+class test_apply_transforms(unittest.TestCase):
+    #TODO(skyler) add tests for _apply_transforms
     pass
 
 class test_generate_default(unittest.TestCase):
