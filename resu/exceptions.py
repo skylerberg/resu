@@ -3,3 +3,6 @@ class FileExistsError(Exception):
 
 class MissingPackageDataError(Exception):
     pass
+
+class TransformNotFoundError(Exception):
+    pass

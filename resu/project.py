@@ -9,6 +9,7 @@ import pkg_resources
 import yaml
 import jinja2
 
+import resu.transforms
 from resu.exceptions import FileExistsError, MissingPackageDataError
 
 DATA_DIR = 'data'
@@ -86,9 +87,16 @@ def _get_template(template='default.html'):
             '{template} does not exist.'.format(data_file=template_location))
     return pkg_resources.resource_string('resu', template_location)
 
+def _apply_transforms(data):
+    '''Apply all transforms specified in the config file.'''
+    transforms = data.get('config', {}).get('transforms', [])
+    composite_transform = resu.Transform.get_composite_transform(transforms)
+    return composite_transform(data)
+
 def build(data_files, output_file):
     '''Create a new resume from configuration files.'''
     data = _combine_yaml_files(data_files)
+    data = _apply_transforms(data)
     template = _get_template()
     jinja_template = jinja2.Template(template)
     with open(output_file, 'w') as out:
