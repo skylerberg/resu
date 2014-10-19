@@ -92,3 +92,6 @@ def build(output_file, files):
     with open(template_config) as template_file:
         template = jinja2.Template(template_file.read())
     print template.render(resume=data)
+
+def generate_default():
+    pass

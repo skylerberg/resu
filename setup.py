@@ -7,6 +7,6 @@ setup(
     packages=find_packages(),
     long_description=open(join(dirname(__file__), 'README.md')).read(),
     entry_points={
-        'console_scripts': ['resu = resu.cli:resu_command']
+        'console_scripts': ['resu = resu.cli:run']
         }
     )
