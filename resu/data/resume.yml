@@ -1,1 +1,76 @@
-#TODO(skyler) Add default resume
+personal:
+  name: Jane Doe
+
+skills:
+
+  languages:
+    - Python
+    - Java
+    - C
+
+  tools:
+    - Git
+    - Eclipse
+
+  libraries:
+    - Backbone.js
+    - Django
+
+education:
+
+  State University:
+    city: Town
+    state: ST
+    gpa: 3.75
+    major GPA: 3.85
+    graduation: 
+      year: 2015
+      month: June
+      expected: True
+    major: Computer Science
+    type: Bachelor of Science
+
+experience:
+
+  Company Name 1:
+    title: Software Development Intern
+    bullets:
+      - Improved something by 50% by doing something.
+      - Implemented a change, reducing something bad from 100 to 10.
+      - Built a tool which is now used by major project X.
+    from: June 2014
+    to: September 2014
+
+  Company Name 2:
+    title: Software Development Intern
+    bullets:
+      - Created a system to do something using some technology.
+      - Some other sentence that demonstrates Jane adding value to a company.
+    from: June 2013
+    to: September 2013
+
+projects:
+
+  Personal Project 1:
+    bullets:
+      - Sentence that simultaniously explains the project, lists skills learned.
+      - Sentence that says something impressive about the project
+
+  Personal Project 2:
+    bullets:
+      - Sentence that simultaniously explains the project, lists skills learned.
+      - Sentence that says something impressive about the project
+
+publications:
+
+  A Novel Approach to Doing Something that is not that Novel:
+    bullets:
+      - Moved the curve ever so slightly by doing something crazy
+    type: paper
+    venue: Conference Name
+    date: June 4, 2014
+
+awards:
+
+  State University, Big Scholarship:
+    date: Spring 2011

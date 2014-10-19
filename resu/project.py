@@ -7,6 +7,7 @@ import os
 
 import pkg_resources
 import yaml
+import jinja2
 
 from resu.exceptions import FileExistsError, MissingPackageDataError
 
@@ -85,4 +86,9 @@ def _combine_yaml_files(files):
 
 def build(output_file, files):
     '''Create a new resume from an existing project.'''
-    pass
+    data = _combine_yaml_files(files)
+    template_config = data.get('template', 'templates/default.html')
+    #template_path = os.path.join(template_config.split('.'))
+    with open(template_config) as template_file:
+        template = jinja2.Template(template_file.read())
+    print template.render(resume=data)

@@ -1,0 +1,133 @@
+{%- set personal = resume['personal'] -%}
+{%- set skills = resume['skills'] -%}
+{%- set education = resume['education'] -%}
+{%- set experience = resume['experience'] -%}
+{%- set projects = resume['projects'] -%}
+{%- set publications = resume['publications'] -%}
+{%- set awards = resume['awards'] -%}
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* {
+	font-family: "Times New Roman", Times, serif;
+}
+body {
+    margin: 0;
+    padding: 0;
+    //width:612px;
+    //height:792px;
+    width:1240px;
+    height:1753px;
+    //width:2480px; # 300 dpi
+    //height:3507px; # 300 dpi
+}
+
+div.page {
+    margin: 150px;
+}
+
+div.personal {
+	margin: 0 auto 0 auto;
+	width: 180px;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+h1 {
+	color: #008888;
+	margin: .2em 0 .2em 0;
+}
+
+p {
+	margin: 0;
+	font-size: 22px;
+}
+
+ul {
+	margin: 0;
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+<div class="personal">
+<h1>{{ personal['name'] }}</h1>
+</div>
+
+<h1>Education</h1>
+{% for school_name in education -%}
+{% set school = education[school_name] -%}
+<p class='left'>{{ school_name }}, Major: {{ school['major'] }}</p>
+<p class='right'> GPA: {{ school['gpa'] }}</p>
+<div style='clear:both;'></div>
+<p>Expected Graduation: {{ school['graduation']['month'] }} {{ school['graduation']['year'] }}</p>
+{% endfor -%}
+
+<h1>Skills</h1>
+{% for category in skills -%}
+<p>{{ category }}: 
+{% for skill in skills[category] -%}
+{{ skill }}, 
+{% endfor -%}
+</p>
+{% endfor -%}
+
+<h1>Experience</h1>
+{% for job_name in experience -%}
+{% set job = experience[job_name] -%}
+<p class='left'><b>{{ job_name }} </b></p>
+<p class='right'>{{ job['from'] }} - {{ job['to'] }}</p>
+<div style='clear:both;'></div>
+<p><i>{{ job['title'] }}</i></p>
+<ul>
+{% for bullet in job['bullets'] -%}
+<li><p>{{ bullet }}</p></li>
+{% endfor -%}
+</ul>
+{% endfor -%}
+
+<h1>Projects</h1>
+{% for project_name in projects -%}
+{% set project = projects[project_name] -%}
+<p><b>{{ project_name }}</b></p>
+<ul>
+{% for bullet in project['bullets'] -%}
+<li><p>{{ bullet }}</p></li>
+{% endfor -%}
+</ul>
+{% endfor -%}
+
+<h1>Publications</h1>
+{% for publication_name in publications -%}
+{% set publication = publications[publication_name] -%}
+<p><b>{{ publication_name }}</b></p>
+<ul>
+{% for bullet in publication['bullets'] -%}
+<li><p>{{ bullet }}</p></li>
+{% endfor -%}
+</ul>
+{% endfor -%}
+
+<h1>Awards</h1>
+{% for award_name in awards -%}
+{% set award = awards[award_name] -%}
+<p>{{ award_name }}</p>
+<ul>
+{% for bullet in award['bullets'] -%}
+<li><p>{{ bullet }}</p></li>
+{% endfor -%}
+</ul>
+{% endfor -%}
+
+</div>
+</body>
+</html>
