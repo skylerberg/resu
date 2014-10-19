@@ -12,6 +12,7 @@ import jinja2
 from resu.exceptions import FileExistsError, MissingPackageDataError
 
 DATA_DIR = 'data'
+TEMPLATES_DIR = 'data/templates'
 
 def _copy_data_file(target_dir, data_dir, data_file):
     '''Copy a file from package data
@@ -68,13 +69,6 @@ def _copy_data_dir(target_dir, data_dir):
                 warnings.append(str(exc))
     return warnings
 
-def init(directory):
-    '''Initialize a new resume.
-
-    directory: Directory to copy the default project into.
-    '''
-    _copy_data_dir(directory, DATA_DIR)
-
 def _combine_yaml_files(files):
     '''Read a list of YAML files and combine their content.'''
     files_content = []
@@ -84,14 +78,22 @@ def _combine_yaml_files(files):
     config = "\n".join(files_content)
     return yaml.load(config)
 
-def build(output_file, files):
-    '''Create a new resume from an existing project.'''
-    data = _combine_yaml_files(files)
-    template_config = data.get('template', 'templates/default.html')
-    #template_path = os.path.join(template_config.split('.'))
-    with open(template_config) as template_file:
-        template = jinja2.Template(template_file.read())
-    print template.render(resume=data)
+def _get_template(template='default.html'):
+    '''Return a template as a string.'''
+    template_location = TEMPLATES_DIR + '/' + template
+    if not pkg_resources.resource_exists('resu', template_location):
+        raise MissingPackageDataError(
+            '{template} does not exist.'.format(data_file=template_location))
+    return pkg_resources.resource_string('resu', template_location)
+
+def build(data_files, output_file):
+    '''Create a new resume from configuration files.'''
+    data = _combine_yaml_files(data_files)
+    template = _get_template()
+    jinja_template = jinja2.Template(template)
+    with open(output_file, 'w') as out:
+        out.write(jinja_template.render(config=data))
 
 def generate_default():
-    pass
+    '''Copy default resu.yml file into local directory.'''
+    _copy_data_file('.', DATA_DIR, 'resu.yml')

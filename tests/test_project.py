@@ -94,13 +94,6 @@ class test_copy_data_dir(unittest.TestCase):
     def tearDown(self):
         mock.patch.stopall()
 
-class test_init(unittest.TestCase):
-
-    @mock.patch('resu.project._copy_data_dir')
-    def test_valid_input(self, mock_copy_data_dir):
-        resu.project.init('.')
-        mock_copy_data_dir.assert_called_once_with('.', resu.project.DATA_DIR)
-
 class test_combine_yaml_files(unittest.TestCase):
 
     def setUp(self):
@@ -146,3 +139,18 @@ class test_combine_yaml_files(unittest.TestCase):
 
     def tearDown(self):
         mock.patch.stopall()
+
+class test_get_template(unittest.TestCase):
+    #TODO(skyler) add tests for _get_template
+    pass
+
+class test_build(unittest.TestCase):
+    #TODO(skyler) add tests for build
+    pass
+
+class test_generate_default(unittest.TestCase):
+
+    @mock.patch('resu.project._copy_data_file')
+    def test_valid_input(self, mock_copy_data_file):
+        resu.project.generate_default()
+        mock_copy_data_file.assert_called_once_with('.', resu.project.DATA_DIR, 'resu.yml')
