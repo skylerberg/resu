@@ -19,6 +19,9 @@ class Transform(object):
         '''
         Return a function composed of the application of each transforms each
         transfrom from a given list.
+
+        Running the composite function returned by this function is the
+        equivalent of running each transform in the same order supplied.
         '''
         transform_lookup = {}
         for transform in cls.get_transforms():
