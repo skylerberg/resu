@@ -81,11 +81,7 @@
 
 		{% if section == 'skills' -%}
 		{% for category in skills -%}
-		<p>{{ category.capitalize() }}: 
-			{% for skill in skills[category] -%}
-			{{ skill }}, 
-			{% endfor -%}
-		</p>
+		<p>{{ category.capitalize() }}: {{ ", ".join(skills[category]) }}</p>
 		{% endfor -%}
 		{% endif -%}
 
