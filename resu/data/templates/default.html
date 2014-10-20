@@ -6,6 +6,9 @@
 {%- set projects = resume['projects'] -%}
 {%- set publications = resume['publications'] -%}
 {%- set awards = resume['awards'] -%}
+
+{%- set layout = config.get('layout', {}) -%}
+{%- set sections = layout.get('sections', [ 'education', 'skills', 'experience', 'projects', 'publications', 'awards']) -%}
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,11 +59,16 @@
 <body>
 	<div class="page">
 
+
 		<div class="personal">
 			<h1>{{ personal['name'] }}</h1>
 		</div>
 
-		<h1>Education</h1>
+		{%- for section in sections -%}
+
+		<h1>{{ section.capitalize() }}</h1>
+
+		{% if section == 'education' -%}
 		{% for school in education -%}
 		{% for name, details in school.iteritems() -%}
 		<p class='left'>{{ name }}, Major: {{ details['major'] }}</p>
@@ -69,17 +77,19 @@
 		<p>Expected Graduation: {{ details['graduation']['month'] }} {{ details['graduation']['year'] }}</p>
 		{% endfor -%}
 		{% endfor -%}
+		{% endif -%}
 
-		<h1>Skills</h1>
+		{% if section == 'skills' -%}
 		{% for category in skills -%}
-		<p>{{ category }}: 
+		<p>{{ category.capitalize() }}: 
 			{% for skill in skills[category] -%}
 			{{ skill }}, 
 			{% endfor -%}
 		</p>
 		{% endfor -%}
+		{% endif -%}
 
-		<h1>Experience</h1>
+		{% if section == 'experience' -%}
 		{% for job in experience -%}
 		{% for name, details in job.iteritems() -%}
 		<p class='left'><b>{{ name }}</b></p>
@@ -93,8 +103,9 @@
 		</ul>
 		{% endfor -%}
 		{% endfor -%}
+		{% endif -%}
 
-		<h1>Projects</h1>
+		{% if section == 'projects' -%}
 		{% for project in projects -%}
 		{% for name, details in project.iteritems() -%}
 		<p><b>{{ name }}</b></p>
@@ -105,8 +116,9 @@
 		</ul>
 		{% endfor -%}
 		{% endfor -%}
+		{% endif -%}
 
-		<h1>Publications</h1>
+		{% if section == 'publications' -%}
 		{% for publication in publications -%}
 		{% for name, details in publication.iteritems() -%}
 		<p><b>{{ name }}</b></p>
@@ -117,8 +129,9 @@
 		</ul>
 		{% endfor -%}
 		{% endfor -%}
+		{% endif -%}
 
-		<h1>Awards</h1>
+		{% if section == 'awards' -%}
 		{% for award in awards -%}
 		{% for name, details in award.iteritems() -%}
 		<p>{{ name }}</p>
@@ -129,7 +142,9 @@
 		</ul>
 		{% endfor -%}
 		{% endfor -%}
+		{% endif -%}
 
+		{%- endfor -%}
 	</div>
 </body>
 </html>

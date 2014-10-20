@@ -1,10 +1,14 @@
 config:
   template: templates/default.html
 
-
 layout:
   sections:
     - education
+    - skills
+    - experience
+    - projects
+    - publications
+    - awards
 
 resume:
   personal:
