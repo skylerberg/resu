@@ -61,12 +61,13 @@
 		</div>
 
 		<h1>Education</h1>
-		{% for school_name in education -%}
-		{% set school = education[school_name] -%}
-		<p class='left'>{{ school_name }}, Major: {{ school['major'] }}</p>
-		<p class='right'> GPA: {{ school['gpa'] }}</p>
+		{% for school in education -%}
+		{% for name, details in school.iteritems() -%}
+		<p class='left'>{{ name }}, Major: {{ details['major'] }}</p>
+		<p class='right'> GPA: {{ details['gpa'] }}</p>
 		<div style='clear:both;'></div>
-		<p>Expected Graduation: {{ school['graduation']['month'] }} {{ school['graduation']['year'] }}</p>
+		<p>Expected Graduation: {{ details['graduation']['month'] }} {{ details['graduation']['year'] }}</p>
+		{% endfor -%}
 		{% endfor -%}
 
 		<h1>Skills</h1>
@@ -79,50 +80,54 @@
 		{% endfor -%}
 
 		<h1>Experience</h1>
-		{% for job_name in experience -%}
-		{% set job = experience[job_name] -%}
-		<p class='left'><b>{{ job_name }}</b></p>
-		<p class='right'>{{ job['from'] }} - {{ job['to'] }}</p>
+		{% for job in experience -%}
+		{% for name, details in job.iteritems() -%}
+		<p class='left'><b>{{ name }}</b></p>
+		<p class='right'>{{ details['from'] }} - {{ details['to'] }}</p>
 		<div style='clear:both;'></div>
-		<p><i>{{ job['title'] }}</i></p>
+		<p><i>{{ details['title'] }}</i></p>
 		<ul>
-			{% for bullet in job['bullets'] -%}
+			{% for bullet in details['bullets'] -%}
 			<li><p>{{ bullet }}</p></li>
 			{% endfor -%}
 		</ul>
+		{% endfor -%}
 		{% endfor -%}
 
 		<h1>Projects</h1>
-		{% for project_name in projects -%}
-		{% set project = projects[project_name] -%}
-		<p><b>{{ project_name }}</b></p>
+		{% for project in projects -%}
+		{% for name, details in project.iteritems() -%}
+		<p><b>{{ name }}</b></p>
 		<ul>
-		{% for bullet in project['bullets'] -%}
-		<li><p>{{ bullet }}</p></li>
-		{% endfor -%}
+			{% for bullet in details['bullets'] -%}
+			<li><p>{{ bullet }}</p></li>
+			{% endfor -%}
 		</ul>
+		{% endfor -%}
 		{% endfor -%}
 
 		<h1>Publications</h1>
-		{% for publication_name in publications -%}
-		{% set publication = publications[publication_name] -%}
-		<p><b>{{ publication_name }}</b></p>
+		{% for publication in publications -%}
+		{% for name, details in publication.iteritems() -%}
+		<p><b>{{ name }}</b></p>
 		<ul>
-			{% for bullet in publication['bullets'] -%}
+			{% for bullet in details['bullets'] -%}
 			<li><p>{{ bullet }}</p></li>
 			{% endfor -%}
 		</ul>
 		{% endfor -%}
+		{% endfor -%}
 
 		<h1>Awards</h1>
-		{% for award_name in awards -%}
-		{% set award = awards[award_name] -%}
-		<p>{{ award_name }}</p>
+		{% for award in awards -%}
+		{% for name, details in award.iteritems() -%}
+		<p>{{ name }}</p>
 		<ul>
-			{% for bullet in award['bullets'] -%}
+			{% for bullet in details['bullets'] -%}
 			<li><p>{{ bullet }}</p></li>
 			{% endfor -%}
 		</ul>
+		{% endfor -%}
 		{% endfor -%}
 
 	</div>
