@@ -13,9 +13,12 @@
 <html>
 <head>
 	<style>
+		{%- set spacing = ".4em" -%}
+
 		* {
 			font-family: "Times New Roman", Times, serif;
 		}
+
 		body {
 		    margin: 0;
 		    padding: 0;
@@ -34,25 +37,36 @@
 
 		.left {
 			float: left;
+			//margin: .0525em;
+			margin: .2em;
 		}
 
 		.right {
 			float: right;
+			//margin: .0525em;
+			margin: .2em;
 		}
 
 		h1 {
 			color: #008888;
-			margin: .2em 0 .2em 0;
+			margin: {{ spacing }} 0;
 		}
 
 		p {
-			margin: 0;
+			margin: {{ spacing }} 0;
 			font-size: 22px;
 		}
 
 		ul {
 			margin: 0;
 		}
+
+		li  {
+			margin: {{ spacing }};
+		}
+	</style>
+</head>
+
 	</style>
 </head>
 
@@ -69,13 +83,13 @@
 		<h1>{{ section.capitalize() }}</h1>
 
 		{% if section == 'education' -%}
-		{% for school in education -%}
-		{% for name, details in school.iteritems() -%}
-		<p class='left'>{{ name }}, Major: {{ details['major'] }}</p>
-		<p class='right'> GPA: {{ details['gpa'] }}</p>
+		{% for details in education -%}
+		<p class='left' style="margin: 0;">{{ details['name'] }}</p>
+		<p class='right' style="margin: 0;">Expected {{ details['graduation']['month'] }} {{ details['graduation']['year'] }}</p>
 		<div style='clear:both;'></div>
-		<p>Expected Graduation: {{ details['graduation']['month'] }} {{ details['graduation']['year'] }}</p>
-		{% endfor -%}
+		<p>{{ details['type'] }} in {{ details['major'] }}</p>
+		
+		<p> GPA: {{ details['gpa'] }}</p>
 		{% endfor -%}
 		{% endif -%}
 
@@ -86,10 +100,9 @@
 		{% endif -%}
 
 		{% if section == 'experience' -%}
-		{% for job in experience -%}
-		{% for name, details in job.iteritems() -%}
-		<p class='left'><b>{{ name }}</b></p>
-		<p class='right'>{{ details['from'] }} - {{ details['to'] }}</p>
+		{% for details in experience -%}
+		<p class='left' style="margin: 0;"><b>{{ details['name'] }}</b></p>
+		<p class='right' style="margin: 0;">{{ details['from'] }} - {{ details['to'] }}</p>
 		<div style='clear:both;'></div>
 		<p><i>{{ details['title'] }}</i></p>
 		<ul>
@@ -98,46 +111,35 @@
 			{% endfor -%}
 		</ul>
 		{% endfor -%}
-		{% endfor -%}
 		{% endif -%}
 
 		{% if section == 'projects' -%}
-		{% for project in projects -%}
-		{% for name, details in project.iteritems() -%}
-		<p><b>{{ name }}</b></p>
+		{% for details in projects -%}
+		<p><b>{{ details['name'] }}</b></p>
 		<ul>
 			{% for bullet in details['bullets'] -%}
 			<li><p>{{ bullet }}</p></li>
 			{% endfor -%}
 		</ul>
-		{% endfor -%}
 		{% endfor -%}
 		{% endif -%}
 
 		{% if section == 'publications' -%}
-		{% for publication in publications -%}
-		{% for name, details in publication.iteritems() -%}
-		<p><b>{{ name }}</b></p>
-		<ul>
-			{% for bullet in details['bullets'] -%}
-			<li><p>{{ bullet }}</p></li>
-			{% endfor -%}
-		</ul>
-		{% endfor -%}
+		{% for details in publications -%}
+		<p><b>{{ details['name'] }}</b></p>
+		<p><i>{{ ", ".join(details['authors']) }}</i></p>
+		<p>{{ details['venue'] }}</p>
 		{% endfor -%}
 		{% endif -%}
 
 		{% if section == 'awards' -%}
-		{% for award in awards -%}
-		{% for name, details in award.iteritems() -%}
-		<p>{{ name }}</p>
 		<ul>
-			{% for bullet in details['bullets'] -%}
-			<li><p>{{ bullet }}</p></li>
-			{% endfor -%}
+		{% for details in awards %}
+			<li class='left'><p style="margin: 0;">{{ details['name'] }}</p></li>
+			<p class='right' style="margin: 0;">{{ details['date'] }}</p>
+			<div style='clear:both;'></div>
+		{% endfor -%}
 		</ul>
-		{% endfor -%}
-		{% endfor -%}
 		{% endif -%}
 
 		{%- endfor -%}
