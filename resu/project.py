@@ -9,7 +9,7 @@ import pkg_resources
 
 import resu.transforms
 import resu.parsers
-from resu.exceptions import FileExistsError, MissingPackageDataError
+from resu.exceptions import FileExistsError, MissingPackageDataError, DataMergeError
 
 DATA_DIR = 'data'
 TEMPLATES_DIR = 'data/templates'
@@ -69,15 +69,49 @@ def _copy_data_dir(target_dir, data_dir):
                 warnings.append(str(exc))
     return warnings
 
-def _combine_yaml_files(files):
-    '''Read a list of YAML files and combine their content.'''
-    files_content = []
-    for yaml_file_path in files:
-        with open(yaml_file_path) as yaml_file:
-            files_content.append(yaml_file.read())
-    config = "\n".join(files_content)
-    data_parser = resu.defaults.DATA_PARSER()
-    return data_parser.load(config)
+def _merge_dicts(dicts):
+    '''Recursively combine a list of dictionaries.
+
+    If a subset of the dictionaries contain the same key and the associated
+    value is a dictionary in all dictionaries in this subset, then the key will
+    map to the merged values.
+
+    If a subset of the dictionaries contain the same key and the associated
+    value is a list in all dictionaries in this subset, then the lists will be
+    concatenated in the order the dictionaries where provided.
+
+    If a subset of the dictionaries contain the same key and the associated
+    value in any dictionary contains any data type other than lists or
+    dictionies or there are both list and dictionary values, then a
+    DataMergeError is raised.
+
+    warning: This function copies the data in each dictionary, this could be
+    quite costly. This function is a prime candidate for optimization.
+    '''
+    out = {}
+    for dictionary in dicts:
+        for key, value in dictionary.iteritems():
+            if key not in out:
+                out[key] = value
+            else:
+                if isinstance(out[key], dict) and isinstance(value, dict):
+                    out[key] = _merge_dicts([out[key], value])
+                elif isinstance(out[key], list) and isinstance(value, list):
+                    out[key] += value
+                else:
+                    raise DataMergeError(
+                        "Cannot combine {first} and {second}".format(
+                            first=type(out[key]), second=type(value)))
+    return out
+
+def _combine_data_files(files, parser):
+    '''Read a list of files containing dictionaries and combine their content.
+    '''
+    dicts = []
+    for data_file_path in files:
+        with open(data_file_path) as data_file:
+            dicts.append(parser.load(data_file.read()))
+    return _merge_dicts(dicts)
 
 def _get_template(template='default.html'):
     '''Return a template as a string.'''
@@ -94,7 +128,7 @@ def _apply_transforms(transforms, data):
 
 def build(data_files, output_file):
     '''Create a new resume from configuration files.'''
-    data = _combine_yaml_files(data_files)
+    data = _combine_data_files(data_files, resu.defaults.DATA_PARSER)
     settings = data.get('config', {})
     data = _apply_transforms(settings.get('transforms', []), data)
     template = _get_template()

@@ -6,3 +6,9 @@ class MissingPackageDataError(Exception):
 
 class TransformNotFoundError(Exception):
     pass
+
+class DataMergeError(Exception):
+    pass
+
+class ParserError(Exception):
+    pass
