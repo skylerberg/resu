@@ -98,9 +98,10 @@ def build(data_files, output_file):
     settings = data.get('config', {})
     data = _apply_transforms(settings.get('transforms', []), data)
     template = _get_template()
-    jinja_template = jinja2.Template(template)
+    # TODO(skyler) don't assign template_engine to always be jinja2
+    template_engine = resu.template.Jinja2Engine()
     with open(output_file, 'w') as out:
-        out.write(jinja_template.render(config=data))
+        out.write(template_engine.render(template, config=data))
 
 def generate_default():
     '''Copy default resu.yml file into local directory.'''
