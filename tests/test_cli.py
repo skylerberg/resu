@@ -10,7 +10,7 @@ import resu.cli
 class test_run(unittest.TestCase):
 
     def setUp(self):
-        self.mock_generate_default = mock.patch('resu.generate_default').start()
+        self.mock_generate_default = mock.patch('resu.example.generate_default').start()
         self.mock_build = mock.patch('resu.build').start()
         self.out = StringIO.StringIO()
 

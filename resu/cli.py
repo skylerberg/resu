@@ -46,7 +46,7 @@ def run(args=sys.argv[1:], out=sys.stdout):
     elif arguments['--version']:
         out.write(resu.__version__ + '\n')
     elif arguments['--generate']:
-        resu.generate_default()
+        resu.example.generate_default()
     else:
         kwargs = {}
         if arguments['<files>']:
