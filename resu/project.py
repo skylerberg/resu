@@ -11,8 +11,8 @@ import resu.transforms
 import resu.parsers
 from resu.exceptions import FileExistsError, MissingPackageDataError, DataMergeError
 
-DATA_DIR = 'data'
-TEMPLATES_DIR = 'data/templates'
+DATA_DIR = 'examples'
+TEMPLATES_DIR = 'examples/templates'
 
 def _copy_data_file(target_dir, data_dir, data_file):
     '''Copy a file from package data
