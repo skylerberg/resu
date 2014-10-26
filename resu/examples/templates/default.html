@@ -13,48 +13,37 @@
 <html>
 <head>
 	<style>
-		{%- set spacing = ".4em" -%}
+		{%- set spacing = layout.get('spacing', 0.3)  -%}
+		{%- set font_size = layout.get('font size', 11) -%}
+		{%- set dpi = layout.get('dpi', 150) -%}
+		{%- set margins = layout.get('margins', 1) * dpi -%}
 
 		* {
 			font-family: "Times New Roman", Times, serif;
 		}
 
 		body {
-		    margin: 0;
-		    padding: 0;
-		    width:1240px;
-		    height:1753px;
-		}
-
-		div.page {
-		    margin: 150px;
-		}
-
-		div.personal {
-			margin: 0 auto 0 auto;
-			width: 180px;
-		}
-
-		.left {
-			float: left;
-			//margin: .0525em;
-			margin: .2em;
-		}
-
-		.right {
-			float: right;
-			//margin: .0525em;
-			margin: .2em;
+			margin: 0;
+			padding: 0;
+			width: {{ (dpi * 8.5) | round }}px;
+			height: {{ (dpi * 11) | round }}px;
+			font-size: {{ (1.0 / 72 * dpi * font_size) | round }}px;
 		}
 
 		h1 {
-			color: #008888;
-			margin: {{ spacing }} 0;
+			margin: {{ spacing }}em 0;
+			font-size: 1.5em;
+			//color: #253C80;
+		}
+
+		h2 {
+			margin: {{ spacing }}em 0;
+			font-size: 1em;
+			//color: #253C80;
 		}
 
 		p {
-			margin: {{ spacing }} 0;
-			font-size: 22px;
+			margin: {{ spacing }}em 0;
 		}
 
 		ul {
@@ -62,7 +51,60 @@
 		}
 
 		li  {
-			margin: {{ spacing }};
+			margin: {{ spacing }}em;
+		}
+
+		td {
+			font-weight: bold;
+		}
+
+		div.page {
+			padding: {{ margins }}px;
+		}
+
+		div.personal {
+			margin: 0 auto 0 auto;
+			width: 11.25em;
+		}
+
+		.section {
+			margin: 10em 0 0 0;
+		}
+
+		.left {
+			float: left;
+			text-align: left;
+			margin: {{ spacing / 2 }}em 0;
+		}
+
+		.right {
+			float: right;
+			text-align: left;
+			margin: {{ spacing / 2 }}em 0;
+		}
+
+		.center {
+			text-align: center;
+			margin-top: {{ spacing / 2 }}em;
+			margin-bottom: {{ spacing / 2 }}em;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.title {
+			font-weight: bold;
+		}
+
+		.subtitle {
+			font-style: italic;
+		}
+
+		.date {
+			font-style: italic;
+		}
+
+		.section {
+			margin: {{ spacing * 1.5 }}em;
 		}
 	</style>
 </head>
@@ -80,68 +122,72 @@
 
 		{%- for section in sections -%}
 
-		<h1>{{ section.capitalize() }}</h1>
+		<div class='section'>
+			<h2>{{ section.capitalize() }}</h2>
+			<hr />
 
-		{% if section == 'education' -%}
-		{% for details in education -%}
-		<p class='left' style="margin: 0;">{{ details['name'] }}</p>
-		<p class='right' style="margin: 0;">Expected {{ details['graduation']['month'] }} {{ details['graduation']['year'] }}</p>
-		<div style='clear:both;'></div>
-		<p>{{ details['type'] }} in {{ details['major'] }}</p>
-		
-		<p> GPA: {{ details['gpa'] }}</p>
-		{% endfor -%}
-		{% endif -%}
-
-		{% if section == 'skills' -%}
-		{% for category in skills -%}
-		<p>{{ category.capitalize() }}: {{ ", ".join(skills[category]) }}</p>
-		{% endfor -%}
-		{% endif -%}
-
-		{% if section == 'experience' -%}
-		{% for details in experience -%}
-		<p class='left' style="margin: 0;"><b>{{ details['name'] }}</b></p>
-		<p class='right' style="margin: 0;">{{ details['from'] }} - {{ details['to'] }}</p>
-		<div style='clear:both;'></div>
-		<p><i>{{ details['title'] }}</i></p>
-		<ul>
-			{% for bullet in details['bullets'] -%}
-			<li><p>{{ bullet }}</p></li>
-			{% endfor -%}
-		</ul>
-		{% endfor -%}
-		{% endif -%}
-
-		{% if section == 'projects' -%}
-		{% for details in projects -%}
-		<p><b>{{ details['name'] }}</b></p>
-		<ul>
-			{% for bullet in details['bullets'] -%}
-			<li><p>{{ bullet }}</p></li>
-			{% endfor -%}
-		</ul>
-		{% endfor -%}
-		{% endif -%}
-
-		{% if section == 'publications' -%}
-		{% for details in publications -%}
-		<p><b>{{ details['name'] }}</b></p>
-		<p><i>{{ ", ".join(details['authors']) }}</i></p>
-		<p>{{ details['venue'] }}</p>
-		{% endfor -%}
-		{% endif -%}
-
-		{% if section == 'awards' -%}
-		<ul>
-		{% for details in awards %}
-			<li class='left'><p style="margin: 0;">{{ details['name'] }}</p></li>
-			<p class='right' style="margin: 0;">{{ details['date'] }}</p>
+			{% if section == 'education' -%}
+			{% for details in education -%}
+			<p class='left title'>{{ details['name'] }}</p>
+			<p class='right date'>(Expected {{ details['graduation']['month'] }} {{ details['graduation']['year'] }})</p>
 			<div style='clear:both;'></div>
-		{% endfor -%}
-		</ul>
-		{% endif -%}
+			<p class='left'>{{ details['type'] }} in {{ details['major'] }}</p>
+			<p class='right'> GPA: {{ details['gpa'] }}</p>
+			<div style='clear:both;'></div>
+			{% endfor -%}
+			{% endif -%}
 
+			{% if section == 'skills' -%}
+			{% for category in skills -%}
+			<p>{{ category.capitalize() }}: {{ ", ".join(skills[category]) }}</p>
+			{% endfor -%}
+			{% endif -%}
+
+			{% if section == 'experience' -%}
+			{% for details in experience -%}
+			<table style='width: 100%; table-layout:fixed;'> <tr>
+				<td width='25%'><p style='text-align: left'>{{ details['title'] }}</p></td>
+				<td width='50%'><p style='text-align: center'>{{ details['name'] }}</p></td>
+				<td width='25%'><p style='text-align: right'>({{ details['from'] }} - {{ details['to'] }})</p></td>
+			</tr></table>
+			<div style='clear:both;'></div>
+			<ul>
+				{% for bullet in details['bullets'] -%}
+				<li><p>{{ bullet }}</p></li>
+				{% endfor -%}
+			</ul>
+			{% endfor -%}
+			{% endif -%}
+
+			{% if section == 'projects' -%}
+			{% for details in projects -%}
+			<p class='title'>{{ details['name'] }}</p>
+			<ul>
+				{% for bullet in details['bullets'] -%}
+				<li><p>{{ bullet }}</p></li>
+				{% endfor -%}
+			</ul>
+			{% endfor -%}
+			{% endif -%}
+
+			{% if section == 'publications' -%}
+			{% for details in publications -%}
+			<p class='title'>{{ details['name'] }}</p>
+			<p class='subtitle'>{{ ", ".join(details['authors']) }}</p>
+			<p>{{ details['venue'] }}</p>
+			{% endfor -%}
+			{% endif -%}
+
+			{% if section == 'awards' -%}
+			<ul>
+			{% for details in awards %}
+				<li class='left'><p style="margin: 0;">{{ details['name'] }}</p></li>
+				<p class='right date' style="margin: 0;">({{ details['date'] }})</p>
+				<div style='clear:both;'></div>
+			{% endfor -%}
+			</ul>
+			{% endif -%}
+		</div>
 		{%- endfor -%}
 	</div>
 </body>
