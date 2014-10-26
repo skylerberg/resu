@@ -1,6 +1,6 @@
 import jinja2
 
-from resu.templating import TemplateEngine
+from resu.template_engine import TemplateEngine
 
 class Jinja2Engine(TemplateEngine):
 

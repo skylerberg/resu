@@ -1,6 +1,6 @@
 import mako
 
-from resu.templating import TemplateEngine
+from resu.template_engine import TemplateEngine
 
 class MakoEngine(TemplateEngine):
 
