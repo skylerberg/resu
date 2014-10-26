@@ -126,9 +126,12 @@ def _apply_transforms(transforms, data):
     composite_transform = resu.Transform.get_composite_transform(transforms)
     return composite_transform(data)
 
-def build(data_files, output_file):
+def build(
+        data_files=resu.defaults.DATA_FILES,
+        output_file=resu.defaults.OUTPUT_FILE,
+        parser=resu.defaults.DATA_PARSER):
     '''Create a new resume from configuration files.'''
-    data = _combine_data_files(data_files, resu.defaults.DATA_PARSER)
+    data = _combine_data_files(data_files, parser)
     settings = data.get('config', {})
     data = _apply_transforms(settings.get('transforms', []), data)
     template = _get_template()

@@ -19,9 +19,7 @@ class test_run(unittest.TestCase):
         output = self.out.getvalue()
         self.assertEquals(output, '')
         assert not self.mock_generate_default.called
-        self.mock_build.assert_called_once_with(
-            data_files=['resu.yml'],
-            output_file='resu.html')
+        self.mock_build.assert_called_once_with()
 
     def test_alternate_files(self):
         resu.cli.run(args=['config.yml', 'resume.yml'], out=self.out)
@@ -29,8 +27,7 @@ class test_run(unittest.TestCase):
         self.assertEquals(output, '')
         assert not self.mock_generate_default.called
         self.mock_build.assert_called_once_with(
-            data_files=['config.yml', 'resume.yml'],
-            output_file='resu.html')
+            data_files=['config.yml', 'resume.yml'])
 
     def test_help_option(self):
         resu.cli.run(args=['-h'], out=self.out)

@@ -2,7 +2,7 @@
 Entry point into resu and subcommands.
 
 resu.cli is responsible for providing the entry point for executables as well
-as handling parsing arguments and providing defaults.
+as handling parsing arguments.
 '''
 import sys
 
@@ -20,7 +20,6 @@ Options:
     -g --generate       Generate the default resu.yml file.
     -o --output-file <file>
                         Path to output file.
-                        [default: resu.html]
 '''
 
 def run(args=sys.argv[1:], out=sys.stdout):
@@ -49,8 +48,9 @@ def run(args=sys.argv[1:], out=sys.stdout):
     elif arguments['--generate']:
         resu.generate_default()
     else:
-        if not arguments['<files>']:
-            arguments['<files>'] = ['resu.yml']
-        resu.build(
-            data_files=arguments['<files>'],
-            output_file=arguments['--output-file'])
+        kwargs = {}
+        if arguments['<files>']:
+            kwargs['data_files'] = arguments['<files>']
+        if arguments['--output-file']:
+            kwargs['output_file'] = arguments['--output-file']
+        resu.build(**kwargs)
