@@ -98,8 +98,7 @@ def build(data_files, output_file):
     settings = data.get('config', {})
     data = _apply_transforms(settings.get('transforms', []), data)
     template = _get_template()
-    # TODO(skyler) don't assign template_engine to always be jinja2
-    template_engine = resu.template.Jinja2Engine()
+    template_engine = resu.defaults.TEMPLATE_ENGINE
     with open(output_file, 'w') as out:
         out.write(template_engine.render(template, config=data))
 
