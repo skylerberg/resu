@@ -129,13 +129,13 @@ def _apply_transforms(transforms, data):
 def build(
         data_files=resu.defaults.DATA_FILES,
         output_file=resu.defaults.OUTPUT_FILE,
-        parser=resu.defaults.DATA_PARSER):
+        parser=resu.defaults.DATA_PARSER,
+        template_engine=resu.defaults.TEMPLATE_ENGINE):
     '''Create a new resume from configuration files.'''
     data = _combine_data_files(data_files, parser)
     settings = data.get('config', {})
     data = _apply_transforms(settings.get('transforms', []), data)
     template = _get_template()
-    template_engine = resu.defaults.TEMPLATE_ENGINE
     with open(output_file, 'w') as out:
         out.write(template_engine.render(template, config=data))
 
