@@ -6,9 +6,9 @@ This module stores the main commands for working with projects.
 import os
 
 import pkg_resources
-import yaml
 
 import resu.transforms
+import resu.parsers
 from resu.exceptions import FileExistsError, MissingPackageDataError
 
 DATA_DIR = 'data'
@@ -76,7 +76,8 @@ def _combine_yaml_files(files):
         with open(yaml_file_path) as yaml_file:
             files_content.append(yaml_file.read())
     config = "\n".join(files_content)
-    return yaml.load(config)
+    data_parser = resu.defaults.DATA_PARSER()
+    return data_parser.load(config)
 
 def _get_template(template='default.html'):
     '''Return a template as a string.'''
@@ -97,7 +98,7 @@ def build(data_files, output_file):
     settings = data.get('config', {})
     data = _apply_transforms(settings.get('transforms', []), data)
     template = _get_template()
-    template_engine = resu.defaults.TEMPLATE_ENGINE
+    template_engine = resu.defaults.TEMPLATE_ENGINE()
     with open(output_file, 'w') as out:
         out.write(template_engine.render(template, config=data))
 
