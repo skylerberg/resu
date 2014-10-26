@@ -1,3 +1,4 @@
 docopt
 PyYAML
 jinja2
+mako
