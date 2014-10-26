@@ -7,7 +7,6 @@ import os
 
 import pkg_resources
 import yaml
-import jinja2
 
 import resu.transforms
 from resu.exceptions import FileExistsError, MissingPackageDataError
