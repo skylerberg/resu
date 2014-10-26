@@ -19,3 +19,6 @@ lib64
 
 # coverage
 .coverage
+
+# sphinx
+doc/_build
