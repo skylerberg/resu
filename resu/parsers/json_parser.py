@@ -1,8 +1,8 @@
 import json
 
-from resu.parser import DataParser
+from resu.parser import Parser
 
-class JsonParser(DataParser):
+class JsonParser(Parser):
 
     format = "json"
 

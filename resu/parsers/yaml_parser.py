@@ -1,8 +1,8 @@
 import yaml
 
-from resu.parser import DataParser
+from resu.parser import Parser
 
-class YamlParser(DataParser):
+class YamlParser(Parser):
 
     format = "yaml"
 
