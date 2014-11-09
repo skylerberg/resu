@@ -75,18 +75,6 @@ class test_build(unittest.TestCase):
     #TODO(skyler) add tests for build
     pass
 
-class test_apply_transforms(unittest.TestCase):
-
-    @mock.patch('resu.Transform.get_composite_transform')
-    def test_valid_input(self, mock_get_composite_transform):
-        composite = mock.Mock()
-        mock_get_composite_transform.return_value = composite
-        transforms = []
-        data = {}
-        resu.project._apply_transforms(transforms, data)
-        mock_get_composite_transform.assert_called_once_with(transforms)
-        composite.assert_called_once_with(data)
-
 class test_merge_dicts(unittest.TestCase):
 
     def test_simple(self):

@@ -49,11 +49,6 @@ def _combine_data_files(files, parser):
             dicts.append(parser.load(data_file.read()))
     return _merge_dicts(dicts)
 
-def _apply_transforms(transforms, data):
-    '''Apply all transforms specified in the config file.'''
-    composite_transform = resu.Transform.get_composite_transform(transforms)
-    return composite_transform(data)
-
 def build(**kwargs):
     '''Create a new resume from configuration files.'''
     # Set up config and read data
