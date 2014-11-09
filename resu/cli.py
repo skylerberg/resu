@@ -15,11 +15,12 @@ CLI_DOC = \
     resu [options] [<files>]...
 
 Options:
-    -h --help           Show this message.
-    -v --version        Show resu version number and exit.
-    -g --generate       Generate the default resu.yml file.
-    -o --output-file <file>
-                        Path to output file.
+    -h --help               Show this message.
+    -v --version            Show resu version number and exit.
+    -g --generate           Generate the default resu.yml file.
+    -p --parser <name>      Use specified parser for user provided data files.
+    -t --template <name>    Use specified template.
+    -o --output-file <file> Path to output file.
 '''
 
 def run(args=sys.argv[1:], out=sys.stdout):
@@ -53,4 +54,8 @@ def run(args=sys.argv[1:], out=sys.stdout):
             kwargs['data_files'] = arguments['<files>']
         if arguments['--output-file']:
             kwargs['output_file'] = arguments['--output-file']
+        if arguments['--parser']:
+            kwargs['parser'] = arguments['--parser']
+        if arguments['--template']:
+            kwargs['template'] = arguments['--template']
         resu.build(**kwargs)

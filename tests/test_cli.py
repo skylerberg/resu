@@ -36,6 +36,20 @@ class test_run(unittest.TestCase):
         assert not self.mock_generate_default.called
         self.mock_build.assert_called_once_with(output_file='resu.md')
 
+    def test_alternate_parser(self):
+        resu.cli.run(args=['-p', 'json'], out=self.out)
+        output = self.out.getvalue()
+        self.assertEquals(output, '')
+        assert not self.mock_generate_default.called
+        self.mock_build.assert_called_once_with(parser='json')
+
+    def test_alternate_template(self):
+        resu.cli.run(args=['-t', 'fancy'], out=self.out)
+        output = self.out.getvalue()
+        self.assertEquals(output, '')
+        assert not self.mock_generate_default.called
+        self.mock_build.assert_called_once_with(template='fancy')
+
     def test_help_option(self):
         resu.cli.run(args=['-h'], out=self.out)
         output = self.out.getvalue()
