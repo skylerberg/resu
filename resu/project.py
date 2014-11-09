@@ -54,18 +54,20 @@ def _apply_transforms(transforms, data):
     composite_transform = resu.Transform.get_composite_transform(transforms)
     return composite_transform(data)
 
-def build(
-        data_files=resu.defaults.DATA_FILES,
-        output_file=resu.defaults.OUTPUT_FILE,
-        template_engine=resu.defaults.TEMPLATE_ENGINE,
-        **kwargs):
+def build(**kwargs):
     '''Create a new resume from configuration files.'''
+    # Set up config and read data
     config = resu.Config()
     config.set_command_line_options(kwargs)
     parser = config.get_parser()
-    data = _combine_data_files(data_files, parser)
-    settings = data.get('config', {})
-    data = _apply_transforms(settings.get('transforms', []), data)
-    template = resu.get_template()
+    data = _combine_data_files(config.get_data_files(), parser)
+    config.set_user_data_options(data.get('config', {}))
+
+    # Get a composite transform based on config
+    data = config.get_transform()(data)
+
+    template = config.get_template()
+    template_engine = config.get_template_engine()
+    output_file = config.get_output_file()
     with open(output_file, 'w') as out:
         out.write(template_engine.render(template, config=data))
