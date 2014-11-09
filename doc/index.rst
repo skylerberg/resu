@@ -3,14 +3,23 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Resu's documentation!
-================================
+Resu
+====
+
+The future of resume creation.
 
 Contents:
 
 .. toctree::
    :maxdepth: 2
 
+   pages/intro.rst
+   pages/tutorial.rst
+   pages/design.rst
+   pages/concepts.rst
+   pages/templates.rst
+   pages/transforms.rst
+   pages/api.rst
 
 
 Indices and tables
