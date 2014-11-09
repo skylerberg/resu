@@ -25,12 +25,11 @@ class Config(object):
         self.command_line_options = {}
 
     def set_command_line_options(self, options):
-        '''Get a Parser class from the configuration.'''
         self.command_line_options = options
 
     def get_parser(self):
-        '''Get a Parser class from the configuration.'''
+        '''Get a Parser object from the configuration.'''
         format = DATA_PARSER_FORMAT
         if 'parser' in self.command_line_options:
             format = self.command_line_options['parser']
-        return resu.Parser.get_parser(format)
+        return resu.Parser.get_parser(format)()

@@ -1,5 +1,6 @@
 '''This module stores the main commands for working with projects.'''
 
+import resu
 import resu.transforms
 import resu.parsers
 from resu.exceptions import DataMergeError
@@ -56,9 +57,12 @@ def _apply_transforms(transforms, data):
 def build(
         data_files=resu.defaults.DATA_FILES,
         output_file=resu.defaults.OUTPUT_FILE,
-        parser=resu.defaults.DATA_PARSER,
-        template_engine=resu.defaults.TEMPLATE_ENGINE):
+        template_engine=resu.defaults.TEMPLATE_ENGINE,
+        **kwargs):
     '''Create a new resume from configuration files.'''
+    config = resu.Config()
+    config.set_command_line_options(kwargs)
+    parser = config.get_parser()
     data = _combine_data_files(data_files, parser)
     settings = data.get('config', {})
     data = _apply_transforms(settings.get('transforms', []), data)
