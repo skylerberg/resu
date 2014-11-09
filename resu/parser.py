@@ -12,6 +12,11 @@ class DataParser(object):
 
     __metaclass__ = abc.ABCMeta
 
+    @abc.abstractproperty
+    def format(self):
+        '''Specify the format the parser parses.'''
+        raise NotImplementedError
+
     @abc.abstractmethod
     def load(self, data):
         '''Return load data from string.'''
