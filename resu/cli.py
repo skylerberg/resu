@@ -24,7 +24,7 @@ Options:
 
 def run(args=sys.argv[1:], out=sys.stdout):
     '''
-    Dispatch control to a longer.
+    Handle command line options and run Resu.
 
     args
         Resu arguments. Defaults to system arguments.

@@ -1,7 +1,4 @@
-'''project.py
-
-This module stores the main commands for working with projects.
-'''
+'''This module stores the main commands for working with projects.'''
 
 import resu.transforms
 import resu.parsers
@@ -20,10 +17,10 @@ def _merge_dicts(dicts):
 
     If a subset of the dictionaries contain the same key and the associated
     value in any dictionary contains any data type other than lists or
-    dictionies or there are both list and dictionary values, then a
+    dictionaries or there are both list and dictionary values, then a
     DataMergeError is raised.
 
-    warning: This function copies the data in each dictionary, this could be
+    Warning: This function copies the data in each dictionary, this could be
     quite costly. This function is a prime candidate for optimization.
     '''
     out = {}

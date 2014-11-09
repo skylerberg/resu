@@ -35,7 +35,6 @@ class Transform(object):
             composite = _compose(transform.apply, composite)
         return composite
 
-
     @abc.abstractmethod
     def apply(self, data):
         '''Transform a dictionary of data into a new dictionary.'''
