@@ -2,3 +2,5 @@ docopt
 PyYAML
 jinja2
 mako
+sphinx
+sphinx_rtd_theme
