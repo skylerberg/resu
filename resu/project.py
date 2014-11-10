@@ -61,7 +61,7 @@ def build(**kwargs):
     # Get a composite transform based on config
     data = config.get_transform()(data)
 
-    template = config.get_template()
+    template = config.get_template().get()
     template_engine = config.get_template_engine()
     output_file = config.get_output_file()
     with open(output_file, 'w') as out:

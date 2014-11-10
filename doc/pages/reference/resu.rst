@@ -3,6 +3,9 @@ resu
 
 .. automodule:: resu
 
+.. autoclass:: resu.Template
+   :members:
+
 .. autoclass:: resu.TemplateEngine
    :members:
 

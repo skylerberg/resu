@@ -14,12 +14,14 @@ This class will eventually replace the defaults.py file.
 import resu
 import resu.template_engines
 import resu.parsers
+import resu.templates
 
 # Default values
 PARSER_FORMAT = 'yaml'
 DATA_FILES = ('resu.yml', )
 TRANSFORMS = ()
 TEMPLATE_ENGINE = resu.template_engines.Jinja2Engine()
+TEMPLATE = resu.templates.Default()
 OUTPUT_FILE = 'resu.html'
 
 class Config(object):
@@ -97,9 +99,9 @@ class Config(object):
         Get template from configuration.
 
         :returns: A template.
-        :rtype: String.
+        :rtype: :class:`Template`
         '''
-        return resu.get_template()
+        return TEMPLATE
 
     # TODO(skyler) Make this function actually look at config
     def get_template_engine(self):
