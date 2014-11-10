@@ -11,7 +11,6 @@ class TestConfig(unittest.TestCase):
     def setUp(self):
         self.mock_get_parser = mock.patch('resu.Parser.get_parser').start()
         self.mock_get_composite_transform = mock.patch('resu.Transform.get_composite_transform').start()
-        self.mock_resu_get_template = mock.patch('resu.get_template').start()
         self.config = resu.config.Config()
 
     def test_get_parser(self):
@@ -45,8 +44,7 @@ class TestConfig(unittest.TestCase):
         self.assertEquals(self.config.get_template_engine(), resu.config.TEMPLATE_ENGINE)
 
     def test_get_template(self):
-        self.config.get_template()
-        self.mock_resu_get_template.assert_called_once_with()
+        self.assertEquals(self.config.get_template(), resu.config.TEMPLATE)
 
     def test_get_output_file(self):
         self.assertEquals(self.config.get_output_file(), resu.config.OUTPUT_FILE)
