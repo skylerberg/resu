@@ -7,3 +7,4 @@ resu.template_engines
    :members:
 
 .. autoclass:: resu.template_engines.MakoEngine
+   :members:

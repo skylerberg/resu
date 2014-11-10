@@ -15,8 +15,8 @@ class TemplateEngine(object):
         '''
         :arg template: A template.
         :type template: str
-        :arg **kwargs: Context for the template.
-        :type **kwargs: dict
+        :arg kwargs: Context for the template.
+        :type kwargs: dict
 
         :returns: Rendered template.
         :rtype: String.
