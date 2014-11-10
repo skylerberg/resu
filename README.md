@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/skylerberg/resu.png)](https://travis-ci.org/skylerberg/resu)
 [![Coverage Status](https://img.shields.io/coveralls/skylerberg/resu.svg)](https://coveralls.io/r/skylerberg/resu?branch=master)
+[![Documentation Status](https://readthedocs.org/projects/resu/badge/?style=normal&version=latest)](https://readthedocs.org/projects/resu/?badge=latest)
 
 Resu
 ====
