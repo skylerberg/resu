@@ -20,12 +20,3 @@ Contents:
    pages/templates.rst
    pages/transforms.rst
    pages/reference.rst
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
