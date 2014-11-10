@@ -1,7 +1,10 @@
-API
-===
+resu
+====
 
 .. automodule:: resu
+
+.. autoclass:: resu.TemplateEngine
+   :members:
 
 .. autoclass:: resu.Parser
    :members:
@@ -11,4 +14,3 @@ API
 
 .. autoclass:: resu.Config
    :members:
-

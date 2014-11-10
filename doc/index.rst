@@ -19,7 +19,7 @@ Contents:
    pages/concepts.rst
    pages/templates.rst
    pages/transforms.rst
-   pages/api.rst
+   pages/reference.rst
 
 
 Indices and tables

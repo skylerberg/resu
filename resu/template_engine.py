@@ -1,12 +1,8 @@
-'''
-An abstract class representating a templating engine that only provides the
-provides only the features needed by Resu.
-'''
-
 import abc
 
 class TemplateEngine(object):
-    '''Abstract base class for template engines.
+    '''
+    Abstract base class for template engines.
 
     Support for a templating engine should be added to Resu by implementing this
     class.
@@ -16,5 +12,13 @@ class TemplateEngine(object):
 
     @abc.abstractmethod
     def render(self, template, **kwargs):
-        '''Return rendered template with data passed in as kwargs.'''
+        '''
+        :arg template: A template.
+        :type template: str
+        :arg **kwargs: Context for the template.
+        :type **kwargs: dict
+
+        :returns: Rendered template.
+        :rtype: String.
+        '''
         raise NotImplementedError
