@@ -15,8 +15,5 @@ Contents:
 
    pages/intro.rst
    pages/tutorial.rst
-   pages/design.rst
    pages/concepts.rst
-   pages/templates.rst
-   pages/transforms.rst
    pages/reference.rst
