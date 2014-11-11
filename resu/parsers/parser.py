@@ -13,7 +13,7 @@ class Parser(object):
 
     @abc.abstractproperty
     def format(self):
-        raise NotImplementedError
+        pass
 
     @abc.abstractmethod
     def load(self, data):
@@ -26,7 +26,7 @@ class Parser(object):
         :returns: Deserialized data.
         :rtype: Object.
         '''
-        raise NotImplementedError
+        pass
 
     @classmethod
     def get_parser(cls, format):

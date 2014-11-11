@@ -54,7 +54,7 @@ class Transform(object):
         :returns: ``data`` after having a tranformation applied to it.
         :rtype: Dictionary.
         '''
-        raise NotImplementedError
+        pass
 
 def _identity(data):
     '''

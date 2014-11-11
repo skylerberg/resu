@@ -21,4 +21,4 @@ class TemplateEngine(object):
         :returns: Rendered template.
         :rtype: String.
         '''
-        raise NotImplementedError
+        pass

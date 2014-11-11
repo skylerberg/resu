@@ -17,11 +17,11 @@ class Template(object):
 
     @abc.abstractproperty
     def file_type(self):
-        raise NotImplementedError
+        pass
 
     @abc.abstractproperty
     def language(self):
-        raise NotImplementedError
+        pass
 
     @abc.abstractmethod
     def get(self):
@@ -29,4 +29,4 @@ class Template(object):
         :returns: The contents of the template.
         :rtype: String.
         '''
-        raise NotImplementedError
+        pass
