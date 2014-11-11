@@ -5,12 +5,17 @@
 Resu
 ====
 
-Resu converts YAML files into other formats based on templates. The use case 
-that resu is built for is resume generation. However, resu should be generic
-enough for other uses.
+Resu allows you generate a resume from data files.
+
+
+Documentation
+=============
+
+To see how to install and use Resu, please read the [documentation](https://resu.readthedocs.org/en/latest/index.html).
+
 
 Changes
 =======
 
 Since I am hosting this on GitHub from the start, there will be a lot of commits
-before release 0.0.0. After the first release I will use semantic versioning.
+before release 0.1.0. After the first release I will use semantic versioning.
