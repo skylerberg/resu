@@ -11,9 +11,10 @@ Currently Resu can only be installed from source.
 
    git clone git://github.com/skylerberg/resu.git
    cd resu
-   python setup.py install
+   pip install -r requirements.txt
+   pip install .
 
-Resu will be installable by pip after the initial 0.0.0 release.
+Resu will be on available Pypi after the initial 0.1.0 release.
 
 
 Quick Start
