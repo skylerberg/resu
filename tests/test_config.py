@@ -9,8 +9,8 @@ import resu.config
 class TestConfig(unittest.TestCase):
 
     def setUp(self):
-        self.mock_get_parser = mock.patch('resu.Parser.get_parser').start()
-        self.mock_get_composite_transform = mock.patch('resu.Transform.get_composite_transform').start()
+        self.mock_get_parser = mock.patch('resu.parsers.Parser.get_parser').start()
+        self.mock_get_composite_transform = mock.patch('resu.transforms.Transform.get_composite_transform').start()
         self.config = resu.config.Config()
 
     def test_get_parser(self):

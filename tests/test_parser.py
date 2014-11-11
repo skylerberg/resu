@@ -1,10 +1,10 @@
 #pylint: skip-file
 import unittest
 
-import resu
+import resu.parsers
 
 # Subclasses of Parser for testing
-class GibberishParser(resu.Parser):
+class GibberishParser(resu.parsers.Parser):
     '''Parses gibberish'''
     
     format = 'gibberish'
@@ -15,7 +15,7 @@ class GibberishParser(resu.Parser):
 class test_get_parser(unittest.TestCase):
 
     def test_get_parser(self):
-        self.assertEquals(resu.Parser.get_parser('gibberish'), GibberishParser)
+        self.assertEquals(resu.parsers.Parser.get_parser('gibberish'), GibberishParser)
 
     def test_get_non_existant_parser(self):
-        self.assertEquals(resu.Parser.get_parser('unknown'), None)
+        self.assertEquals(resu.parsers.Parser.get_parser('unknown'), None)

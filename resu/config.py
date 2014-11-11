@@ -68,7 +68,7 @@ class Config(object):
         format = PARSER_FORMAT
         if 'parser' in self.command_line_options:
             format = self.command_line_options['parser']
-        return resu.Parser.get_parser(format)()
+        return resu.parsers.Parser.get_parser(format)()
 
     def get_data_files(self):
         '''
@@ -91,7 +91,7 @@ class Config(object):
         transforms = TRANSFORMS
         if 'transforms' in self.user_data_options:
             transforms = self.user_data_options['transforms']
-        return resu.Transform.get_composite_transform(transforms)
+        return resu.transforms.Transform.get_composite_transform(transforms)
 
     # TODO(skyler) Make this function actually look at config
     def get_template(self):

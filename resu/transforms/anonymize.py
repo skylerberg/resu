@@ -1,4 +1,4 @@
-from resu.transform import Transform
+from resu.transforms import Transform
 
 class Anonymize(Transform):
     '''

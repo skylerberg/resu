@@ -1,6 +1,7 @@
 import resu
+from resu.templates import Template
 
-class Default(object):
+class Default(Template):
     '''
     Default template.
 

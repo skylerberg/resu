@@ -1,6 +1,6 @@
 import json
 
-from resu.parser import Parser
+from resu.parsers import Parser
 
 class JsonParser(Parser):
     '''

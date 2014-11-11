@@ -1,3 +1,4 @@
+from resu.template_engines.template_engine import TemplateEngine
 try:
     from resu.template_engines.jinja_engine import Jinja2Engine
 except ImportError:
