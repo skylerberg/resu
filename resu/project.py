@@ -56,7 +56,6 @@ def build(**kwargs):
     config.set_command_line_options(kwargs)
     parser = config.get_parser()
     data = _combine_data_files(config.get_data_files(), parser)
-    config.set_user_data_options(data.get('config', {}))
 
     # Get a composite transform based on config
     data = config.get_transform()(data)

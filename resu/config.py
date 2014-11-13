@@ -16,22 +16,19 @@ import resu.template_engines
 import resu.parsers
 import resu.templates
 
-# Default values
-PARSER_FORMAT = 'yaml'
-DATA_FILES = ('resu.yml', )
-TRANSFORMS = ()
-TEMPLATE_ENGINE = resu.template_engines.Jinja2Engine()
-TEMPLATE = resu.templates.Default()
-OUTPUT_FILE = 'resu.html'
-
+# TODO(skyler) Consider making Config class a NamedTuple.
 class Config(object):
     '''
     Store configuration parameters and translate them into Resu classes.
     '''
 
     def __init__(self):
-        self.command_line_options = {}
-        self.user_data_options = {}
+        self.parser_format = 'yaml'
+        self.data_files = ('resu.yml', )
+        self.transforms = ()
+        self.template_engine = resu.template_engines.Jinja2Engine()
+        self.template = resu.templates.Default()
+        self.output_file = 'resu.html'
 
     def set_command_line_options(self, options):
         '''
@@ -43,19 +40,9 @@ class Config(object):
         :returns: None
         :rtype: None
         '''
-        self.command_line_options = options
-
-    def set_user_data_options(self, options):
-        '''
-        Load parsed options provided in user data files.
-
-        :arg options: Options specified in the user data files.
-        :type options: dict
-
-        :returns: None
-        :rtype: None
-        '''
-        self.user_data_options = options
+        for key, value in options.iteritems():
+            if key in self.__dict__:
+                self.__dict__[key] = value
 
     def get_parser(self):
         '''
@@ -65,10 +52,7 @@ class Config(object):
         :returns: A Parser
         :rtype: :class:`Parser`
         '''
-        format = PARSER_FORMAT
-        if 'parser' in self.command_line_options:
-            format = self.command_line_options['parser']
-        return resu.parsers.Parser.get_parser(format)()
+        return resu.parsers.Parser.get_parser(self.parser_format)()
 
     def get_data_files(self):
         '''
@@ -77,9 +61,7 @@ class Config(object):
         :returns: Paths to data files specified.
         :rtype: List of strings.
         '''
-        if 'data_files' in self.command_line_options:
-            return self.command_line_options['data_files']
-        return DATA_FILES
+        return self.data_files
 
     def get_transform(self):
         '''
@@ -88,12 +70,8 @@ class Config(object):
         :returns: Composition of all transforms specified.
         :rtype: Function.
         '''
-        transforms = TRANSFORMS
-        if 'transforms' in self.user_data_options:
-            transforms = self.user_data_options['transforms']
-        return resu.transforms.Transform.get_composite_transform(transforms)
+        return resu.transforms.Transform.get_composite_transform(self.transforms)
 
-    # TODO(skyler) Make this function actually look at config
     def get_template(self):
         '''
         Get template from configuration.
@@ -101,9 +79,8 @@ class Config(object):
         :returns: A template.
         :rtype: :class:`Template`
         '''
-        return TEMPLATE
+        return self.template
 
-    # TODO(skyler) Make this function actually look at config
     def get_template_engine(self):
         '''
         Get template engine from configuration.
@@ -111,7 +88,7 @@ class Config(object):
         :returns: A template engine
         :rtype: :class:`TemplateEngine`.
         '''
-        return TEMPLATE_ENGINE
+        return self.template_engine
 
     def get_output_file(self):
         '''
@@ -120,8 +97,4 @@ class Config(object):
         :returns: The path to the intended output file.
         :rtype: String.
         '''
-        if 'output_file' in self.command_line_options:
-            return self.command_line_options['output_file']
-        if 'output_file' in self.user_data_options:
-            return self.user_data_options['output_file']
-        return OUTPUT_FILE
+        return self.output_file
