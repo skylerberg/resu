@@ -40,7 +40,7 @@ class test_combine_data_files(unittest.TestCase):
             elif data == '2: b':
                 return {'2': 'b'}
             else:
-                raise resu.exceptions.ParserError()
+                raise Exception()
         self.parser.load.side_effect = parser_load_side_effect
         self.mock_merge_dicts = mock.patch('resu.project._merge_dicts').start()
 
@@ -51,7 +51,7 @@ class test_combine_data_files(unittest.TestCase):
         self.mock_merge_dicts.assert_called_once_with([])
 
     def test_unparsable_file(self):
-        with self.assertRaises(resu.exceptions.ParserError):
+        with self.assertRaises(Exception):
             resu.project._combine_data_files(['invalid.yml'], self.parser)
 
     def test_non_existent_file(self):

@@ -38,11 +38,11 @@ class TestConfig(unittest.TestCase):
         self.config = resu.Config()
 
     def test_get_parser(self):
-        self.config.parser_format = 'gibberish'
+        self.config.parser = 'gibberish'
         assert isinstance(self.config.get_parser(), GibberishParser)
 
     def test_get_non_existant_parser(self):
-        self.config.parser_format = 'unknown'
+        self.config.parser = 'unknown'
         self.assertEquals(self.config.get_parser(), None)
 
     def test_empty_transforms_list(self):
