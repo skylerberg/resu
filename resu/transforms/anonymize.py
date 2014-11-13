@@ -5,6 +5,8 @@ class Anonymize(Transform):
     Transform sensitive feilds into anonymous defaults.
     '''
 
+    name = 'Anonymize'
+
     def apply(self, data, **kwargs):
         '''
         Currently, this function is just a toy to test out transforms.
