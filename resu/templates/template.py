@@ -16,6 +16,10 @@ class Template(object):
     __metaclass__ = abc.ABCMeta
 
     @abc.abstractproperty
+    def name(self):
+        pass
+
+    @abc.abstractproperty
     def file_type(self):
         pass
 

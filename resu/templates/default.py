@@ -11,8 +11,8 @@ class Default(Template):
     :type language: str
     '''
 
+    name = 'default'
     file_type = 'html'
-
     language = 'jinja2'
 
     def get(self):

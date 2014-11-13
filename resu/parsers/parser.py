@@ -27,18 +27,3 @@ class Parser(object):
         :rtype: Object.
         '''
         pass
-
-    @classmethod
-    def get_parser(cls, format):
-        '''
-        Return a parser for a given format.
-
-        :arg format: Name of serialization format the desired parser handles.
-        :type format: str
-
-        :returns: Parser class for specified format.
-        :rtype: Subclass of :class:`Parser`.
-        '''
-        for subclass in cls.__subclasses__():
-            if format == subclass.format:
-                return subclass

@@ -1,16 +1,3 @@
-'''
-This file contains default values and functions for dealing with configuration.
-
-Default values are assigned through from one of the following sources. If one
-source does not provide the value, then the next is looked up.
-
-1. Command line arguments.
-2. Configuration in data files.
-3. Built in default values.
-
-This class will eventually replace the defaults.py file.
-'''
-
 import resu
 import resu.template_engines
 import resu.parsers
@@ -26,8 +13,8 @@ class Config(object):
         self.parser_format = 'yaml'
         self.data_files = ('resu.yml', )
         self.transforms = ()
-        self.template_engine = resu.template_engines.Jinja2Engine()
-        self.template = resu.templates.Default()
+        self.template_engine = 'jinja2'
+        self.template = 'default'
         self.output_file = 'resu.html'
 
     def set_command_line_options(self, options):
@@ -46,13 +33,14 @@ class Config(object):
 
     def get_parser(self):
         '''
-        Get a :class:`Parser` that can handle the format specified in the
-        configuration.
+        Return a parser for a configured format.
 
-        :returns: A Parser
-        :rtype: :class:`Parser`
+        :returns: Parser class for configured format.
+        :rtype: Subclass of :class:`Parser`.
         '''
-        return resu.parsers.Parser.get_parser(self.parser_format)()
+        for parser in resu.parsers.Parser.__subclasses__():
+            if self.parser_format == parser.format:
+                return parser()
 
     def get_data_files(self):
         '''
@@ -65,12 +53,21 @@ class Config(object):
 
     def get_transform(self):
         '''
-        Get a function composed of transforms specified in the configuration.
+        Running the composite function returned by this function is the
+        equivalent of running each transform in the same order supplied.
 
-        :returns: Composition of all transforms specified.
+        :returns: A function composed of the application of each transform given.
         :rtype: Function.
         '''
-        return resu.transforms.Transform.get_composite_transform(self.transforms)
+        transform_lookup = {}
+        for transform in resu.transforms.Transform.__subclasses__():
+            transform_lookup[transform.name] = transform()
+        composite = _identity
+        for transform_name in self.transforms:
+            transform = transform_lookup[transform_name]
+            composite = _compose(transform.apply, composite)
+        return composite
+
 
     def get_template(self):
         '''
@@ -79,7 +76,9 @@ class Config(object):
         :returns: A template.
         :rtype: :class:`Template`
         '''
-        return self.template
+        for template in resu.templates.Template.__subclasses__():
+            if self.template == template.name:
+                return template()
 
     def get_template_engine(self):
         '''
@@ -88,7 +87,9 @@ class Config(object):
         :returns: A template engine
         :rtype: :class:`TemplateEngine`.
         '''
-        return self.template_engine
+        for template_engine in resu.template_engines.TemplateEngine.__subclasses__():
+            if self.template_engine == template_engine.language:
+                return template_engine()
 
     def get_output_file(self):
         '''
@@ -98,3 +99,15 @@ class Config(object):
         :rtype: String.
         '''
         return self.output_file
+
+def _identity(data):
+    '''
+    The single argument identity function.
+    '''
+    return data
+
+def _compose(f, g):
+    '''
+    Return the composition of two functions taking a single argument.
+    '''
+    return lambda data: f(g(data))
