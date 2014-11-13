@@ -7,6 +7,8 @@ class Jinja2Engine(TemplateEngine):
     :class:`resu.TemplateEngine` for Jinja2.
     '''
 
+    language = 'jinja2'
+
     def render(self, template, **kwargs):
         '''
         :arg template: A template.

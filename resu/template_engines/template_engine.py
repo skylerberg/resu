@@ -10,6 +10,10 @@ class TemplateEngine(object):
 
     __metaclass__ = abc.ABCMeta
 
+    @abc.abstractproperty
+    def language(self):
+        pass
+
     @abc.abstractmethod
     def render(self, template, **kwargs):
         '''

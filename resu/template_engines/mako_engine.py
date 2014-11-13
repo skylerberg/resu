@@ -7,6 +7,8 @@ class MakoEngine(TemplateEngine):
     :class:`resu.TemplateEngine` for Mako.
     '''
 
+    language = 'mako'
+
     def render(self, template, **kwargs):
         '''
         :arg template: A template.
