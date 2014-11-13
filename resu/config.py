@@ -3,7 +3,6 @@ import resu.template_engines
 import resu.parsers
 import resu.templates
 
-# TODO(skyler) Consider making Config class a NamedTuple.
 class Config(object):
     '''
     Store configuration parameters and translate them into Resu classes.
