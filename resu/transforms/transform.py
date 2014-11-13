@@ -1,7 +1,5 @@
 import abc
 
-from resu.exceptions import TransformNotFoundError
-
 class Transform(object):
     '''
     Abstract base class for transforms.
