@@ -10,10 +10,9 @@ class Config(object):
     '''
 
     def __init__(self):
-        self.parser_format = 'yaml'
+        self.parser = 'yaml'
         self.data_files = ('resu.yml', )
         self.transforms = ()
-        self.template_engine = 'jinja2'
         self.template = 'default'
         self.output_file = 'resu.html'
 
@@ -39,7 +38,7 @@ class Config(object):
         :rtype: Subclass of :class:`Parser`.
         '''
         for parser in resu.parsers.Parser.__subclasses__():
-            if self.parser_format == parser.format:
+            if self.parser == parser.format:
                 return parser()
 
     def get_data_files(self):
@@ -87,8 +86,9 @@ class Config(object):
         :returns: A template engine
         :rtype: :class:`TemplateEngine`.
         '''
+        template = self.get_template()
         for template_engine in resu.template_engines.TemplateEngine.__subclasses__():
-            if self.template_engine == template_engine.language:
+            if template.language == template_engine.language:
                 return template_engine()
 
     def get_output_file(self):
