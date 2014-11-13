@@ -5,6 +5,8 @@ from resu.exceptions import TransformNotFoundError
 class Transform(object):
     '''
     Abstract base class for transforms.
+
+    :var name: The name of the transform.
     '''
 
     __metaclass__ = abc.ABCMeta

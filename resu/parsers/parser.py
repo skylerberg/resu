@@ -6,7 +6,6 @@ class Parser(object):
     Parser provides only the functions that resu needs to deserialize data.
 
     :var format: The format the parser parses.
-    :type format: str
     '''
 
     __metaclass__ = abc.ABCMeta

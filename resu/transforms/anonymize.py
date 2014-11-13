@@ -3,9 +3,11 @@ from resu.transforms import Transform
 class Anonymize(Transform):
     '''
     Transform sensitive feilds into anonymous defaults.
+
+    :var name: ``'anonymize'``
     '''
 
-    name = 'Anonymize'
+    name = 'anonymize'
 
     def apply(self, data, **kwargs):
         '''

@@ -7,7 +7,6 @@ class YamlParser(Parser):
     Parser for YAML files.
 
     :var format: ``'yaml'``
-    :type format: str
     '''
 
     format = "yaml"

@@ -5,10 +5,9 @@ class Default(Template):
     '''
     Default template.
 
-    :var file_type: ``html``
-    :type file_type: str
-    :var language: ``jinja2``
-    :type language: str
+    :var file_type: ``'default'``
+    :var file_type: ``'html'``
+    :var language: ``'jinja2'``
     '''
 
     name = 'default'

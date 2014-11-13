@@ -5,6 +5,8 @@ from resu.template_engines import TemplateEngine
 class Jinja2Engine(TemplateEngine):
     '''
     :class:`resu.TemplateEngine` for Jinja2.
+
+    :var language: ``'jinja2'``
     '''
 
     language = 'jinja2'

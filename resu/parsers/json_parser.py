@@ -7,7 +7,6 @@ class JsonParser(Parser):
     Parser for JSON files.
 
     :var format: ``'json'``
-    :type format: String.
     '''
 
     format = "json"
