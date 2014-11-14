@@ -21,13 +21,13 @@ class test_run(unittest.TestCase):
         assert not self.mock_generate_default.called
         self.mock_build.assert_called_once_with()
 
-    def test_alternate_data_files(self):
-        resu.cli.run(args=['config.yml', 'resume.yml'], out=self.out)
+    def test_alternate_data_file(self):
+        resu.cli.run(args='resume.yml', out=self.out)
         output = self.out.getvalue()
         self.assertEquals(output, '')
         assert not self.mock_generate_default.called
         self.mock_build.assert_called_once_with(
-            data_files=['config.yml', 'resume.yml'])
+            data_source='resume.yml')
 
     def test_alternate_output_file(self):
         resu.cli.run(args=['-o', 'resu.md'], out=self.out)
