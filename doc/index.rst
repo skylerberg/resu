@@ -15,5 +15,6 @@ Contents:
 
    pages/intro.rst
    pages/tutorial.rst
-   pages/concepts.rst
-   pages/reference.rst
+   pages/contributing.rst
+   pages/cli.rst
+   pages/api.rst

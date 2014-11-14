@@ -19,9 +19,9 @@ class Config(object):
 
     def update(self, options):
         '''
-        Load parsed command line options.
+        Replace existing configuration options.
 
-        :arg options: Options specified on the command line.
+        :arg options: New configuration options.
         :type options: dict
 
         :returns: None
@@ -33,7 +33,7 @@ class Config(object):
 
     def get_parser(self):
         '''
-        Return a parser for a configured format.
+        Get a parser that can parse the format specified in the configuration.
 
         :returns: Parser class for configured format.
         :rtype: Subclass of :class:`Parser`.
@@ -56,7 +56,7 @@ class Config(object):
         Running the composite function returned by this function is the
         equivalent of running each transform in the same order supplied.
 
-        :returns: A function composed of the application of each transform given.
+        :returns: A function composed of each transform given.
         :rtype: Function.
         '''
         transform_lookup = {}

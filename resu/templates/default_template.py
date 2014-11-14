@@ -9,6 +9,8 @@ class DefaultTemplate(Template):
     :var file_type: ``'default'``
     :var file_type: ``'html'``
     :var language: ``'jinja2'``
+    :var template_source: The location of the default resume template file.
+    :var example_source: The location of the default resume input file.
     '''
 
     name = 'default'
@@ -25,4 +27,8 @@ class DefaultTemplate(Template):
         return PackageDataLoader().load(DefaultTemplate.template_source)
 
     def get_example(self):
+        '''
+        :returns: The contents of the default ``resu.yml`` file.
+        :rtype: String.
+        '''
         return PackageDataLoader().load(DefaultTemplate.example_source)

@@ -1,7 +1,11 @@
-'''This module stores the main commands for working with projects.'''
+'''
+This module stores the main commands for working with projects.
+'''
 
 def build(config):
-    '''Create a new resume from configuration files.'''
+    '''
+    Create a new resume from configuration files.
+    '''
     # Get and process data
     source = config.get_data_source()
     loader = config.get_loader()

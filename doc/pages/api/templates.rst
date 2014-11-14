@@ -3,8 +3,8 @@ resu.templates
 
 .. automodule:: resu.templates
 
-.. autoclass:: resu.templates.Template
+.. autoclass:: Template
    :members:
 
-.. autoclass:: resu.templates.DefaultTemplate
+.. autoclass:: DefaultTemplate
    :members:

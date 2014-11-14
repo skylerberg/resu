@@ -3,5 +3,5 @@ resu
 
 .. automodule:: resu
 
-.. autoclass:: resu.Config
+.. autoclass:: Config
    :members:

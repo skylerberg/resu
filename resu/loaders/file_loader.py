@@ -2,6 +2,9 @@ from resu.loaders import Loader
 
 class FileLoader(Loader):
     '''
+    Loads the contents of a file.
+
+    :var return_type: ``str``
     '''
 
     return_type = str

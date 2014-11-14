@@ -3,9 +3,9 @@ resu.transforms
 
 .. automodule:: resu.transforms
 
-.. autoclass:: resu.transforms.Transform
+.. autoclass:: Transform
    :members:
 
-.. autoclass:: resu.transforms.Anonymize
+.. autoclass:: Anonymize
    :members:
 
