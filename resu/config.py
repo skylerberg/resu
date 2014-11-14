@@ -2,6 +2,7 @@ import resu
 import resu.template_engines
 import resu.parsers
 import resu.templates
+import resu.loaders
 
 class Config(object):
     '''
@@ -10,7 +11,7 @@ class Config(object):
 
     def __init__(self):
         self.parser = 'yaml'
-        self.data_files = ('resu.yml', )
+        self.data_source = 'resu.yml'
         self.transforms = ()
         self.template = 'default'
         self.output_file = 'resu.html'
@@ -40,14 +41,14 @@ class Config(object):
             if self.parser == parser.format:
                 return parser()
 
-    def get_data_files(self):
+    def get_data_source(self):
         '''
         Get a list of data files based on config.
 
         :returns: Paths to data files specified.
         :rtype: List of strings.
         '''
-        return self.data_files
+        return self.data_source
 
     def get_transform(self):
         '''
@@ -98,6 +99,9 @@ class Config(object):
         :rtype: String.
         '''
         return self.output_file
+
+    def get_loader(self):
+        return resu.loaders.File()
 
 def _identity(data):
     '''

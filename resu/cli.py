@@ -12,7 +12,7 @@ import resu
 
 CLI_DOC = \
 '''Usage:
-    resu [options] [<files>]...
+    resu [options] [<file>]
 
 Options:
     -h --help               Show this message.
@@ -50,8 +50,8 @@ def run(args=sys.argv[1:], out=sys.stdout):
         resu.example.generate_default()
     else:
         kwargs = {}
-        if arguments['<files>']:
-            kwargs['data_files'] = arguments['<files>']
+        if arguments['<file>']:
+            kwargs['data_source'] = arguments['<file>']
         if arguments['--output-file']:
             kwargs['output_file'] = arguments['--output-file']
         if arguments['--parser']:
