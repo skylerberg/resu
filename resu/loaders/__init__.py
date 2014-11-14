@@ -1,3 +1,3 @@
 from resu.loaders.loader import Loader
-from resu.loaders.file import File
-from resu.loaders.package_data import PackageData, PackageDataSource
+from resu.loaders.file_loader import FileLoader
+from resu.loaders.package_data_loader import PackageDataLoader, PackageDataSource

@@ -1,8 +1,8 @@
 import resu
 from resu.templates import Template
-from resu.loaders import PackageData, PackageDataSource
+from resu.loaders import PackageDataLoader, PackageDataSource
 
-class Default(Template):
+class DefaultTemplate(Template):
     '''
     Default template.
 
@@ -22,7 +22,7 @@ class Default(Template):
         :returns: The contents of the default template.
         :rtype: String.
         '''
-        return PackageData().load(Default.template_source)
+        return PackageDataLoader().load(DefaultTemplate.template_source)
 
     def get_example(self):
-        return PackageData().load(Default.example_source)
+        return PackageDataLoader().load(DefaultTemplate.example_source)

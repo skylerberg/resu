@@ -102,7 +102,7 @@ class Config(object):
         return self.output_file
 
     def get_loader(self):
-        return resu.loaders.File()
+        return resu.loaders.FileLoader()
 
 def _identity(data):
     '''

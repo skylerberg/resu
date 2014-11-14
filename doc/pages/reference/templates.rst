@@ -6,5 +6,5 @@ resu.templates
 .. autoclass:: resu.templates.Template
    :members:
 
-.. autoclass:: resu.templates.Default
+.. autoclass:: resu.templates.DefaultTemplate
    :members:

@@ -1,6 +1,6 @@
 from resu.loaders import Loader
 
-class File(Loader):
+class FileLoader(Loader):
     '''
     '''
 

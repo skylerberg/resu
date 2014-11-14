@@ -4,7 +4,7 @@ import pkg_resources
 
 from resu.loaders import Loader
 
-class PackageData(Loader):
+class PackageDataLoader(Loader):
     '''
     '''
 
