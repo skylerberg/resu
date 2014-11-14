@@ -1,17 +1,13 @@
 '''This module stores the main commands for working with projects.'''
 
-import resu
-
 def build(config):
     '''Create a new resume from configuration files.'''
-    # Set up config and read data
+    # Get and process data
+    source = config.get_data_source()
     loader = config.get_loader()
-    data = loader.load(config.get_data_source())
     parser = config.get_parser()
-    data = parser.load(data)
-
-    # Get a composite transform based on config
-    data = config.get_transform()(data)
+    transform = config.get_transform()
+    data = transform(parser.load(loader.load(source)))
 
     template = config.get_template().get()
     template_engine = config.get_template_engine()
