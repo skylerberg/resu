@@ -3,6 +3,7 @@ import resu.template_engines
 import resu.parsers
 import resu.templates
 import resu.loaders
+import resu.transforms
 
 class Config(object):
     '''
