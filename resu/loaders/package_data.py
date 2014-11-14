@@ -20,7 +20,7 @@ class PackageData(Loader):
         '''
         return pkg_resources.resource_string(source.package, source.path)
 
-class PackageDataSource(namedtuple('PackageDataSource', 'package path')):
+class PackageDataSource(namedtuple('PackageDataSource', ['package', 'path'])):
     '''
     '''
     pass
