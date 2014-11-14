@@ -14,11 +14,15 @@ class Default(Template):
     name = 'default'
     file_type = 'html'
     language = 'jinja2'
-    source = PackageDataSource('resu', 'examples/templates/default.html')
+    template_source = PackageDataSource('resu', 'examples/templates/default.html')
+    example_source = PackageDataSource('resu', 'examples/resu.yml')
 
     def get(self):
         '''
         :returns: The contents of the default template.
         :rtype: String.
         '''
-        return PackageData().load(Default.source)
+        return PackageData().load(Default.template_source)
+
+    def get_example(self):
+        return PackageData().load(Default.example_source)

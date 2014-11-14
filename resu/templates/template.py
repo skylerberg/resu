@@ -10,7 +10,9 @@ class Template(object):
     :var name: The name of the template.
     :var file_type: The file type the template produces.
     :var language: The templating language used in the template.
-    :var source: The source that the template can be loaded from.
+    :var template_source: The source that the template can be loaded from.
+    :var example_source: The source an example of input for the tempalte can be
+    loaded from.
     '''
 
     __metaclass__ = abc.ABCMeta
@@ -28,7 +30,11 @@ class Template(object):
         pass
 
     @abc.abstractproperty
-    def source(self):
+    def template_source(self):
+        pass
+
+    @abc.abstractproperty
+    def example_source(self):
         pass
 
     @abc.abstractmethod
@@ -37,4 +43,8 @@ class Template(object):
         :returns: The contents of the template.
         :rtype: String.
         '''
+        pass
+
+    @abc.abstractmethod
+    def get_example(self):
         pass
