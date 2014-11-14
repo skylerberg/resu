@@ -19,36 +19,35 @@ class test_run(unittest.TestCase):
         output = self.out.getvalue()
         self.assertEquals(output, '')
         assert not self.mock_generate_default.called
-        self.mock_build.assert_called_once_with()
+        self.mock_build.assert_called_once()
 
     def test_alternate_data_file(self):
         resu.cli.run(args='resume.yml', out=self.out)
         output = self.out.getvalue()
         self.assertEquals(output, '')
         assert not self.mock_generate_default.called
-        self.mock_build.assert_called_once_with(
-            data_source='resume.yml')
+        self.mock_build.assert_called_once()
 
     def test_alternate_output_file(self):
         resu.cli.run(args=['-o', 'resu.md'], out=self.out)
         output = self.out.getvalue()
         self.assertEquals(output, '')
         assert not self.mock_generate_default.called
-        self.mock_build.assert_called_once_with(output_file='resu.md')
+        self.mock_build.assert_called_once()
 
     def test_alternate_parser(self):
         resu.cli.run(args=['-p', 'json'], out=self.out)
         output = self.out.getvalue()
         self.assertEquals(output, '')
         assert not self.mock_generate_default.called
-        self.mock_build.assert_called_once_with(parser='json')
+        self.mock_build.assert_called_once()
 
     def test_alternate_template(self):
         resu.cli.run(args=['-t', 'fancy'], out=self.out)
         output = self.out.getvalue()
         self.assertEquals(output, '')
         assert not self.mock_generate_default.called
-        self.mock_build.assert_called_once_with(template='fancy')
+        self.mock_build.assert_called_once()
 
     def test_help_option(self):
         resu.cli.run(args=['-h'], out=self.out)
