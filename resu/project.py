@@ -2,11 +2,9 @@
 
 import resu
 
-def build(**kwargs):
+def build(config):
     '''Create a new resume from configuration files.'''
     # Set up config and read data
-    config = resu.Config()
-    config.set_command_line_options(kwargs)
     loader = config.get_loader()
     data = loader.load(config.get_data_source())
     parser = config.get_parser()
@@ -20,3 +18,6 @@ def build(**kwargs):
     output_file = config.get_output_file()
     with open(output_file, 'w') as out:
         out.write(template_engine.render(template, config=data))
+
+def generate(config):
+    print config.get_template().get_example()

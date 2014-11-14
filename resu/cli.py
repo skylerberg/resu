@@ -46,8 +46,6 @@ def run(args=sys.argv[1:], out=sys.stdout):
         out.write(CLI_DOC)
     elif arguments['--version']:
         out.write(resu.__version__ + '\n')
-    elif arguments['--generate']:
-        resu.example.generate_default()
     else:
         kwargs = {}
         if arguments['<file>']:
@@ -58,4 +56,9 @@ def run(args=sys.argv[1:], out=sys.stdout):
             kwargs['parser'] = arguments['--parser']
         if arguments['--template']:
             kwargs['template'] = arguments['--template']
-        resu.build(**kwargs)
+        config = resu.Config()
+        config.update(kwargs)
+        if arguments['--generate']:
+            resu.generate(config)
+        else:
+            resu.build(config)

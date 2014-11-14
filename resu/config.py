@@ -17,7 +17,7 @@ class Config(object):
         self.template = 'default'
         self.output_file = 'resu.html'
 
-    def set_command_line_options(self, options):
+    def update(self, options):
         '''
         Load parsed command line options.
 
