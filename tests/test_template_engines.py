@@ -22,7 +22,7 @@ class TestJinja2Engine(unittest.TestCase):
 
     def setUp(self):
         self.template_engine = resu.template_engines.Jinja2Engine()
-        self.mock_jinja2 = mock.patch('resu.template_engines.jinja_engine.jinja2').start()
+        self.mock_jinja2 = mock.patch('resu.template_engines.jinja2_engine.jinja2').start()
         self.mock_template = mock.Mock()
         self.mock_jinja2.Template.return_value = self.mock_template
 
