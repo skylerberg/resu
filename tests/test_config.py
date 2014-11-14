@@ -54,14 +54,14 @@ class TestConfig(unittest.TestCase):
         composite = self.config.get_transform()
         self.assertEquals(composite(2), 8)
 
-class test_identity(unittest.TestCase):
+class TestIdentity(unittest.TestCase):
 
     def test_dictionary(self):
         self.assertEquals(
             resu.config._identity({'one': 1}),
             {'one': 1})
 
-class test_compose(unittest.TestCase):
+class TestCompose(unittest.TestCase):
 
     def test_simple(self):
         f = lambda x: x + 1

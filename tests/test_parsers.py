@@ -3,7 +3,7 @@ import unittest
 
 import resu.parsers
 
-class test_json_parser(unittest.TestCase):
+class TestJsonParser(unittest.TestCase):
 
     def setUp(self):
         self.parser = resu.parsers.JsonParser()
@@ -16,7 +16,7 @@ class test_json_parser(unittest.TestCase):
     def tearDown(self):
         mock.patch.stopall()
 
-class test_yaml_parser(unittest.TestCase):
+class TestYamlParser(unittest.TestCase):
 
     def setUp(self):
         self.parser = resu.parsers.YamlParser()
@@ -28,4 +28,3 @@ class test_yaml_parser(unittest.TestCase):
 
     def tearDown(self):
         mock.patch.stopall()
-

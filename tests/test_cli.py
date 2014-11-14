@@ -5,9 +5,8 @@ import StringIO
 import mock
 
 import resu
-import resu.cli
 
-class test_run(unittest.TestCase):
+class TestRun(unittest.TestCase):
 
     def setUp(self):
         self.mock_build = mock.patch('resu.build').start()
