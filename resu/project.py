@@ -2,6 +2,7 @@
 This module stores the main commands for working with projects.
 '''
 
+import resu
 from resu.loaders import load
 
 def build(config):
@@ -15,7 +16,7 @@ def build(config):
     transform = config.get_transform()
     data = transform(parser.load(loader.load(source)))
 
-    template = load(config.get_template().template_source)
+    template = load(resu.get_template(config.template).template_source)
     template_engine = config.get_template_engine()
     output_file = config.get_output_file()
     with open(output_file, 'w') as out:

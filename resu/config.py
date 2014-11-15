@@ -68,15 +68,6 @@ class Config(object):
         return composite
 
 
-    def get_template(self):
-        '''
-        Get template from configuration.
-
-        :returns: A template.
-        :rtype: :class:`Template`
-        '''
-        return resu.get_template(self.template)
-
     def get_template_engine(self):
         '''
         Get template engine from configuration.
@@ -84,7 +75,7 @@ class Config(object):
         :returns: A template engine
         :rtype: :class:`TemplateEngine`.
         '''
-        template = self.get_template()
+        template = resu.get_template(self.template)
         for template_engine in resu.template_engines.TemplateEngine.__subclasses__():
             if template.language == template_engine.language:
                 return template_engine()
