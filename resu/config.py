@@ -76,9 +76,7 @@ class Config(object):
         :returns: A template.
         :rtype: :class:`Template`
         '''
-        for template in resu.templates.Template.__subclasses__():
-            if self.template == template.name:
-                return template()
+        return resu.templates.get_template_by_name(self.template)
 
     def get_template_engine(self):
         '''

@@ -2,6 +2,8 @@
 This module stores the main commands for working with projects.
 '''
 
+from resu.loaders import load
+
 def build(config):
     '''
     Create a new resume from configuration files.
@@ -13,7 +15,7 @@ def build(config):
     transform = config.get_transform()
     data = transform(parser.load(loader.load(source)))
 
-    template = config.get_template().get()
+    template = load(config.get_template().template_source)
     template_engine = config.get_template_engine()
     output_file = config.get_output_file()
     with open(output_file, 'w') as out:
@@ -21,4 +23,4 @@ def build(config):
 
 def generate(config):
     with open('resu.yml', 'w') as out:
-        out.write(config.get_template().get_example())
+        out.write(load(config.get_template().example_source))

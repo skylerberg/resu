@@ -4,13 +4,22 @@ import pkg_resources
 
 from resu.loaders import Loader
 
+class PackageDataSource(namedtuple('PackageDataSource', ['package', 'path'])):
+    '''
+    :var package: The name of a package.
+    :var path: The path to a file within the package.
+    '''
+    pass
+
 class PackageDataLoader(Loader):
     '''
     Loads the contents of a file stored in a Python package.
 
+    :var source_type: :class:`PackageDataSource`
     :var return_type: ``str``
     '''
 
+    source_type = PackageDataSource
     return_type = str
 
     def load(self, source):
@@ -22,10 +31,3 @@ class PackageDataLoader(Loader):
         :rtype: String.
         '''
         return pkg_resources.resource_string(source.package, source.path)
-
-class PackageDataSource(namedtuple('PackageDataSource', ['package', 'path'])):
-    '''
-    :var package: The name of a package.
-    :var path: The path to a file within the package.
-    '''
-    pass

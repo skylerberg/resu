@@ -15,6 +15,10 @@ class Loader(object):
     __metaclass__ = abc.ABCMeta
 
     @abc.abstractproperty
+    def source_type(self):
+        pass
+
+    @abc.abstractproperty
     def return_type(self):
         pass
 
