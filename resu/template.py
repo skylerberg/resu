@@ -8,7 +8,7 @@ class Template(namedtuple('Template', [
         'name', 'file_type', 'language', 'template_source', 'example_source'])):
     pass
 
-def get_template_by_name(name):
+def get_template(name):
     return Template(
         name='default',
         file_type='html',

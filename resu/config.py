@@ -1,7 +1,6 @@
 import resu
 import resu.template_engines
 import resu.parsers
-import resu.templates
 import resu.loaders
 import resu.transforms
 
@@ -76,7 +75,7 @@ class Config(object):
         :returns: A template.
         :rtype: :class:`Template`
         '''
-        return resu.templates.get_template_by_name(self.template)
+        return resu.get_template(self.template)
 
     def get_template_engine(self):
         '''
