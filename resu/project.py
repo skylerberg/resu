@@ -20,4 +20,5 @@ def build(config):
         out.write(template_engine.render(template, config=data))
 
 def generate(config):
-    print config.get_template().get_example()
+    with open('resu.yml', 'w') as out:
+        out.write(config.get_template().get_example())
