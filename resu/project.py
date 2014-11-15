@@ -24,4 +24,4 @@ def build(config):
 
 def generate(config):
     with open('resu.yml', 'w') as out:
-        out.write(load(config.get_template().example_source))
+        out.write(load(resu.get_template(config.template).example_source))
