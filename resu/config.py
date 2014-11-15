@@ -51,15 +51,3 @@ class Config(object):
         for template_engine in resu.template_engines.TemplateEngine.__subclasses__():
             if template.language == template_engine.language:
                 return template_engine()
-
-    def get_output_file(self):
-        '''
-        Get output file from configuration.
-
-        :returns: The path to the intended output file.
-        :rtype: String.
-        '''
-        return self.output_file
-
-    def get_loader(self):
-        return resu.loaders.FileLoader()
