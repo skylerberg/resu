@@ -41,15 +41,6 @@ class Config(object):
             if self.parser == parser.format:
                 return parser()
 
-    def get_data_source(self):
-        '''
-        Get a list of data files based on config.
-
-        :returns: Paths to data files specified.
-        :rtype: List of strings.
-        '''
-        return self.data_source
-
     def get_transform(self):
         '''
         Running the composite function returned by this function is the

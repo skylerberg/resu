@@ -10,11 +10,10 @@ def build(config):
     Create a new resume from configuration files.
     '''
     # Get and process data
-    source = config.get_data_source()
     loader = config.get_loader()
     parser = config.get_parser()
     transform = config.get_transform()
-    data = transform(parser.load(loader.load(source)))
+    data = transform(parser.load(loader.load(config.data_source)))
 
     template = load(resu.get_template(config.template).template_source)
     template_engine = config.get_template_engine()
