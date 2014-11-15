@@ -1,8 +1,6 @@
 '''
 Entry point into resu and subcommands.
-
-resu.cli is responsible for providing the entry point for executables as well
-as handling parsing arguments.
+resu.cli is responsible for providing the entry point for executables as well as handling parsing arguments.
 '''
 import sys
 
@@ -56,8 +54,6 @@ def run(args=sys.argv[1:], out=sys.stdout):
             kwargs['parser'] = arguments['--parser']
         if arguments['--template']:
             kwargs['template'] = arguments['--template']
-        config = resu.Config()
-        config.update(kwargs)
         if arguments['--generate']:
             resu.generate(**kwargs)
         else:
