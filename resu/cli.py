@@ -59,6 +59,6 @@ def run(args=sys.argv[1:], out=sys.stdout):
         config = resu.Config()
         config.update(kwargs)
         if arguments['--generate']:
-            resu.generate(config)
+            resu.generate(**kwargs)
         else:
-            resu.build(config)
+            resu.build(**kwargs)
