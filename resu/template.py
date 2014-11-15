@@ -1,8 +1,6 @@
-import abc
 from collections import namedtuple
 
-import resu.loaders
-from resu.loaders import PackageDataLoader, PackageDataSource
+from resu.loaders import PackageDataSource
 
 class Template(namedtuple('Template', [
         'name', 'file_type', 'language', 'template_source', 'example_source'])):
