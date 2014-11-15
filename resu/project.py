@@ -12,8 +12,7 @@ def build(config):
     # Get and process data
     loader = config.get_loader()
     parser = config.get_parser()
-    transform = config.get_transform()
-    data = transform(parser.load(loader.load(config.data_source)))
+    data = parser.load(loader.load(config.data_source))
 
     template = load(resu.get_template(config.template).template_source)
     template_engine = config.get_template_engine()

@@ -2,7 +2,6 @@ import resu
 import resu.template_engines
 import resu.parsers
 import resu.loaders
-import resu.transforms
 
 class Config(object):
     '''
@@ -41,24 +40,6 @@ class Config(object):
             if self.parser == parser.format:
                 return parser()
 
-    def get_transform(self):
-        '''
-        Running the composite function returned by this function is the
-        equivalent of running each transform in the same order supplied.
-
-        :returns: A function composed of each transform given.
-        :rtype: Function.
-        '''
-        transform_lookup = {}
-        for transform in resu.transforms.Transform.__subclasses__():
-            transform_lookup[transform.name] = transform()
-        composite = _identity
-        for transform_name in self.transforms:
-            transform = transform_lookup[transform_name]
-            composite = _compose(transform.apply, composite)
-        return composite
-
-
     def get_template_engine(self):
         '''
         Get template engine from configuration.
@@ -82,15 +63,3 @@ class Config(object):
 
     def get_loader(self):
         return resu.loaders.FileLoader()
-
-def _identity(data):
-    '''
-    The single argument identity function.
-    '''
-    return data
-
-def _compose(f, g):
-    '''
-    Return the composition of two functions taking a single argument.
-    '''
-    return lambda data: f(g(data))
