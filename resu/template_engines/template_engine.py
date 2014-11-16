@@ -7,13 +7,13 @@ class TemplateEngine(object):
     Support for a templating engine should be added to Resu by implementing this
     class.
 
-    :var language: The templating language that the engine can parse.
+    :var name: The templating language that the engine can parse.
     '''
 
     __metaclass__ = abc.ABCMeta
 
     @abc.abstractproperty
-    def language(self):
+    def name(self):
         pass
 
     @abc.abstractmethod

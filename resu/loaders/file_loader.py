@@ -4,10 +4,12 @@ class FileLoader(Loader):
     '''
     Loads the contents of a file.
 
+    :var name: ``file``
     :var source_type: ``str``
     :var return_type: ``str``
     '''
 
+    name = 'file'
     source_type = str
     return_type = str
 

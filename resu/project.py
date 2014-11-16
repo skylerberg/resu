@@ -5,7 +5,7 @@ This module stores the main commands for working with projects.
 import resu
 from resu.loaders import load
 from resu.parsers import get_parser
-from resu.template_engines import get_template_engine
+from resu.template import Template
 
 def build(
         parser='yaml',
@@ -19,11 +19,9 @@ def build(
     parser = get_parser(parser)
     data = parser.load(load(data_source))
 
-    template = resu.get_template(template)
-    template_engine = get_template_engine(template.language)
     with open(output_file, 'w') as out:
-        out.write(template_engine.render(load(template.template_source), config=data))
+        out.write(resu.render_template(template, data))
 
 def generate(template='default', output_file='resu.yml'):
     with open(output_file, 'w') as out:
-        out.write(load(resu.get_template(template).example_source))
+        out.write(load(resu.find(Template, template).example_source))

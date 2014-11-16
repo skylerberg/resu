@@ -6,10 +6,10 @@ class YamlParser(Parser):
     '''
     Parser for YAML files.
 
-    :var format: ``'yaml'``
+    :var name: ``'yaml'``
     '''
 
-    format = "yaml"
+    name = "yaml"
 
     def load(self, data):
         '''

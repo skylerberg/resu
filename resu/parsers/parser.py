@@ -5,13 +5,13 @@ class Parser(object):
 
     Parser provides only the functions that resu needs to deserialize data.
 
-    :var format: The format the parser parses.
+    :var name: The format the parser parses.
     '''
 
     __metaclass__ = abc.ABCMeta
 
     @abc.abstractproperty
-    def format(self):
+    def name(self):
         pass
 
     @abc.abstractmethod

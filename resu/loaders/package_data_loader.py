@@ -15,10 +15,12 @@ class PackageDataLoader(Loader):
     '''
     Loads the contents of a file stored in a Python package.
 
+    :var name: ``'package_data'``
     :var source_type: :class:`PackageDataSource`
     :var return_type: ``str``
     '''
 
+    name = 'package_data'
     source_type = PackageDataSource
     return_type = str
 

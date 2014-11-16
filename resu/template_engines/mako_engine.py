@@ -6,10 +6,10 @@ class MakoEngine(TemplateEngine):
     '''
     :class:`resu.TemplateEngine` for Mako.
 
-    :var language: ``'mako'``
+    :var name: ``'mako'``
     '''
 
-    language = 'mako'
+    name  = 'mako'
 
     def render(self, template, **kwargs):
         '''

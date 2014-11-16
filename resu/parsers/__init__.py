@@ -13,5 +13,5 @@ def get_parser(parser_format):
     :rtype: Subclass of :class:`Parser`.
     '''
     for parser in Parser.__subclasses__():
-        if parser_format == parser.format:
+        if parser_format == parser.name:
             return parser()

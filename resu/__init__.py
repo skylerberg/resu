@@ -1,6 +1,6 @@
-from resu.cli import run
 from resu.project import build, generate
-from resu.template import Template, get_template
-from resu.parsers import Parser, get_parser
+from resu.search import find, available
+from resu.template import render_template
+from resu.loaders import load
 
 __version__ = '0.0.0'

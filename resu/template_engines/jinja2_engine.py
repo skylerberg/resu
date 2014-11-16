@@ -6,10 +6,10 @@ class Jinja2Engine(TemplateEngine):
     '''
     :class:`resu.TemplateEngine` for Jinja2.
 
-    :var language: ``'jinja2'``
+    :var name: ``'jinja2'``
     '''
 
-    language = 'jinja2'
+    name = 'jinja2'
 
     def render(self, template, **kwargs):
         '''

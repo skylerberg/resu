@@ -6,10 +6,10 @@ class JsonParser(Parser):
     '''
     Parser for JSON files.
 
-    :var format: ``'json'``
+    :var name: ``'json'``
     '''
 
-    format = "json"
+    name = "json"
 
     def load(self, data):
         '''
