@@ -11,8 +11,6 @@ resu
 
 .. autofunction:: available
 
-.. autofunction:: render
-
-.. autofunction:: get_template
+.. autofunction:: render_template
 
 .. autofunction:: load
