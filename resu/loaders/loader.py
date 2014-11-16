@@ -31,6 +31,8 @@ class Loader(object):
         '''
         :returns: The contents stored in ``sources``.
         :rtype: Object
+
+        :raises IOError: if the source cannot be read.
         '''
         pass
 

@@ -18,8 +18,13 @@ class FileLoader(Loader):
 
     def read(self, source):
         '''
-        :returns: The contents stored in ``source``.
+        :arg source: Path to file to read.
+        :type source: :class:`FileSource`
+
+        :returns: Contents of the file specified in ``source``.
         :rtype: String
+
+        :raises IOError: if the file does not exist.
         '''
         with open(source.path) as f:
             return f.read()
