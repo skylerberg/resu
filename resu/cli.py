@@ -1,8 +1,10 @@
 '''
-Entry point into resu and subcommands.
-resu.cli is responsible for providing the entry point for executables as well as handling parsing arguments.
+Entry point into resu and subcommands. resu.cli is responsible for providing the
+entry point for executables as well as handling parsing arguments.
 '''
 import sys
+import os
+import importlib
 
 import docopt
 
@@ -19,6 +21,7 @@ Options:
     -p --parser <name>      Use specified parser for user provided data files.
     -t --template <name>    Use specified template.
     -o --output-file <file> Path to output file.
+    -e --extensions <names> Comma separated list of extensions to import.
 '''
 
 def run(args=sys.argv[1:], out=sys.stdout):
@@ -42,19 +45,31 @@ def run(args=sys.argv[1:], out=sys.stdout):
         exit(1)
     if arguments['--help']:
         out.write(CLI_DOC)
-    elif arguments['--version']:
+        exit(0)
+    if arguments['--version']:
         out.write(resu.__version__ + '\n')
+        exit(0)
+    if arguments['--extensions']:
+        _load_extensions(arguments['--extensions'].split(','))
+    kwargs = {}
+    if arguments['<file>']:
+        kwargs['data_source'] = arguments['<file>']
+    if arguments['--output-file']:
+        kwargs['output_file'] = arguments['--output-file']
+    if arguments['--parser']:
+        kwargs['parser'] = arguments['--parser']
+    if arguments['--template']:
+        kwargs['template'] = arguments['--template']
+    if arguments['--generate']:
+        resu.generate(**kwargs)
     else:
-        kwargs = {}
-        if arguments['<file>']:
-            kwargs['data_source'] = arguments['<file>']
-        if arguments['--output-file']:
-            kwargs['output_file'] = arguments['--output-file']
-        if arguments['--parser']:
-            kwargs['parser'] = arguments['--parser']
-        if arguments['--template']:
-            kwargs['template'] = arguments['--template']
-        if arguments['--generate']:
-            resu.generate(**kwargs)
-        else:
-            resu.build(**kwargs)
+        resu.build(**kwargs)
+
+def _load_extensions(extensions):
+    '''
+    Load each extension as a python module from either installed packages or
+    from the current working directory.
+    '''
+    sys.path.append(os.getcwd())
+    for extension in extensions:
+        importlib.import_module(extension)
