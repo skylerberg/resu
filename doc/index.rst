@@ -14,7 +14,8 @@ Contents:
    :maxdepth: 2
 
    pages/intro.rst
-   pages/tutorial.rst
+   pages/quick.rst
+   pages/tutorials.rst
    pages/contributing.rst
    pages/cli.rst
    pages/api.rst

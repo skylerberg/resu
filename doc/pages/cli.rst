@@ -86,3 +86,23 @@ input for the template. If we wanted to see how to write a resume for the
 .. code-block:: bash
 
    resu -t fancy -g
+
+
+Include Extensions
+==================
+
+Resu includes a convenient way to extend its functionality with your own Python
+modules. For details on how to create an extension, read the 
+:doc:`tutorials/extension` tutorial. To include an extension, use the ``-e`` or 
+``--extensions`` option. To include a python module called ``resu_ext``, use the
+command:
+
+.. code-block:: bash
+
+   resu -e resu_ext
+
+To include multiple extensions, separate the module names with commas:
+
+.. code-block:: bash
+
+   resu -e resu_ext1,resu_ext2

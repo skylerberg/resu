@@ -4,7 +4,7 @@ This module stores the main commands for working with projects.
 
 import resu
 from resu.parsers import Parser
-from resu.template import Template
+from resu.templates import Template
 from resu.template_engines import TemplateEngine
 from resu.loaders import Loader
 
