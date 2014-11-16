@@ -6,8 +6,6 @@
 Resu
 ====
 
-The future of resume creation.
-
 Contents:
 
 .. toctree::
