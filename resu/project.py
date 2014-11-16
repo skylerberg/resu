@@ -58,7 +58,7 @@ def load(source):
     :returns: Deserialized data
     :rtype: Dictionary
     '''
-    return resu.find(Loader, type(source), id_attr='source_type')().load(source)
+    return resu.find(Loader, type(source), id_attr='source_type')().read(source)
 
 def parse(format_, data):
     '''

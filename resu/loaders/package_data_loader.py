@@ -16,7 +16,7 @@ class PackageDataLoader(Loader):
     source_type = PackageDataSource
     return_type = str
 
-    def load(self, source):
+    def read(self, source):
         '''
         :arg source: The location of a file within a package.
         :type source: :class:`PackageDataSource`

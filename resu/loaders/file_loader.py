@@ -15,7 +15,7 @@ class FileLoader(Loader):
     source_type = FileSource
     return_type = str
 
-    def load(self, source):
+    def read(self, source):
         '''
         :returns: The contents stored in ``source``.
         :rtype: String

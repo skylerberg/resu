@@ -27,7 +27,7 @@ class Loader(object):
         pass
 
     @abc.abstractmethod
-    def load(self, sources):
+    def read(self, sources):
         '''
         :returns: The contents stored in ``sources``.
         :rtype: Object
