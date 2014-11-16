@@ -8,6 +8,9 @@ def available(class_, id_attr='name'):
     :type id_attr: String
     '''
     ret = list()
+    for instance in class_.__dict__.get('instances', []):
+        if instance._asdict().get(id_attr, ''):
+            ret.append(instance._asdict()[id_attr])
     for subclass in class_.__subclasses__():
         if id_attr in subclass.__dict__:
             ret.append(subclass.__dict__[id_attr])
