@@ -2,11 +2,6 @@
 Command Line Reference
 ======================
 
-Resu provides a command line utility.
-
-Default Behavior
-================
-
 Resu is meant to be usable with just two commands: 
 
 .. code-block:: bash
