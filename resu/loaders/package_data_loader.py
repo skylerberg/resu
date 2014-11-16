@@ -25,3 +25,10 @@ class PackageDataLoader(Loader):
         :rtype: String
         '''
         return pkg_resources.resource_string(source.package, source.path)
+
+    def write(self, source, content, force=False):
+        '''
+        :raises IOError: when called. Writing to a Python package is not
+          allowed.
+        '''
+        raise IOError('Cannot write into python package')

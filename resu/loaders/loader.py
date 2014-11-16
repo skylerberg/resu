@@ -27,9 +27,28 @@ class Loader(object):
         pass
 
     @abc.abstractmethod
-    def read(self, sources):
+    def read(self, source):
         '''
         :returns: The contents stored in ``sources``.
         :rtype: Object
+        '''
+        pass
+
+    @abc.abstractmethod
+    def write(self, source, content, force):
+        '''
+        :arg source: Information needed to write the content.
+        :arg content: Content to write.
+        :arg force: Flag to specify whether or not to override existing
+          resources.
+        :type source: Object
+        :type content: Object
+        :type force: Boolean
+
+        :returns: None
+
+        :raises IOError: when attempting to write over an existing resource
+          while ``force`` is ``False`` or when attempting to write to a
+          readonly resource.
         '''
         pass
