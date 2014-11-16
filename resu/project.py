@@ -3,9 +3,9 @@ This module stores the main commands for working with projects.
 '''
 
 import resu
-from resu.loaders import load
 from resu.parsers import get_parser
 from resu.template import Template
+from resu.loaders import Loader
 
 def build(
         data_source='resu.yml',
@@ -28,7 +28,7 @@ def build(
     '''
     # Get and process data
     parser = get_parser(parser)
-    data = parser.load(load(data_source))
+    data = parser.load(resu.load(data_source))
 
     with open(output_file, 'w') as out:
         out.write(resu.render_template(template, data))
@@ -45,4 +45,17 @@ def generate(template='default', output_file='resu.yml'):
     :returns: None
     '''
     with open(output_file, 'w') as out:
-        out.write(load(resu.find(Template, template).example_source))
+        out.write(resu.load(resu.find(Template, template).example_source))
+
+
+def load(source):
+    '''
+    Read data from ``source``.
+
+    :arg source: The source of the data.
+    :type source: namedtuple
+
+    :returns: Deserialized data.
+    :rtype: Dictionary
+    '''
+    return resu.find(Loader, type(source), id_attr='source_type')().load(source)

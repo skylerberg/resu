@@ -1,7 +1,7 @@
 from collections import namedtuple
 
 import resu
-from resu.loaders import PackageDataSource
+from resu.sources import PackageDataSource
 from resu.template_engines import TemplateEngine
 
 class Template(namedtuple('Template', [

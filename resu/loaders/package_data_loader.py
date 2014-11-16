@@ -1,15 +1,7 @@
-from collections import namedtuple
-
 import pkg_resources
 
 from resu.loaders import Loader
-
-class PackageDataSource(namedtuple('PackageDataSource', ['package', 'path'])):
-    '''
-    :var package: The name of a package.
-    :var path: The path to a file within the package.
-    '''
-    pass
+from resu.sources import PackageDataSource
 
 class PackageDataLoader(Loader):
     '''
