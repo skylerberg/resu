@@ -7,6 +7,7 @@ from resu.parsers import Parser
 from resu.templates import Template
 from resu.template_engines import TemplateEngine
 from resu.loaders import Loader
+from resu.sources import FileSource
 
 def build(
         data_source='resu.yml',
@@ -27,6 +28,7 @@ def build(
 
     :returns: None
     '''
+    data_source = FileSource(data_source)
     data = parse(parser, load(data_source))
     with open(output_file, 'w') as out:
         out.write(render_template(template, data))

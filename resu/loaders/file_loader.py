@@ -1,5 +1,7 @@
 from resu.loaders import Loader
 
+from resu.sources import FileSource
+
 class FileLoader(Loader):
     '''
     Loads the contents of a file.
@@ -10,7 +12,7 @@ class FileLoader(Loader):
     '''
 
     name = 'file'
-    source_type = str
+    source_type = FileSource
     return_type = str
 
     def load(self, source):
@@ -18,5 +20,5 @@ class FileLoader(Loader):
         :returns: The contents stored in ``source``.
         :rtype: String
         '''
-        with open(source) as f:
+        with open(source.path) as f:
             return f.read()
