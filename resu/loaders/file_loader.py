@@ -16,7 +16,7 @@ class FileLoader(Loader):
     def load(self, source):
         '''
         :returns: The contents stored in ``source``.
-        :rtype: String.
+        :rtype: String
         '''
         with open(source) as f:
             return f.read()

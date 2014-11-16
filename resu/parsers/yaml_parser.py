@@ -16,9 +16,9 @@ class YamlParser(Parser):
         Deserialize YAML data.
 
         :arg data: Serialized data in the YAML format.
-        :type data: str
+        :type data: String
 
         :returns: Deserialized data.
-        :rtype: Object.
+        :rtype: Object
         '''
         return yaml.load(data)

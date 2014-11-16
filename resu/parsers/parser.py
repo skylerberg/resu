@@ -20,9 +20,9 @@ class Parser(object):
         Return load data from string.
 
         :arg data: Serialized data in ``format``.
-        :type data: str
+        :type data: String
 
         :returns: Deserialized data.
-        :rtype: Object.
+        :rtype: Object
         '''
         pass

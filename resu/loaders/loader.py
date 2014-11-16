@@ -30,6 +30,6 @@ class Loader(object):
     def load(self, sources):
         '''
         :returns: The contents stored in ``sources``.
-        :rtype: Object.
+        :rtype: Object
         '''
         pass

@@ -14,12 +14,12 @@ class MakoEngine(TemplateEngine):
     def render(self, template, **kwargs):
         '''
         :arg template: A template.
-        :type template: str
-        :arg kwargs: Conext for the template.
-        :type kwargs: dict
+        :type template: String
+        :arg kwargs: Context for the template.
+        :type kwargs: Dictionary
 
         :returns: Template rendered with Mako.
-        :rtype: String.
+        :rtype: String
         '''
         mako_template = mako.template.Template(template)
         return mako_template.render(**kwargs)

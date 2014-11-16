@@ -22,6 +22,6 @@ class PackageDataLoader(Loader):
         :type source: :class:`PackageDataSource`
 
         :returns: The contents stored in ``source``.
-        :rtype: String.
+        :rtype: String
         '''
         return pkg_resources.resource_string(source.package, source.path)

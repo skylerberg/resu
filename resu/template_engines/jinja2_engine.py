@@ -14,12 +14,12 @@ class Jinja2Engine(TemplateEngine):
     def render(self, template, **kwargs):
         '''
         :arg template: A template.
-        :type template: str
-        :arg kwargs: Conext for the template.
-        :type kwargs: dict
+        :arg kwargs: Context for the template.
+        :type template: String
+        :type kwargs: Dictionary
 
         :returns: Template rendered with Jinja2.
-        :rtype: String.
+        :rtype: String
         '''
         jinja_template = jinja2.Template(template)
         return jinja_template.render(**kwargs)

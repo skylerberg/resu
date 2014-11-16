@@ -14,11 +14,6 @@ class Template(namedtuple('Template', [
     :var language: Templating language used in the template. Required.
     :var template_source: Location of the template. Required.
     :var example_source: Location of example input for the template. Optional.
-    :type name: String
-    :type file_type: String
-    :type language: String
-    :type template_source: namedtuple
-    :type example_source: namedtuple
     '''
 
     instances = []

@@ -16,13 +16,13 @@ def build(
     '''
     Create a new resume from configuration files.
 
-    :arg data_source: A string indicating where to find the resume data
+    :arg data_source: A string indicating where to find the resume data.
+    :arg parser: The format of the resume data must be parsed from.
+    :arg template: Name of the template for the resume.
+    :arg output_file: Path to the file to write the resume to.
     :type data_source: String
-    :arg parser: The format of the resume data must be parsed from
     :type parser: String
-    :arg template: Name of the template for the resume
     :type template: String
-    :arg output_file: Path to the file to write the resume to
     :type output_file: String
 
     :returns: None
@@ -35,9 +35,9 @@ def generate(template='default', output_file='resu.yml'):
     '''
     Generate an example resume for a template.
 
-    :arg template: The name of the template to generate an example for
+    :arg template: The name of the template to generate an example for.
+    :arg output_file: Path to the file to save the example resume to.
     :type template: String
-    :arg output_file: Path to the file to save the example resume to
     :type output_file: String
 
     :returns: None
@@ -50,7 +50,7 @@ def load(source):
     '''
     Read data from ``source``.
 
-    :arg source: The source of the data
+    :arg source: The source of the data.
     :type source: namedtuple
 
     :returns: Deserialized data
@@ -62,9 +62,9 @@ def parse(format_, data):
     '''
     Parse data
 
-    :arg language: The serialization format to parse
+    :arg language: The serialization format to parse.
+    :arg data: Data to deserialize.
     :type langauge: String
-    :arg data: Data to deserialize
     :type data: String
 
     :returns: Deserialized data
@@ -76,12 +76,12 @@ def render_template(name, data):
     '''
     Render a template with provided data.
 
-    :arg name: Name of the template to render
+    :arg name: Name of the template to render.
+    :arg data: Data to pass into the template.
     :type name: String
-    :arg data: Data to pass into the template
     :type data: Dictionary
 
-    :returns: The template with data provided as its context
+    :returns: The template with data provided as its context.
     :rtype: String
     '''
     template = resu.find(Template, name)

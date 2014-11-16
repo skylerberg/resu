@@ -28,11 +28,10 @@ def run(args=sys.argv[1:], out=sys.stdout):
     '''
     Handle command line options and run Resu.
 
-    args
-        Resu arguments. Defaults to system arguments.
+    :arg args: Resu arguments.
+    :arg out: Output file, or StringIO. Defaults to standard out.
 
-    out
-        Output file, or StringIO. Defaults to standard out.
+    :returns: None
     '''
     try:
         arguments = docopt.docopt(

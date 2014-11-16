@@ -16,9 +16,9 @@ class JsonParser(Parser):
         Deserialize JSON data.
 
         :arg data: Serialized data in the JSON format.
-        :type data: str
+        :type data: String
 
         :returns: Deserialized data.
-        :rtype: Object.
+        :rtype: Object
         '''
         return json.load(data)
