@@ -44,13 +44,17 @@ class TestRun(unittest.TestCase):
         self.mock_build.assert_called_once()
 
     def test_help_option(self):
-        resu.cli.run(args=['-h'], out=self.out)
+        with self.assertRaises(SystemExit) as cm:
+            resu.cli.run(args=['-h'], out=self.out)
+        self.assertEquals(cm.exception.code, 0)
         output = self.out.getvalue()
         self.assertEquals(output, resu.cli.CLI_DOC)
         assert not self.mock_build.called
 
     def test_version_option(self):
-        resu.cli.run(args=['-v'], out=self.out)
+        with self.assertRaises(SystemExit) as cm:
+            resu.cli.run(args=['-v'], out=self.out)
+        self.assertEquals(cm.exception.code, 0)
         output = self.out.getvalue().strip()
         self.assertEquals(output, resu.__version__)
         assert not self.mock_build.called
