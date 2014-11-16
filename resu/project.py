@@ -27,9 +27,7 @@ def build(
 
     :returns: None
     '''
-    # Get and process data
     data = parse(parser, load(data_source))
-
     with open(output_file, 'w') as out:
         out.write(render_template(template, data))
 

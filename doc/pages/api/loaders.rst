@@ -11,6 +11,3 @@ resu.loaders
 
 .. autoclass:: PackageDataLoader
    :members:
-
-.. autoclass:: PackageDataSource
-   :members:

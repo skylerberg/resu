@@ -17,7 +17,7 @@ Resu is meant to be usable with just two commands:
 
    resu
 
-``resu -g`` will write a file called ``resu.yml`` which contains a an example
+``resu -g`` will write a file called ``resu.yml`` which contains an example
 resume. By default, ``resu`` will look for a file called ``resu.yml``, load 
 this file and turn it into an html resume written to the file ``resu.html``.
 To make a resume that is actually useful, you can update ``resu.yml`` with your
@@ -56,14 +56,14 @@ Non-YAML Resume
 ===============
 
 The ``-p`` or ``--parser`` option allows you to specify an alternate format for
-your data. If you have your resume writtin in JSON in a file called 
+your data. If you have your resume written in JSON in a file called 
 ``resume.json``, then can build your resume with the command:
 
 .. code-block:: bash
 
   resu -p json resume.json
 
-Right now JSON is the only format other than YAML support.
+Current JSON is the only format other than YAML supported.
 
 
 Non-Default Template

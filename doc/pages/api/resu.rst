@@ -7,10 +7,12 @@ resu
 
 .. autofunction:: generate
 
-.. autofunction:: find
+.. autofunction:: load
 
-.. autofunction:: available
+.. autofunction:: parse
 
 .. autofunction:: render_template
 
-.. autofunction:: load
+.. autofunction:: find
+
+.. autofunction:: available
