@@ -53,11 +53,11 @@ def run(args=sys.argv[1:], out=sys.stdout):
     if arguments['--version']:
         out.write(resu.__version__ + '\n')
         exit(0)
+    if arguments['--extensions']:
+        _load_extensions(arguments['--extensions'].split(','))
     if arguments['--list-features']:
         _print_capabilities(out)
         exit(0)
-    if arguments['--extensions']:
-        _load_extensions(arguments['--extensions'].split(','))
     kwargs = {}
     if arguments['<file>']:
         kwargs['data_source'] = arguments['<file>']
