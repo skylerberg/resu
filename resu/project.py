@@ -30,8 +30,8 @@ def build(
     '''
     data_source = FileSource(data_source)
     data = parse(parser, load(data_source))
-    with open(output_file, 'w') as out:
-        out.write(render_template(template, data))
+    output = render_template(template, data)
+    FileLoader().write(FileSource(output_file), output, force=True)
 
 def generate(template='default', output_file='resu.yml'):
     '''
@@ -45,9 +45,8 @@ def generate(template='default', output_file='resu.yml'):
     :returns: None
     '''
     source = FileSource(output_file)
-    loader = FileLoader()
     content = load(resu.find(Template, template).example_source)
-    loader.write(source, content)
+    FileLoader().write(source, content)
 
 def load(source):
     '''
