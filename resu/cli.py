@@ -1,6 +1,6 @@
 '''
-Entry point into resu and subcommands. resu.cli is responsible for providing the
-entry point for executables as well as handling parsing arguments.
+Entry point into resu and subcommands. resu.cli is responsible for providing
+the entry point for executables as well as handling parsing arguments.
 '''
 import sys
 import os
@@ -15,7 +15,7 @@ from resu.loaders import Loader
 from resu.template_engines import TemplateEngine
 
 CLI_DOC = \
-'''Usage:
+    '''Usage:
     resu [options] [<file>]
 
 Options:
@@ -28,6 +28,7 @@ Options:
     -o --output-file <file> Path to output file.
     -e --extensions <names> Comma separated list of extensions to import.
 '''
+
 
 def run(args=sys.argv[1:], out=sys.stdout):
     '''
@@ -72,6 +73,7 @@ def run(args=sys.argv[1:], out=sys.stdout):
     else:
         resu.build(**kwargs)
 
+
 def _load_extensions(extensions):
     '''
     Load each extension as a python module from either installed packages or
@@ -80,6 +82,7 @@ def _load_extensions(extensions):
     sys.path.append(os.getcwd())
     for extension in extensions:
         importlib.import_module(extension)
+
 
 def _print_capabilities(out=sys.stdout):
     '''

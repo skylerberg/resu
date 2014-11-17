@@ -1,4 +1,10 @@
+'''
+To make it easier to deal with IO, this module defines a set of namedtuples to
+specify the location of a resource to read or write.
+'''
+
 from collections import namedtuple
+
 
 class PackageDataSource(namedtuple('PackageDataSource', 'package path')):
     '''
@@ -8,6 +14,7 @@ class PackageDataSource(namedtuple('PackageDataSource', 'package path')):
     :type path: String
     '''
     pass
+
 
 class FileSource(namedtuple('FileSource', 'path')):
     '''

@@ -12,6 +12,7 @@ from resu.template_engines import TemplateEngine
 from resu.loaders import Loader, FileLoader
 from resu.sources import FileSource
 
+
 def build(
         data_source='resu.yml',
         parser='yaml',
@@ -38,6 +39,7 @@ def build(
     output = render_template(template, data)
     FileLoader().write(FileSource(output_file), output, force=True)
 
+
 def generate(template='default', output_file='resu.yml'):
     '''
     Write the example input for a template to the specified location. The data
@@ -55,6 +57,7 @@ def generate(template='default', output_file='resu.yml'):
     content = load(resu.find(Template, template).example_source)
     FileLoader().write(source, content)
 
+
 def load(source):
     '''
     Read data from ``source``.
@@ -65,7 +68,9 @@ def load(source):
     :returns: Deserialized data
     :rtype: Dictionary
     '''
-    return resu.find(Loader, type(source), id_attr='source_type')().read(source)
+    loader = resu.find(Loader, type(source), id_attr='source_type')()
+    return loader.read(source)
+
 
 def parse(format_, data):
     '''
@@ -80,6 +85,7 @@ def parse(format_, data):
     :rtype: Dictionary
     '''
     return resu.find(Parser, format_)().load(data)
+
 
 def render_template(name, context):
     '''

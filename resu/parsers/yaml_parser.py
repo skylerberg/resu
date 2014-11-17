@@ -2,6 +2,7 @@ import yaml
 
 from resu.parsers import Parser
 
+
 class YamlParser(Parser):
     '''
     Parser for YAML files.

@@ -1,11 +1,12 @@
 import abc
 
+
 class TemplateEngine(object):
     '''
     Abstract base class for template engines.
 
-    Support for a templating engine should be added to Resu by implementing this
-    class.
+    Support for a templating engine should be added to Resu by implementing
+    this class.
 
     :var name: The templating language that the engine can parse.
     '''
@@ -13,7 +14,7 @@ class TemplateEngine(object):
     __metaclass__ = abc.ABCMeta
 
     @abc.abstractproperty
-    def name(self):
+    def name(self):  # pylint: disable=missing-docstring
         pass
 
     @abc.abstractmethod

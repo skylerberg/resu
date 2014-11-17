@@ -2,6 +2,7 @@ import mako
 
 from resu.template_engines import TemplateEngine
 
+
 class MakoEngine(TemplateEngine):
     '''
     :class:`resu.TemplateEngine` for Mako.
@@ -9,7 +10,7 @@ class MakoEngine(TemplateEngine):
     :var name: ``'mako'``
     '''
 
-    name  = 'mako'
+    name = 'mako'
 
     def render(self, template, **kwargs):
         '''

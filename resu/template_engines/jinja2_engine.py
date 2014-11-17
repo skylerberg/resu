@@ -2,6 +2,7 @@ import jinja2
 
 from resu.template_engines import TemplateEngine
 
+
 class Jinja2Engine(TemplateEngine):
     '''
     :class:`resu.TemplateEngine` for Jinja2.

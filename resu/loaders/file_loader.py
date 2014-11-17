@@ -3,6 +3,7 @@ import os
 from resu.loaders import Loader
 from resu.sources import FileSource
 
+
 class FileLoader(Loader):
     '''
     Loads the contents of a file.

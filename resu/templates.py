@@ -2,6 +2,7 @@ from collections import namedtuple
 
 from resu.sources import PackageDataSource
 
+
 class Template(
         namedtuple('Template',
                    'name template_source example_source file_type language')):
@@ -18,7 +19,7 @@ class Template(
 
     instances = []
 
-    def __new__(cls, 
+    def __new__(cls,
                 name,
                 template_source,
                 example_source=None,
@@ -34,6 +35,7 @@ class Template(
 
     def __init__(self, **kwargs):
         Template.instances.append(self)
+
 
 Template(name='default',
          template_source=PackageDataSource('resu', 'examples/templates/default.html'),

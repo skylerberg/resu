@@ -3,6 +3,7 @@ import pkg_resources
 from resu.loaders import Loader
 from resu.sources import PackageDataSource
 
+
 class PackageDataLoader(Loader):
     '''
     Loads the contents of a file stored in a Python package.

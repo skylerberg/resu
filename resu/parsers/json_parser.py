@@ -2,6 +2,7 @@ import json
 
 from resu.parsers import Parser
 
+
 class JsonParser(Parser):
     '''
     Parser for JSON files.
