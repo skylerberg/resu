@@ -1,5 +1,8 @@
 '''
 This module stores the main commands for working with projects.
+
+This module should not be directly imported, all public members of this module
+are made available in :module:`resu`.
 '''
 
 import resu
@@ -15,7 +18,9 @@ def build(
         template='default',
         output_file='resu.html'):
     '''
-    Create a new resume from configuration files.
+    Use user data to create a document from a template. The user's data is read
+    from the source provided, parsed into a dictionary, and used to render a
+    template. The rendered template is then written to the specified location.
 
     :arg data_source: A string indicating where to find the resume data.
     :arg parser: The format of the resume data must be parsed from.
@@ -35,7 +40,9 @@ def build(
 
 def generate(template='default', output_file='resu.yml'):
     '''
-    Generate an example resume for a template.
+    Write the example input for a template to the specified location. The data
+    written by this command can be used by :func:`build` to generate a
+    document.
 
     :arg template: The name of the template to generate an example for.
     :arg output_file: Path to the file to save the example resume to.
@@ -62,7 +69,7 @@ def load(source):
 
 def parse(format_, data):
     '''
-    Parse data
+    Parses data serialized as a string into a Python dictionary.
 
     :arg language: The serialization format to parse.
     :arg data: Data to deserialize.
@@ -74,12 +81,12 @@ def parse(format_, data):
     '''
     return resu.find(Parser, format_)().load(data)
 
-def render_template(name, data):
+def render_template(name, context):
     '''
-    Render a template with provided data.
+    Render a template with provided context.
 
     :arg name: Name of the template to render.
-    :arg data: Data to pass into the template.
+    :arg context: Context to pass to the template.
     :type name: String
     :type data: Dictionary
 
@@ -89,4 +96,4 @@ def render_template(name, data):
     template = resu.find(Template, name)
     template_content = load(template.template_source)
     template_engine = resu.find(TemplateEngine, template.language)()
-    return template_engine.render(template_content, config=data)
+    return template_engine.render(template_content, config=context)
