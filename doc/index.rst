@@ -6,8 +6,6 @@
 Resu
 ====
 
-Contents:
-
 .. toctree::
    :maxdepth: 2
 
@@ -18,3 +16,11 @@ Contents:
    pages/contributing.rst
    pages/cli.rst
    pages/api.rst
+
+
+Indices and tables
+==================
+
+  * :ref:`genindex`
+  * :ref:`modindex`
+  * :ref:`search`
