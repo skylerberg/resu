@@ -26,3 +26,16 @@ class Parser(object):
         :rtype: Object
         '''
         pass
+
+    @abc.abstractmethod
+    def dump(self, data):
+        '''
+        Return load data from string.
+
+        :arg data: An object to serialize.
+        :type data: Object
+
+        :returns: Serialized data.
+        :rtype: String
+        '''
+        pass

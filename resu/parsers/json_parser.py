@@ -21,4 +21,16 @@ class JsonParser(Parser):
         :returns: Deserialized data.
         :rtype: Object
         '''
-        return json.load(data)
+        return json.loads(data)
+
+    def dump(self, data):
+        '''
+        Deserialize JSON data.
+
+        :arg data: Data to serialize.
+        :type data: Object
+
+        :returns: Serialized JSON data.
+        :rtype: String
+        '''
+        return json.dumps(data)

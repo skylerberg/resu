@@ -22,3 +22,13 @@ class YamlParser(Parser):
         :rtype: Object
         '''
         return yaml.load(data)
+
+    def dump(self, data):
+        '''
+        :arg data: Data to serialize
+        :type data: Object
+
+        :returns: Data serialized as YAML.
+        :rtype: String
+        '''
+        return yaml.dump(data)

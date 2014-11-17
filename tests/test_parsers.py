@@ -11,7 +11,7 @@ class TestJsonParser(unittest.TestCase):
 
     def test_load(self):
         self.parser.load("some data")
-        self.mock_json.load.assert_called_once_with("some data")
+        self.mock_json.loads.assert_called_once_with("some data")
 
     def tearDown(self):
         mock.patch.stopall()
