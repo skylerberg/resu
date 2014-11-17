@@ -14,6 +14,7 @@ Contents:
    pages/intro.rst
    pages/quick.rst
    pages/tutorials.rst
+   pages/extensions.rst
    pages/contributing.rst
    pages/cli.rst
    pages/api.rst
