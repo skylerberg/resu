@@ -9,6 +9,10 @@ import importlib
 import docopt
 
 import resu
+from resu.templates import Template
+from resu.parsers import Parser, YamlParser
+from resu.loaders import Loader
+from resu.template_engines import TemplateEngine
 
 CLI_DOC = \
 '''Usage:
@@ -17,6 +21,7 @@ CLI_DOC = \
 Options:
     -h --help               Show this message.
     -v --version            Show resu version number and exit.
+    -l --list-features      Show all supported features.
     -g --generate           Generate the default resu.yml file.
     -p --parser <name>      Use specified parser for user provided data files.
     -t --template <name>    Use specified template.
@@ -48,6 +53,9 @@ def run(args=sys.argv[1:], out=sys.stdout):
     if arguments['--version']:
         out.write(resu.__version__ + '\n')
         exit(0)
+    if arguments['--list-features']:
+        _print_capabilities(out)
+        exit(0)
     if arguments['--extensions']:
         _load_extensions(arguments['--extensions'].split(','))
     kwargs = {}
@@ -72,3 +80,15 @@ def _load_extensions(extensions):
     sys.path.append(os.getcwd())
     for extension in extensions:
         importlib.import_module(extension)
+
+def _print_capabilities(out=sys.stdout):
+    '''
+    Prints out a YAML representation of the available features.
+    '''
+    capabilities = {}
+    capabilities['parsers'] = resu.available(Parser)
+    capabilities['templates'] = resu.available(Template)
+    capabilities['template engines'] = resu.available(TemplateEngine)
+    capabilities['input types'] = resu.available(Loader)
+    parser = YamlParser()
+    out.write(parser.dump(capabilities))
