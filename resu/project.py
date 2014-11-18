@@ -37,7 +37,7 @@ def build(
     data_source = FileSource(data_source)
     data = parse(parser, load(data_source))
     output = render_template(template, data)
-    io.File().write(FileSource(output_file), output, force=True)
+    io.File(FileSource(output_file)).write(output, force=True)
 
 
 def generate(template='default', output_file='resu.yml'):
@@ -55,7 +55,7 @@ def generate(template='default', output_file='resu.yml'):
     '''
     source = FileSource(output_file)
     content = load(resu.find(Template, template).example_source)
-    io.File().write(source, content)
+    io.File(source).write(content)
 
 
 def load(source):
@@ -68,8 +68,7 @@ def load(source):
     :returns: Deserialized data
     :rtype: Dictionary
     '''
-    loader = resu.find(io.Provider, type(source), id_attr='source_type')()
-    return loader.read(source)
+    return resu.find(io.Provider, type(source), 'source_type')(source).read()
 
 
 def parse(format_, data):

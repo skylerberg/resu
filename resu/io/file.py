@@ -6,7 +6,7 @@ from resu.sources import FileSource
 
 class File(Provider):
     '''
-    Reads and writes files on the local file system.
+    Read and write to a file on the local file system.
 
     :var name: ``file``
     :var source_type: ``str``
@@ -17,25 +17,20 @@ class File(Provider):
     source_type = FileSource
     return_type = str
 
-    def read(self, source):
+    def read(self):
         '''
-        :arg source: Path to file to read.
-        :type source: :class:`FileSource`
-
-        :returns: Contents of the file specified in ``source``.
+        :returns: Contents of the file specified in ``self.source``.
         :rtype: String
 
         :raises IOError: if the file does not exist.
         '''
-        with open(source.path) as f:
+        with open(self.source.path) as f:
             return f.read()
 
-    def write(self, source, content, force=False):
+    def write(self, content, force=False):
         '''
-        :arg source: The file to write.
         :arg content: The content to write to the file.
         :arg force: Flag to write over existing file.
-        :type source: :class:`FileSource`
         :type content: String
         :type force: Boolean
 
@@ -44,7 +39,7 @@ class File(Provider):
         :raises IOError: When attempting to write over an existing file while
           ``force`` is ``False``.
         '''
-        if not force and os.path.isfile(source.path):
-            raise IOError('File {0} already exists.'.format(source.path))
-        with open(source.path, 'w') as f:
+        if not force and os.path.isfile(self.source.path):
+            raise IOError('File {0} already exists.'.format(self.source.path))
+        with open(self.source.path, 'w') as f:
             f.write(content)

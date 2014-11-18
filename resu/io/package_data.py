@@ -1,4 +1,4 @@
-import pkg_resources
+from pkg_resources import resource_string
 
 from resu.io import Provider
 from resu.sources import PackageDataSource
@@ -17,17 +17,17 @@ class PackageData(Provider):
     source_type = PackageDataSource
     return_type = str
 
-    def read(self, source):
+    def read(self):
         '''
         :arg source: The location of a file within a package.
         :type source: :class:`PackageDataSource`
 
-        :returns: The contents stored in ``source``.
+        :returns: The contents stored in ``self.source``.
         :rtype: String
         '''
-        return pkg_resources.resource_string(source.package, source.path)
+        return resource_string(self.source.package, self.source.path)
 
-    def write(self, source, content, force=False):
+    def write(self, content, force=False):
         '''
         :raises IOError: when called. Writing to a Python package is not
           allowed.

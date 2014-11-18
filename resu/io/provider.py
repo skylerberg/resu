@@ -27,10 +27,13 @@ class Provider(object):
     def return_type(self):  # pylint: disable=missing-docstring
         pass
 
+    def __init__(self, source):
+        self.source = source
+
     @abc.abstractmethod
-    def read(self, source):
+    def read(self):
         '''
-        :returns: The contents stored in ``sources``.
+        :returns: The contents stored in ``self.source``.
         :rtype: Object
 
         :raises IOError: if the source cannot be read.
@@ -38,13 +41,11 @@ class Provider(object):
         pass
 
     @abc.abstractmethod
-    def write(self, source, content, force):
+    def write(self, content, force):
         '''
-        :arg source: Information needed to write the content.
         :arg content: Content to write.
         :arg force: Flag to specify whether or not to override existing
           resources.
-        :type source: Object
         :type content: Object
         :type force: Boolean
 
