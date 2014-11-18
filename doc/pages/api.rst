@@ -13,6 +13,5 @@ add various features see :doc:`tutorials`.
    api/resu.rst
    api/io.rst
    api/parsers.rst
-   api/sources.rst
    api/templates.rst
    api/template_engines.rst
