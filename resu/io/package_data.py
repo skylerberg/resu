@@ -1,7 +1,7 @@
 from pkg_resources import resource_string
 
 from resu.io import Provider
-from resu.sources import PackageDataSource
+from resu.io import PackageDataSource
 
 
 class PackageData(Provider):

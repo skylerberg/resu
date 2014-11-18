@@ -10,7 +10,6 @@ from resu import io
 from resu.parsers import Parser
 from resu.templates import Template
 from resu.template_engines import TemplateEngine
-from resu.sources import FileSource
 
 
 def build(
@@ -34,10 +33,10 @@ def build(
 
     :returns: None
     '''
-    data_source = FileSource(data_source)
+    data_source = io.FileSource(data_source)
     data = parse(parser, load(data_source))
     output = render_template(template, data)
-    io.File(FileSource(output_file)).write(output, force=True)
+    io.File(io.FileSource(output_file)).write(output, force=True)
 
 
 def generate(template='default', output_file='resu.yml'):
@@ -53,7 +52,7 @@ def generate(template='default', output_file='resu.yml'):
 
     :returns: None
     '''
-    source = FileSource(output_file)
+    source = io.FileSource(output_file)
     content = load(resu.find(Template, template).example_source)
     io.File(source).write(content)
 

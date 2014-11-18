@@ -1,7 +1,7 @@
 import os
 
 from resu.io import Provider
-from resu.sources import FileSource
+from resu.io import FileSource
 
 
 class File(Provider):

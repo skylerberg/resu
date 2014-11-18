@@ -1,6 +1,6 @@
 '''
 To make it easier to deal with IO, this module defines a set of namedtuples to
-specify the location of a resource to read or write.
+specify all of the variables needed to access a resource.
 '''
 
 from collections import namedtuple

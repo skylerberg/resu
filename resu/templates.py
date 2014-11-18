@@ -1,6 +1,6 @@
 from collections import namedtuple
 
-from resu.sources import PackageDataSource
+from resu import io
 
 
 class Template(
@@ -38,5 +38,5 @@ class Template(
 
 
 Template(name='default',
-         template_source=PackageDataSource('resu', 'examples/templates/default.html'),
-         example_source=PackageDataSource('resu', 'examples/resu.yml'))
+         template_source=io.PackageDataSource('resu', 'examples/templates/default.html'),
+         example_source=io.PackageDataSource('resu', 'examples/resu.yml'))
