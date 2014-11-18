@@ -1,12 +1,12 @@
 import pkg_resources
 
-from resu.loaders import Loader
+from resu.io import Provider
 from resu.sources import PackageDataSource
 
 
-class PackageDataLoader(Loader):
+class PackageData(Provider):
     '''
-    Loads the contents of a file stored in a Python package.
+    Reads the contents of files stored in Python packages.
 
     :var name: ``'package_data'``
     :var source_type: :class:`PackageDataSource`

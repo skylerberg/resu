@@ -6,10 +6,10 @@ are made available in :module:`resu`.
 '''
 
 import resu
+from resu import io
 from resu.parsers import Parser
 from resu.templates import Template
 from resu.template_engines import TemplateEngine
-from resu.loaders import Loader, FileLoader
 from resu.sources import FileSource
 
 
@@ -37,7 +37,7 @@ def build(
     data_source = FileSource(data_source)
     data = parse(parser, load(data_source))
     output = render_template(template, data)
-    FileLoader().write(FileSource(output_file), output, force=True)
+    io.File().write(FileSource(output_file), output, force=True)
 
 
 def generate(template='default', output_file='resu.yml'):
@@ -55,7 +55,7 @@ def generate(template='default', output_file='resu.yml'):
     '''
     source = FileSource(output_file)
     content = load(resu.find(Template, template).example_source)
-    FileLoader().write(source, content)
+    io.File().write(source, content)
 
 
 def load(source):
@@ -68,7 +68,7 @@ def load(source):
     :returns: Deserialized data
     :rtype: Dictionary
     '''
-    loader = resu.find(Loader, type(source), id_attr='source_type')()
+    loader = resu.find(io.Provider, type(source), id_attr='source_type')()
     return loader.read(source)
 
 

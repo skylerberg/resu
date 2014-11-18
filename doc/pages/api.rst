@@ -11,7 +11,7 @@ add various features see :doc:`tutorials`.
    :maxdepth: 2
 
    api/resu.rst
-   api/loaders.rst
+   api/io.rst
    api/parsers.rst
    api/sources.rst
    api/templates.rst

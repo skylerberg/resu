@@ -1,15 +1,15 @@
 import abc
 
 
-class Loader(object):
+class Provider(object):
     '''
-    Abstract base class for Loaders.
+    Abstract base class for for IO providers.
 
-    Loader classes are responsible for fetching external resources.
+    Providers are responsible for fetching and writing resources.
 
     For example, if the user is loading a resume off of their local file
-    system, then they can use the :class:`resu.loaders.FSLoader` to load their
-    files. After these files are loaded, they are ready to be parsed by a
+    system, then they can use the :class:`resu.io.File` to read their files.
+    After these files are read, they are ready to be parsed by a
     :class:`resu.Parser`.
     '''
 

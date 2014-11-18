@@ -9,9 +9,9 @@ import importlib
 import docopt
 
 import resu
+from resu import io
 from resu.templates import Template
 from resu.parsers import Parser, YamlParser
-from resu.loaders import Loader
 from resu.template_engines import TemplateEngine
 
 CLI_DOC = \
@@ -92,6 +92,6 @@ def _print_capabilities(out=sys.stdout):
     capabilities['parsers'] = resu.available(Parser)
     capabilities['templates'] = resu.available(Template)
     capabilities['template engines'] = resu.available(TemplateEngine)
-    capabilities['input types'] = resu.available(Loader)
+    capabilities['IO providers'] = resu.available(io.Provider)
     parser = YamlParser()
     out.write(parser.dump(capabilities))

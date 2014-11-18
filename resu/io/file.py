@@ -1,12 +1,12 @@
 import os
 
-from resu.loaders import Loader
+from resu.io import Provider
 from resu.sources import FileSource
 
 
-class FileLoader(Loader):
+class File(Provider):
     '''
-    Loads the contents of a file.
+    Reads and writes files on the local file system.
 
     :var name: ``file``
     :var source_type: ``str``
