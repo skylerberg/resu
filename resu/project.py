@@ -13,46 +13,45 @@ from resu.template_engines import TemplateEngine
 
 
 def build(
-        data_source=io.File('resu.yml'),
+        input_provider=io.File('resu.yml'),
+        output_provider=io.File('resu.html'),
         parser='yaml',
-        template='default',
-        output_file='resu.html'):
+        template='default'):
     '''
     Use user data to create a document from a template. The user's data is read
     from the source provided, parsed into a dictionary, and used to render a
     template. The rendered template is then written to the specified location.
 
-    :arg data_source: A string indicating where to find the resume data.
+    :arg input_provider: A string indicating where to find the resume data.
+    :arg output_provider: Path to the file to write the resume to.
     :arg parser: The format of the resume data must be parsed from.
     :arg template: Name of the template for the resume.
-    :arg output_file: Path to the file to write the resume to.
-    :type data_source: String
+    :type input_provider: :class:`io.Provider`
+    :type output_proiver: :class:`io.Provider`
     :type parser: String
     :type template: String
-    :type output_file: String
 
     :returns: None
     '''
-    data = parse(parser, data_source.read())
+    data = parse(parser, input_provider.read())
     output = render_template(template, data)
-    io.File(output_file).write(output, force=True)
+    output_provider.write(output, force=True)
 
 
-def generate(template='default', output_file='resu.yml'):
+def generate(output_provider=io.File('resu.yml'), template='default'):
     '''
     Write the example input for a template to the specified location. The data
     written by this command can be used by :func:`build` to generate a
     document.
 
+    :arg output_provider: Path to the file to save the example resume to.
     :arg template: The name of the template to generate an example for.
-    :arg output_file: Path to the file to save the example resume to.
+    :type output_provider: :class:`io.Provider`
     :type template: String
-    :type output_file: String
 
     :returns: None
     '''
-    example = resu.find(Template, template).example.read()
-    io.File(output_file).write(example)
+    output_provider.write(resu.find(Template, template).example.read())
 
 
 def parse(format_, data):
