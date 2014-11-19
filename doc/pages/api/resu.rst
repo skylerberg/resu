@@ -7,8 +7,6 @@ resu
 
 .. autofunction:: generate
 
-.. autofunction:: load
-
 .. autofunction:: parse
 
 .. autofunction:: render_template

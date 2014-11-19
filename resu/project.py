@@ -55,19 +55,6 @@ def generate(template='default', output_file='resu.yml'):
     io.File(output_file).write(content)
 
 
-def load(source):
-    '''
-    Read data from ``source``.
-
-    :arg source: The source of the data.
-    :type source: namedtuple
-
-    :returns: Deserialized data
-    :rtype: Dictionary
-    '''
-    return resu.find(io.Provider, type(source), 'source_type')(source).read()
-
-
 def parse(format_, data):
     '''
     Parses data serialized as a string into a Python dictionary.
