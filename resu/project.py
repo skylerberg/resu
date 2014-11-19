@@ -13,7 +13,7 @@ from resu.template_engines import TemplateEngine
 
 
 def build(
-        data_source='resu.yml',
+        data_source=io.File('resu.yml'),
         parser='yaml',
         template='default',
         output_file='resu.html'):
@@ -33,10 +33,9 @@ def build(
 
     :returns: None
     '''
-    data_source = io.FileSource(data_source)
-    data = parse(parser, load(data_source))
+    data = parse(parser, data_source.read())
     output = render_template(template, data)
-    io.File(io.FileSource(output_file)).write(output, force=True)
+    io.File(output_file).write(output, force=True)
 
 
 def generate(template='default', output_file='resu.yml'):
@@ -52,9 +51,8 @@ def generate(template='default', output_file='resu.yml'):
 
     :returns: None
     '''
-    source = io.FileSource(output_file)
-    content = load(resu.find(Template, template).example_source)
-    io.File(source).write(content)
+    content = resu.find(Template, template).example_source.read()
+    io.File(output_file).write(content)
 
 
 def load(source):
@@ -98,6 +96,6 @@ def render_template(name, context):
     :rtype: String
     '''
     template = resu.find(Template, name)
-    template_content = load(template.template_source)
+    template_content = template.template_source.read()
     template_engine = resu.find(TemplateEngine, template.language)()
     return template_engine.render(template_content, config=context)

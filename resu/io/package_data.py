@@ -1,7 +1,6 @@
 from pkg_resources import resource_string
 
 from resu.io import Provider
-from resu.io import PackageDataSource
 
 
 class PackageData(Provider):
@@ -9,13 +8,21 @@ class PackageData(Provider):
     Reads the contents of files stored in Python packages.
 
     :var name: ``'package_data'``
-    :var source_type: :class:`PackageDataSource`
     :var return_type: ``str``
     '''
 
     name = 'package_data'
-    source_type = PackageDataSource
     return_type = str
+
+    def __init__(self, package, path):
+        '''
+        :arg package: Package to retrieve file from.
+        :arg path: Path to file inside of package.
+        :type package: String
+        :type path: String
+        '''
+        self.package = package
+        self.path = path
 
     def read(self):
         '''
@@ -25,7 +32,7 @@ class PackageData(Provider):
         :returns: The contents stored in ``self.source``.
         :rtype: String
         '''
-        return resource_string(self.source.package, self.source.path)
+        return resource_string(self.package, self.path)
 
     def write(self, content, force=False):
         '''

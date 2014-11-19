@@ -20,15 +20,8 @@ class Provider(object):
         pass
 
     @abc.abstractproperty
-    def source_type(self):  # pylint: disable=missing-docstring
-        pass
-
-    @abc.abstractproperty
     def return_type(self):  # pylint: disable=missing-docstring
         pass
-
-    def __init__(self, source):
-        self.source = source
 
     @abc.abstractmethod
     def read(self):

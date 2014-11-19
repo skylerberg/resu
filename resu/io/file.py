@@ -1,7 +1,6 @@
 import os
 
 from resu.io import Provider
-from resu.io import FileSource
 
 
 class File(Provider):
@@ -9,13 +8,18 @@ class File(Provider):
     Read and write to a file on the local file system.
 
     :var name: ``file``
-    :var source_type: ``str``
     :var return_type: ``str``
     '''
 
     name = 'file'
-    source_type = FileSource
     return_type = str
+
+    def __init__(self, path):
+        '''
+        :arg path: Path to the file.
+        :type path: String
+        '''
+        self.path = path
 
     def read(self):
         '''
@@ -24,7 +28,7 @@ class File(Provider):
 
         :raises IOError: if the file does not exist.
         '''
-        with open(self.source.path) as f:
+        with open(self.path) as f:
             return f.read()
 
     def write(self, content, force=False):
@@ -39,7 +43,7 @@ class File(Provider):
         :raises IOError: When attempting to write over an existing file while
           ``force`` is ``False``.
         '''
-        if not force and os.path.isfile(self.source.path):
-            raise IOError('File {0} already exists.'.format(self.source.path))
-        with open(self.source.path, 'w') as f:
+        if not force and os.path.isfile(self.path):
+            raise IOError('File {0} already exists.'.format(self.path))
+        with open(self.path, 'w') as f:
             f.write(content)
