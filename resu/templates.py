@@ -4,12 +4,11 @@ from resu import io
 
 
 class Template(
-        namedtuple('Template',
-                   'name template_source example_source file_type language')):
+        namedtuple('Template', 'name source example file_type language')):
     '''
     :var name: Name of the template. Required.
-    :var template_source: Location of the template. Required.
-    :var example_source: Location of example input for the template.
+    :var source: Location of the template. Required.
+    :var example: Location of example input for the template.
       Defaults to ``None``.
     :var file_type: File type the template renders to.
       Defaults to ``'html'``.
@@ -21,15 +20,15 @@ class Template(
 
     def __new__(cls,
                 name,
-                template_source,
-                example_source=None,
+                source,
+                example=None,
                 file_type='html',
                 language='jinja2'):
         # add default values
         return super(Template, cls).__new__(cls,
                                             name,
-                                            template_source,
-                                            example_source,
+                                            source,
+                                            example,
                                             file_type,
                                             language)
 
@@ -38,5 +37,5 @@ class Template(
 
 
 Template(name='default',
-         template_source=io.PackageData('resu', 'examples/templates/default.html'),
-         example_source=io.PackageData('resu', 'examples/resu.yml'))
+         source=io.PackageData('resu', 'examples/templates/default.html'),
+         example=io.PackageData('resu', 'examples/resu.yml'))

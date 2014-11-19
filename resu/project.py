@@ -51,8 +51,8 @@ def generate(template='default', output_file='resu.yml'):
 
     :returns: None
     '''
-    content = resu.find(Template, template).example_source.read()
-    io.File(output_file).write(content)
+    example = resu.find(Template, template).example.read()
+    io.File(output_file).write(example)
 
 
 def parse(format_, data):
@@ -83,6 +83,6 @@ def render_template(name, context):
     :rtype: String
     '''
     template = resu.find(Template, name)
-    template_content = template.template_source.read()
+    template_content = template.source.read()
     template_engine = resu.find(TemplateEngine, template.language)()
     return template_engine.render(template_content, config=context)
