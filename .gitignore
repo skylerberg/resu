@@ -10,6 +10,7 @@ lib64
 
 # setuptools
 *.egg-info
+dist
 
 # tox
 *.tox
