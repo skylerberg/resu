@@ -38,7 +38,7 @@ def build(
     output_provider.write(output, force=True)
 
 
-def generate(output_provider=io.File('resu.yml'), template='default'):
+def get_example(output_provider=io.File('resu.yml'), template='default'):
     '''
     Write the example input for a template to the specified location. The data
     written by this command can be used by :func:`build` to generate a

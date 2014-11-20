@@ -5,7 +5,7 @@ resu
 
 .. autofunction:: build
 
-.. autofunction:: generate
+.. autofunction:: get_example
 
 .. autofunction:: parse
 

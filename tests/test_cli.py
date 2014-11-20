@@ -10,7 +10,7 @@ class TestRun(unittest.TestCase):
 
     def setUp(self):
         self.mock_build = mock.patch('resu.build').start()
-        self.mock_generate = mock.patch('resu.generate').start()
+        self.mock_get_example = mock.patch('resu.get_example').start()
         self.out = StringIO.StringIO()
 
     def test_no_args(self):

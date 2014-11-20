@@ -17,6 +17,7 @@ from resu.template_engines import TemplateEngine
 CLI_DOC = \
     '''Usage:
     resu [options] [<file>]
+    resu [options]
 
 Options:
     -h --help               Show this message.
@@ -69,7 +70,7 @@ def run(args=sys.argv[1:], out=sys.stdout):
     if arguments['--template']:
         kwargs['template'] = arguments['--template']
     if arguments['--generate']:
-        resu.generate(**kwargs)
+        resu.get_example(**kwargs)
     else:
         resu.build(**kwargs)
 
