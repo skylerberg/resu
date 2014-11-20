@@ -1,0 +1,2 @@
+class FeatureNotFound(Exception):
+    pass

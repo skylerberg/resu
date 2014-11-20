@@ -3,6 +3,8 @@
 This module provides functions to search for members of subclasses.
 '''
 
+from resu.exceptions import FeatureNotFound
+
 
 def available(class_, id_attr='name'):
     '''
@@ -40,6 +42,8 @@ def find(class_, target, id_attr='name'):
     :returns: An instance or subclass of ``class_`` where
       ``id_attr == target``.
     :rtype: Class or ``class_``
+
+    :raises FeatureNotFound: if there is no class matching the parameters.
     '''
     for instance in class_.__dict__.get('instances', []):
         if instance._asdict().get(id_attr, '') == target:
@@ -47,3 +51,7 @@ def find(class_, target, id_attr='name'):
     for subclass in class_.__subclasses__():
         if subclass.__dict__[id_attr] == target:
             return subclass
+    raise FeatureNotFound('No {0} with {1} equal to "{2}"'.format(
+        class_.__name__,
+        id_attr,
+        target))
