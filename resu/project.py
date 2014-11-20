@@ -15,7 +15,7 @@ from resu.template_engines import TemplateEngine
 def build(
         input_provider=io.File('resu.yml'),
         output_provider=io.File('resu.html'),
-        parser='yaml',
+        input_format='yaml',
         template='default'):
     '''
     Use user data to create a document from a template. The user's data is read
@@ -24,16 +24,17 @@ def build(
 
     :arg input_provider: A string indicating where to find the resume data.
     :arg output_provider: Path to the file to write the resume to.
-    :arg parser: The format of the resume data must be parsed from.
+    :arg input_format: The format of the resume data must be parsed from.
     :arg template: Name of the template for the resume.
     :type input_provider: :class:`io.Provider`
-    :type output_proiver: :class:`io.Provider`
-    :type parser: String
+    :type output_provider: :class:`io.Provider`
+    :type input_format: String
     :type template: String
 
     :returns: None
     '''
-    data = parse(parser, input_provider.read())
+    parser = resu.find(Parser, input_format)()
+    data = parser.load(input_provider.read())
     output = render_template(template, data)
     output_provider.write(output, force=True)
 
@@ -51,22 +52,8 @@ def get_example(output_provider=io.File('resu.yml'), template='default'):
 
     :returns: None
     '''
-    output_provider.write(resu.find(Template, template).example.read())
-
-
-def parse(format_, data):
-    '''
-    Parses data serialized as a string into a Python dictionary.
-
-    :arg language: The serialization format to parse.
-    :arg data: Data to deserialize.
-    :type langauge: String
-    :type data: String
-
-    :returns: Deserialized data
-    :rtype: Dictionary
-    '''
-    return resu.find(Parser, format_)().load(data)
+    template = resu.find(Template, template)
+    output_provider.write(template.example.read())
 
 
 def render_template(name, context):

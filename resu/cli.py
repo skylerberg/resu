@@ -66,7 +66,7 @@ def run(args=sys.argv[1:], out=sys.stdout):
     if arguments['--output-file']:
         kwargs['output_provider'] = io.File(arguments['--output-file'])
     if arguments['--parser']:
-        kwargs['parser'] = arguments['--parser']
+        kwargs['input_format'] = arguments['--parser']
     if arguments['--template']:
         kwargs['template'] = arguments['--template']
     if arguments['--generate']:
