@@ -62,9 +62,9 @@ def run(args=sys.argv[1:], out=sys.stdout):
         exit(0)
     kwargs = {}
     if arguments['<file>']:
-        kwargs['data_source'] = io.File(arguments['<file>'])
+        kwargs['input_provider'] = io.File(arguments['<file>'])
     if arguments['--output-file']:
-        kwargs['output_file'] = io.File(arguments['--output-file'])
+        kwargs['output_provider'] = io.File(arguments['--output-file'])
     if arguments['--parser']:
         kwargs['parser'] = arguments['--parser']
     if arguments['--template']:
