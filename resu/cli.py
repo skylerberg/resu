@@ -9,7 +9,7 @@ import importlib
 import docopt
 
 import resu
-from resu import io
+from resu.io import Provider, File
 from resu.templates import Template
 from resu.parsers import Parser, YamlParser
 from resu.template_engines import TemplateEngine
@@ -49,30 +49,32 @@ def run(args=sys.argv[1:], out=sys.stdout):
     except SystemExit:
         out.write(CLI_DOC)
         exit(1)
+
+    generate_kwargs = {}
+    build_kwargs = {}
+    if arguments['--output-file']:
+        generate_kwargs['output_provider'] = File(arguments['--output-file'])
+        build_kwargs['output_provider'] = File(arguments['--output-file'])
+    if arguments['--template']:
+        generate_kwargs['template'] = arguments['--template']
+        build_kwargs['template'] = arguments['--template']
+    if arguments['<file>']:
+        build_kwargs['input_provider'] = File(arguments['<file>'])
+    if arguments['--parser']:
+        build_kwargs['input_format'] = arguments['--parser']
+
     if arguments['--help']:
         out.write(CLI_DOC)
-        exit(0)
-    if arguments['--version']:
+    elif arguments['--version']:
         out.write(resu.__version__ + '\n')
-        exit(0)
-    if arguments['--extensions']:
+    elif arguments['--extensions']:
         _load_extensions(arguments['--extensions'].split(','))
-    if arguments['--list-features']:
+    elif arguments['--list-features']:
         _print_capabilities(out)
-        exit(0)
-    kwargs = {}
-    if arguments['<file>']:
-        kwargs['input_provider'] = io.File(arguments['<file>'])
-    if arguments['--output-file']:
-        kwargs['output_provider'] = io.File(arguments['--output-file'])
-    if arguments['--parser']:
-        kwargs['input_format'] = arguments['--parser']
-    if arguments['--template']:
-        kwargs['template'] = arguments['--template']
-    if arguments['--generate']:
-        resu.get_example(**kwargs)
+    elif arguments['--generate']:
+        resu.get_example(**generate_kwargs)  # pylint: disable=star-args
     else:
-        resu.build(**kwargs)
+        resu.build(**build_kwargs)  # pylint: disable=star-args
 
 
 def _load_extensions(extensions):
@@ -93,6 +95,6 @@ def _print_capabilities(out=sys.stdout):
     capabilities['parsers'] = resu.available(Parser)
     capabilities['templates'] = resu.available(Template)
     capabilities['template engines'] = resu.available(TemplateEngine)
-    capabilities['IO providers'] = resu.available(io.Provider)
+    capabilities['IO providers'] = resu.available(Provider)
     parser = YamlParser()
     out.write(parser.dump(capabilities))
