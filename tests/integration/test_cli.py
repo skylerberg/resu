@@ -38,3 +38,26 @@ class TestListAvailable(unittest.TestCase):
         output = self.out.getvalue()
         assert 'templates' in output
         assert 'default' in output
+
+
+class TestBuild(unittest.TestCase):
+
+    def setUp(self):
+        self.out = StringIO.StringIO()
+        os.mkdir('/tmp/resu')  # Append uuid
+        os.chdir('/tmp/resu')
+
+    def test_basic(self):
+        resu.cli.run(args=['-g'], out=self.out)
+        resu.cli.run(args=[], out=self.out)
+        assert os.path.isfile('resu.html')
+        self.assertEquals(self.out.getvalue(), '')
+
+    def test_specify_output_file(self):
+        resu.cli.run(args=['-g'], out=self.out)
+        resu.cli.run(args=['-o', 'other.html'], out=self.out)
+        assert os.path.isfile('other.html')
+        self.assertEquals(self.out.getvalue(), '')
+
+    def tearDown(self):
+        shutil.rmtree('/tmp/resu')
