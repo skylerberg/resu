@@ -6,15 +6,15 @@ are made available in :module:`resu`.
 '''
 
 import resu
-from resu import io
+import resu.io
 from resu.parsers import Parser
 from resu.templates import Template
 from resu.template_engines import TemplateEngine
 
 
 def build(
-        input_provider=io.File('resu.yml'),
-        output_provider=io.File('resu.html'),
+        input_provider=resu.io.File('resu.yml'),
+        output_provider=resu.io.File('resu.html'),
         input_format='yaml',
         template='default'):
     '''
@@ -39,7 +39,7 @@ def build(
     output_provider.write(output, force=True)
 
 
-def get_example(output_provider=io.File('resu.yml'), template='default'):
+def get_example(output_provider=resu.io.File('resu.yml'), template='default'):
     '''
     Write the example input for a template to the specified location. The data
     written by this command can be used by :func:`build` to generate a

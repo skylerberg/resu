@@ -1,6 +1,6 @@
 from collections import namedtuple
 
-from resu import io
+import resu.io
 
 
 class Template(
@@ -37,5 +37,5 @@ class Template(
 
 
 Template(name='default',
-         source=io.PackageData('resu', 'examples/templates/default.html'),
-         example=io.PackageData('resu', 'examples/resu.yml'))
+         source=resu.io.PackageData('resu', 'examples/templates/default.html'),
+         example=resu.io.PackageData('resu', 'examples/resu.yml'))
