@@ -3,6 +3,7 @@ import unittest
 
 import resu.parsers
 
+
 class TestJsonParser(unittest.TestCase):
 
     def setUp(self):
@@ -13,8 +14,13 @@ class TestJsonParser(unittest.TestCase):
         self.parser.load("some data")
         self.mock_json.loads.assert_called_once_with("some data")
 
+    def test_dump(self):
+        self.parser.dump({'a': '1'})
+        self.mock_json.dumps.assert_called_once_with({'a': '1'})
+
     def tearDown(self):
         mock.patch.stopall()
+
 
 class TestYamlParser(unittest.TestCase):
 
@@ -25,6 +31,10 @@ class TestYamlParser(unittest.TestCase):
     def test_load(self):
         self.parser.load("some data")
         self.mock_yaml.load.assert_called_once_with("some data")
+
+    def test_dump(self):
+        self.parser.dump({'a': '1'})
+        self.mock_yaml.dump.assert_called_once_with({'a': '1'})
 
     def tearDown(self):
         mock.patch.stopall()
