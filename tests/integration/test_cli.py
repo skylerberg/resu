@@ -24,6 +24,11 @@ class TestGetExample(unittest.TestCase):
         assert os.path.isfile('other.yml')
         self.assertEquals(self.out.getvalue(), '')
 
+    def test_generate_twice(self):
+        resu.cli.run(args=['-g'], out=self.out)
+        with self.assertRaises(IOError):
+            resu.cli.run(args=['-g'], out=self.out)
+
     def tearDown(self):
         shutil.rmtree('/tmp/resu')
 
