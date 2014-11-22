@@ -4,6 +4,7 @@ import os
 import shutil
 
 import resu.cli
+from resu.exceptions import FeatureNotFound
 
 
 class TestGetExample(unittest.TestCase):
@@ -56,6 +57,12 @@ class TestBuild(unittest.TestCase):
         resu.cli.run(args=['-o', 'other.html'], out=self.out)
         assert os.path.isfile('other.html')
         self.assertEquals(self.out.getvalue(), '')
+
+    def test_non_existant_parser(self):
+        resu.cli.run(args=['-g'], out=self.out)
+        with self.assertRaises(FeatureNotFound):
+            resu.cli.run(args=['-p', 'gibberish'], out=self.out)
+        assert not os.path.isfile('resu.html')
 
     def tearDown(self):
         shutil.rmtree('/tmp/resu')
