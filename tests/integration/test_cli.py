@@ -29,10 +29,8 @@ class TestGetExample(unittest.TestCase):
 
 class TestListAvailable(unittest.TestCase):
 
-    def setUp(self):
-        self.out = StringIO.StringIO()
-
     def test(self):
+        self.out = StringIO.StringIO()
         resu.cli.run(args=['-l'], out=self.out)
         # Check to make sure some expected strings are included
         output = self.out.getvalue()
@@ -58,6 +56,39 @@ class TestBuild(unittest.TestCase):
         resu.cli.run(args=['-o', 'other.html'], out=self.out)
         assert os.path.isfile('other.html')
         self.assertEquals(self.out.getvalue(), '')
+
+    def tearDown(self):
+        shutil.rmtree('/tmp/resu')
+
+
+class TestExtension(unittest.TestCase):
+
+    def setUp(self):
+        extension = '''
+from resu.templates import Template
+from resu import io
+
+Template(name='test_template',
+     source=io.PackageData('resu', 'examples/templates/default.html'),
+     example=io.PackageData('resu', 'examples/resu.yml'))
+'''
+        self.out = StringIO.StringIO()
+        os.mkdir('/tmp/resu')  # Append uuid
+        os.chdir('/tmp/resu')
+        with open('test_template.py', 'w') as f:
+            f.write(extension)
+
+    def test_list_extension(self):
+        resu.cli.run(args=['-g'], out=self.out)
+        resu.cli.run(args=['-l', '-e', 'test_template'], out=self.out)
+        output = self.out.getvalue()
+        assert 'test_template' in output
+
+    def test_using_template(self):
+        resu.cli.run(args=['-g'], out=self.out)
+        resu.cli.run(args=['-e', 'test_template', '-t', 'test_template'],
+                     out=self.out)
+        assert os.path.isfile('resu.html')
 
     def tearDown(self):
         shutil.rmtree('/tmp/resu')

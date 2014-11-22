@@ -50,6 +50,9 @@ def run(args=sys.argv[1:], out=sys.stdout):
         out.write(CLI_DOC)
         exit(1)
 
+    if arguments['--extensions']:
+        _load_extensions(arguments['--extensions'].split(','))
+
     generate_kwargs = {}
     build_kwargs = {}
     if arguments['--output-file']:
@@ -67,8 +70,6 @@ def run(args=sys.argv[1:], out=sys.stdout):
         out.write(CLI_DOC)
     elif arguments['--version']:
         out.write(resu.__version__ + '\n')
-    elif arguments['--extensions']:
-        _load_extensions(arguments['--extensions'].split(','))
     elif arguments['--list-features']:
         _print_capabilities(out)
     elif arguments['--generate']:
