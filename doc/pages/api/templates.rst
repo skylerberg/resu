@@ -5,3 +5,5 @@ resu.templates
 
 .. autoclass:: Template
    :members:
+
+   .. automethod:: __new__
