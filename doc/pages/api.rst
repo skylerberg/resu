@@ -15,3 +15,4 @@ add various features see :doc:`tutorials`.
    api/parsers.rst
    api/templates.rst
    api/template_engines.rst
+   api/exceptions.rst
