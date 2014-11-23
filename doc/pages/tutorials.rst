@@ -8,5 +8,5 @@ Tutorials
    tutorials/extension.rst
    tutorials/template.rst
    tutorials/template_engine.rst
-   tutorials/loader.rst
+   tutorials/io.rst
    tutorials/parser.rst
