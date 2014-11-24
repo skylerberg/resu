@@ -1,3 +1,6 @@
+'''
+Resu provides a simple interface to support arbitrary templating languages.
+'''
 from resu.template_engines.template_engine import TemplateEngine
 try:
     from resu.template_engines.jinja2_engine import Jinja2Engine
