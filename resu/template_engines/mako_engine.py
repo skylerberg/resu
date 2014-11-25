@@ -5,7 +5,7 @@ from resu.template_engines import TemplateEngine
 
 class MakoEngine(TemplateEngine):
     '''
-    :class:`resu.TemplateEngine` for Mako.
+    :class:`resu.template_engines.TemplateEngine` for Mako.
 
     :var name: ``'mako'``
     '''

@@ -26,8 +26,8 @@ def build(
     :arg output_provider: Path to the file to write the resume to.
     :arg input_format: The format of the resume data must be parsed from.
     :arg template: Name of the template for the resume.
-    :type input_provider: :class:`io.Provider`
-    :type output_provider: :class:`io.Provider`
+    :type input_provider: :class:`resu.io.Provider`
+    :type output_provider: :class:`resu.io.Provider`
     :type input_format: String
     :type template: String
 
@@ -47,7 +47,7 @@ def get_example(output_provider=resu.io.File('resu.yml'), template='default'):
 
     :arg output_provider: Path to the file to save the example resume to.
     :arg template: The name of the template to generate an example for.
-    :type output_provider: :class:`io.Provider`
+    :type output_provider: :class:`resu.io.Provider`
     :type template: String
 
     :returns: None

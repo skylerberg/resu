@@ -1,6 +1,11 @@
 '''
-This module stores the :class:`Template` class and instantiates all templates
-included in Resu by default.
+This module stores the :class:`resu.templates.Template` class and instantiates
+all templates included in Resu by default.
+
+To add a template to Resu, one need only instantiate an instance of
+:class:`resu.templates.Template` class. The instance will automatically be
+made available to the rest of Resu. For more details, see how to
+:ref:`tutorials_template`.
 '''
 from collections import namedtuple
 
@@ -11,17 +16,13 @@ class Template(
         namedtuple('Template', 'name source example file_type language')):
     '''
     This modified namedtuple, contains metadata associated with a template.
-    Most importantly, this includes the tempaltes name and where to find the
+    Most importantly, this includes the templates name and where to find the
     template. Other attributes are optional and default to sensible values,
     however, setting the location of an example of the input the
-    :class:`Template` expects is highly recommended.
+    :class:`resu.templates.Template` expects is highly recommended.
 
-    To add a template to Resu, one need only instantiate an instance of the
-    Template class. The instance will automatically be integrated into Resu.
-    For more details see how to :ref:`tutorials_template`.
-
-    :var instances: Stores a list of all :class:`Templates` that have been
-      instantiated.
+    :var instances: Stores a list of all instances of
+      :class:`resu.templates.Template` that have been instantiated.
     '''
 
     instances = []
