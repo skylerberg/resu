@@ -3,6 +3,7 @@ import unittest
 
 import resu.template_engines
 
+
 class TestMakoEngine(unittest.TestCase):
 
     def setUp(self):
@@ -17,6 +18,7 @@ class TestMakoEngine(unittest.TestCase):
 
     def tearDown(self):
         mock.patch.stopall()
+
 
 class TestJinja2Engine(unittest.TestCase):
 

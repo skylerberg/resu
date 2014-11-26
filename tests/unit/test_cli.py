@@ -1,10 +1,11 @@
-#pylint: skip-file
+# pylint: skip-file
 import unittest
 import StringIO
 
 import mock
 
 import resu.cli
+
 
 class TestRun(unittest.TestCase):
 

@@ -1,20 +1,23 @@
+# pylint: skip-file
 import unittest
 from collections import namedtuple
-
-import mock
 
 import resu
 
 # Example classes and instances
 
+
 class Parent(object):
     pass
+
 
 class Child1(Parent):
     name = 'child1'
 
+
 class Child2(Parent):
     name = 'child2'
+
 
 class InstanceTracker(namedtuple('InstanceTacker', ['name'])):
 
@@ -24,6 +27,7 @@ class InstanceTracker(namedtuple('InstanceTacker', ['name'])):
         InstanceTracker.instances.append(self)
 
 InstanceTracker(name='instance1')
+
 
 class TestSearch(unittest.TestCase):
 
