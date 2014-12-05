@@ -13,6 +13,7 @@ from resu.io import Provider, File
 from resu.templates import Template
 from resu.parsers import Parser, YamlParser
 from resu.template_engines import TemplateEngine
+from resu.converters import Converter
 
 CLI_DOC = \
     '''Usage:
@@ -27,6 +28,7 @@ Options:
     -p --parser <name>      Use specified parser for user provided data files.
     -t --template <name>    Use specified template.
     -o --output-file <file> Path to output file.
+    -f --format <file_type> File type to produce.
     -e --extensions <names> Comma separated list of extensions to import.
 '''
 
@@ -58,9 +60,12 @@ def run(args=sys.argv[1:], out=sys.stdout):
     if arguments['--output-file']:
         generate_kwargs['output_provider'] = File(arguments['--output-file'])
         build_kwargs['output_provider'] = File(arguments['--output-file'])
+    if arguments['--format']:
+        build_kwargs['output_format'] = arguments['--format']
+        generate_kwargs['output_format'] = arguments['--format']
     if arguments['--template']:
-        generate_kwargs['template'] = arguments['--template']
-        build_kwargs['template'] = arguments['--template']
+        generate_kwargs['template_name'] = arguments['--template']
+        build_kwargs['template_name'] = arguments['--template']
     if arguments['<file>']:
         build_kwargs['input_provider'] = File(arguments['<file>'])
     if arguments['--parser']:
@@ -97,5 +102,6 @@ def _print_capabilities(out=sys.stdout):
     capabilities['templates'] = resu.available(Template)
     capabilities['template engines'] = resu.available(TemplateEngine)
     capabilities['IO providers'] = resu.available(Provider)
+    capabilities['Converters'] = resu.available(Converter)
     parser = YamlParser()
     out.write(parser.dump(capabilities))
