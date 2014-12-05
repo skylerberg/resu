@@ -54,7 +54,7 @@ class TestBuild(unittest.TestCase):
     def test_basic(self):
         resu.cli.run(args=['-g'], out=self.out)
         resu.cli.run(args=[], out=self.out)
-        assert os.path.isfile('resu.html')
+        assert os.path.isfile('resu.pdf')
         self.assertEquals(self.out.getvalue(), '')
 
     def test_specify_output_file(self):
@@ -67,7 +67,7 @@ class TestBuild(unittest.TestCase):
         resu.cli.run(args=['-g'], out=self.out)
         with self.assertRaises(FeatureNotFound):
             resu.cli.run(args=['-p', 'gibberish'], out=self.out)
-        assert not os.path.isfile('resu.html')
+        assert not os.path.isfile('resu.pdf')
 
     def tearDown(self):
         shutil.rmtree('/tmp/resu')
@@ -100,7 +100,25 @@ Template(name='test_template',
         resu.cli.run(args=['-g'], out=self.out)
         resu.cli.run(args=['-e', 'test_template', '-t', 'test_template'],
                      out=self.out)
+        assert os.path.isfile('resu.pdf')
+
+    def tearDown(self):
+        shutil.rmtree('/tmp/resu')
+
+
+class TestFormat(unittest.TestCase):
+
+    def setUp(self):
+        self.out = StringIO.StringIO()
+        os.mkdir('/tmp/resu')  # Append uuid
+        os.chdir('/tmp/resu')
+        resu.cli.run(args=['-g'], out=self.out)
+
+    def test_format_html(self):
+        resu.cli.run(args=['-f', 'html'], out=self.out)
+        resu.cli.run(args=[], out=self.out)
         assert os.path.isfile('resu.html')
+        self.assertEquals(self.out.getvalue(), '')
 
     def tearDown(self):
         shutil.rmtree('/tmp/resu')
