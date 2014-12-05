@@ -1,8 +1,8 @@
 # pylint: skip-file
 import unittest
-import StringIO
 
 import mock
+from six import StringIO
 
 import resu.cli
 
@@ -12,7 +12,7 @@ class TestRun(unittest.TestCase):
     def setUp(self):
         self.mock_build = mock.patch('resu.build').start()
         self.mock_get_example = mock.patch('resu.get_example').start()
-        self.out = StringIO.StringIO()
+        self.out = StringIO()
 
     def test_no_args(self):
         resu.cli.run(args=[], out=self.out)

@@ -1,7 +1,8 @@
 import unittest
-import StringIO
 import os
 import shutil
+
+from six import StringIO
 
 import resu.cli
 from resu.exceptions import FeatureNotFound
@@ -10,7 +11,7 @@ from resu.exceptions import FeatureNotFound
 class TestGetExample(unittest.TestCase):
 
     def setUp(self):
-        self.out = StringIO.StringIO()
+        self.out = StringIO()
         os.mkdir('/tmp/resu')  # Append uuid
         os.chdir('/tmp/resu')
 
@@ -36,7 +37,7 @@ class TestGetExample(unittest.TestCase):
 class TestListAvailable(unittest.TestCase):
 
     def test(self):
-        self.out = StringIO.StringIO()
+        self.out = StringIO()
         resu.cli.run(args=['-l'], out=self.out)
         # Check to make sure some expected strings are included
         output = self.out.getvalue()
@@ -47,7 +48,7 @@ class TestListAvailable(unittest.TestCase):
 class TestBuild(unittest.TestCase):
 
     def setUp(self):
-        self.out = StringIO.StringIO()
+        self.out = StringIO()
         os.mkdir('/tmp/resu')  # Append uuid
         os.chdir('/tmp/resu')
 
@@ -84,7 +85,7 @@ Template(name='test_template',
      source=io.PackageData('resu', 'examples/templates/default.html'),
      example=io.PackageData('resu', 'examples/resu.yml'))
 '''
-        self.out = StringIO.StringIO()
+        self.out = StringIO()
         os.mkdir('/tmp/resu')  # Append uuid
         os.chdir('/tmp/resu')
         with open('test_template.py', 'w') as f:
@@ -109,7 +110,7 @@ Template(name='test_template',
 class TestFormat(unittest.TestCase):
 
     def setUp(self):
-        self.out = StringIO.StringIO()
+        self.out = StringIO()
         os.mkdir('/tmp/resu')  # Append uuid
         os.chdir('/tmp/resu')
         resu.cli.run(args=['-g'], out=self.out)

@@ -3,5 +3,6 @@ PyYAML
 jinja2
 mako
 pdfkit
+six
 sphinx
 sphinx_rtd_theme
