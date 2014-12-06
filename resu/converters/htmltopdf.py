@@ -22,5 +22,12 @@ class HtmlToPdf(Converter):
 
     def convert(self, data):
         '''
+        Take the contents of an html file and return the pdf equivalent.
+
+        :arg data: Contents of the html file.
+        :type data: String
+
+        :returns: Contents of file as a pdf.
+        :rtype: String
         '''
         return pdfkit.from_string(data, False, options=HtmlToPdf.options)
