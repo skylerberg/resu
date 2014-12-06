@@ -96,7 +96,18 @@ def render_template(name, context):
 
 
 def _get_converter(input_type, output_type):
-    for converter_format in resu.available(Converter):
-        in_type, _, out_type = converter_format.split(' ')
-        if in_type == input_type and out_type == output_type:
-            return resu.find(Converter, converter_format)
+    '''
+    :arg input_type: The input file type the Converter should take.
+    :arg output_type: The output file type the Converter should produce.
+    :type input_type: String
+    :type output_type: String
+
+    :returns: A Converter that can change a file of ``input_type`` into a file
+    of ``output_type``.
+    :rtype: :class:`resu.converters.Converter`
+    '''
+    for converter in resu.available(Converter):
+        converter_input_type, _, converter_output_type = converter.split(' ')
+        if converter_input_type == input_type and \
+           converter_output_type == output_type:
+            return resu.find(Converter, converter)
