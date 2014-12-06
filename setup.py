@@ -15,6 +15,7 @@ setup(
         "PyYAML",
         "jinja2",
         "mako",
+        "pdfkit",
         "sphinx",
         "sphinx_rtd_theme"
         ],
