@@ -100,13 +100,16 @@ To include multiple extensions, separate the module names with commas:
 
 .. code-block:: bash
 
+   resu -e resu_ext1,resu_ext2
+
+
 List Features
 =============
 
-To see the various features supported by Resu, you may use the ``l`` or 
+To see the various features supported by Resu, you may use the ``-l`` or 
 ``--list-features`` option. This is particularly useful for designing 
-:doc:`extensions` because it will list all of the features built into Resu as
-well as those included in extensions. The list is printed out in YAML format.
+extensions because it will list all of the features built into Resu as well as 
+those included in extensions. The list is printed out in YAML.
 
 .. code-block:: bash
 
