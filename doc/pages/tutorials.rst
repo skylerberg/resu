@@ -1,6 +1,6 @@
-=========
-Tutorials
-=========
+===================
+Developer Tutorials
+===================
 
 .. toctree::
    :maxdepth: 2
