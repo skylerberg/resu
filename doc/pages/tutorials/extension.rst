@@ -7,7 +7,7 @@ In this tutorial we will use Resu's built in extension mechanism to integrate
 our code with the Resu command line tool. First we will create a new file 
 called ``my_template.py`` and create a new template. This template will be
 a minimal version of the default template. To create and integrate your own 
-unique template, see how to :doc:`tutorials_template`.
+unique template, see how to :doc:`template`.
 
 Create a file called ``my_template.py`` with the following content.
 

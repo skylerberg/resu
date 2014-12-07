@@ -3,12 +3,13 @@
 Add a Template
 ==============
 
-This tutorial assumes that you have already learned :doc:`tutorials_extension`.
-In this tutorial we will add a template that uses Resu to build something other
-than a resume: the body of an email. Let's start by making the file that stores
-the actual template. Let's start with the basic start with the basic structure:
+This tutorial assumes that you have already learned :doc:`extension`. In this
+tutorial we will add a template that uses Resu to build something other than a
+resume: the body of an email. Let's start by making the file that stores the
+actual template. Let's start with the basic start with the basic structure:
 
 .. code-block:: jinja
+
    Hi {{ config['to'] }},
 
    Are you interested in buying any more {{ config['past_purchase'] }}?
@@ -66,5 +67,5 @@ Other Options
 You may also set the ``file_type``, though it is omitted in this tutorial at
 this time because it is not used by Resu at this time.
 
-The tutorial on :doc:`tutorials_template_engine` will show how to set an
-alternate templating language.
+The tutorial on :doc:`template_engine` will show how to set an alternate
+templating language.
