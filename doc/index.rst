@@ -10,6 +10,7 @@ Resu
    :maxdepth: 2
 
    pages/intro.rst
+   pages/install.rst
    pages/quick.rst
    pages/contributing.rst
    pages/tutorials.rst
