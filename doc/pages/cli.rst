@@ -13,13 +13,13 @@ Resu is meant to be usable with just two commands:
    resu
 
 ``resu -g`` will write a file called ``resu.yml`` which contains an example
-resume. By default, ``resu`` will look for a file called ``resu.yml``, load 
-this file and turn it into an html resume written to the file ``resu.html``.
-To make a resume that is actually useful, you can update ``resu.yml`` with your
+resume. By default, ``resu`` will look for a file called ``resu.yml``, load
+this file and turn it into a pdf resume written to the file ``resu.pdf``. To
+make a resume that is actually useful, you can update ``resu.yml`` with your
 data.
 
 Resu assumes that your data is YAML, that you want to use the default template,
-that you would like to save the output to ``resu.html``. All of these defaults
+that you would like to save the output to ``resu.pdf``. All of these defaults
 can be overridden with command line options.
 
 
@@ -38,13 +38,28 @@ that and then build your resume with the command:
 Specify Output File
 ===================
 
-If you would like to save your file as something other than ``resu.html``, you
+If you would like to save your file as something other than ``resu.pdf``, you
 can use the ``-o`` or ``--output-file`` option. For example, to save your 
-resume as ``resume.html`` you would run the command:
+resume as ``resume.pdf`` you would run the command:
 
 .. code-block:: bash
 
-   resu -o resume.html
+   resu -o resume.pdf
+
+
+Specify Output Format
+=====================
+
+To produce an html resume instead of a pdf, use the ``-f`` or ``--format``
+option. For example, to produce an html file called ``resu.html``, run:
+
+.. code-block:: bash
+
+   resu -f html
+
+Currently, all templates produce html files which are by default converted to
+pdf files. Specifying ``html`` as the format to produce causes this conversion
+not to happen.
 
 
 Non-YAML Resume
@@ -86,11 +101,10 @@ input for the template. If we wanted to see how to write a resume for the
 Include Extensions
 ==================
 
-Resu includes a convenient way to extend its functionality with your own Python
-modules. For details on how to create an extension, read the 
-:doc:`tutorials/extension` tutorial. To include an extension, use the ``-e`` or 
-``--extensions`` option. To include a python module called ``resu_ext``, use the
-command:
+Resu includes a way to extend its functionality with your own Python modules.
+For a more thorough tutorial, read :doc:`tutorials/extension`. To include an
+extension, use the ``-e`` or ``--extensions`` option. To include a Python 
+module called ``resu_ext``, use the command:
 
 .. code-block:: bash
 
