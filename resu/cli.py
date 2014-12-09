@@ -60,12 +60,11 @@ def run(args=sys.argv[1:], out=sys.stdout):
     if arguments['--output-file']:
         generate_kwargs['output_provider'] = File(arguments['--output-file'])
         build_kwargs['output_provider'] = File(arguments['--output-file'])
-    if arguments['--format']:
-        build_kwargs['output_format'] = arguments['--format']
-        generate_kwargs['output_format'] = arguments['--format']
     if arguments['--template']:
         generate_kwargs['template_name'] = arguments['--template']
         build_kwargs['template_name'] = arguments['--template']
+    if arguments['--format']:
+        build_kwargs['output_format'] = arguments['--format']
     if arguments['<file>']:
         build_kwargs['input_provider'] = File(arguments['<file>'])
     if arguments['--parser']:

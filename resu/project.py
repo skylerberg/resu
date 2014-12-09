@@ -56,7 +56,6 @@ def build(
 
 def get_example(
         output_provider=resu.io.File('resu.yml'),
-        output_format='yml',
         template_name='default'):
     '''
     Write the example input for a template to the specified location. The data
