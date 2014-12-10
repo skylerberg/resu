@@ -13,7 +13,6 @@ Resu
    pages/install.rst
    pages/quick.rst
    pages/contributing.rst
-   pages/tutorials.rst
    pages/cli.rst
    pages/api.rst
 

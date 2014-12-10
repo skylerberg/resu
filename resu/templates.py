@@ -4,8 +4,7 @@ all templates included in Resu by default.
 
 To add a template to Resu, one need only instantiate an instance of
 :class:`resu.templates.Template` class. The instance will automatically be
-made available to the rest of Resu. For more details, see how to
-:ref:`tutorials_template`.
+made available to the rest of Resu.
 '''
 from collections import namedtuple
 

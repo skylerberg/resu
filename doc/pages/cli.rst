@@ -102,9 +102,8 @@ Include Extensions
 ==================
 
 Resu includes a way to extend its functionality with your own Python modules.
-For a more thorough tutorial, read :doc:`tutorials/extension`. To include an
-extension, use the ``-e`` or ``--extensions`` option. To include a Python 
-module called ``resu_ext``, use the command:
+To include an extension, use the ``-e`` or ``--extensions`` option. To include
+a Python module called ``resu_ext``, use the command:
 
 .. code-block:: bash
 
