@@ -24,3 +24,6 @@ dist
 
 # sphinx
 doc/_build
+
+# django
+db.sqlite3
